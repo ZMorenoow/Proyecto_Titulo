@@ -13,7 +13,7 @@ const Producto = () => {
             const response = await axios.post("http://localhost:3000/create_preference", {
                 title: "Limpieza de Piso",
                 quantity: 1,
-                price: 100,
+                price: 1000,
             });
 
             const { id } = response.data;

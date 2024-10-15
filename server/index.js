@@ -6,7 +6,6 @@ import cors from "cors";
 const client = new MercadoPagoConfig({ accessToken: "APP_USR-3603337471654012-101417-73046df5da2f0ca7e92fab28b8fbc592-2035500959", });
 
 const app = express();
-const port = 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -49,6 +48,7 @@ app.post("/create_preference", async (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log('Servidor está corriendo en el puerto ${port}');
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
