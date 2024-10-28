@@ -1,0 +1,113 @@
+body {
+  background: url('./img/fondo.jpg') no-repeat center center fixed; /* Cambia esta ruta a tu imagen de fondo */
+  background-size: cover; /* Asegura que la imagen cubra todo el fondo */
+}
+
+/* Contacto.css */
+.contacto-container {
+  padding: 30px 100px 20px 100px; /* Añade espacio alrededor del contenedor */
+  max-width: 1000px; /* Ancho máximo del contenedor */
+  margin-top: 50px; /* Centra el contenedor horizontalmente */
+  font-family: Arial, sans-serif; /* Fuente para el texto */
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px; /* Opcional: bordes redondeados */
+  box-shadow: 0 10px 20px rgba(11, 82, 55, 0.897); /* Sombra suave para dar profundidad */
+}
+
+h2 {
+  text-align: center; /* Centra el título principal */
+  margin-bottom: 30px; /* Espacio debajo del título */
+}
+
+.social-media {
+  margin: 20px 0; /* Espacio vertical entre el título y los iconos */
+}
+
+.iconos {
+  display: flex; /* Para alinear los iconos horizontalmente */
+  justify-content: center; /* Centra los iconos */
+  gap: 15px; /* Espacio entre los iconos */
+}
+
+.iconos img {
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+  transition: transform 0.3s; /* Transición suave al hacer hover */
+  width: 100%; /* Ajustar el ancho a 100% para que sea responsivo */
+  max-width: 150px; /* Ancho máximo */
+  height: auto; /* Mantener la relación de aspecto */
+}
+
+.iconos img:hover {
+  transform: scale(1.1); /* Aumenta el tamaño al pasar el ratón */
+}
+
+.contact-form {
+  margin-top: 40px; /* Espacio superior para el formulario */
+  display: flex; /* Usa flexbox para alinear elementos */
+  flex-direction: column; /* Apila los elementos verticalmente */
+}
+
+.contact-form input,
+.contact-form textarea {
+  margin-bottom: 15px; /* Espacio entre los campos */
+  padding: 15px 40px 20px 40px; /* Espacio interior para los campos */
+  border: 2px solid #248554; /* Borde ligero */
+  border-radius: 10px; /* Bordes redondeados */
+  font-size: 16px; /* Tamaño de fuente */
+  color: aquamarine;
+  box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+}
+
+.contact-form input {
+  width: 100%; /* Ancho completo para el campo de correo */
+}
+
+.contact-form textarea {
+  width: 100%; /* Ancho completo para el área de texto */
+  height: 100px; /* Altura fija para el área de texto */
+}
+
+.contact-form button {
+  margin-top: 20px;
+  padding: 10px 50px 10px 50px; /* Espacio interior del botón */
+  border: 2px solid #248554; /* Borde ligero */
+  border-radius: 50px; /* Bordes redondeados */
+  background-color: aquamarine; /* Color de fondo del botón */
+  color: rgb(0, 0, 0); /* Color del texto */
+  font-size: 25px; /* Tamaño de fuente */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+  transition: background-color 0.3s; /* Transición suave al hacer hover */
+}
+
+.contact-form button:hover {
+  background-color: #1ad1e9; /* Color de fondo al hacer hover */
+  border-color: #248554; /* Cambia el color del borde al hacer hover */
+}
+
+/* Media queries para hacer el diseño responsivo */
+@media (max-width: 600px) {
+  .contacto-container {
+    padding: 10px; /* Reducir el padding en pantallas pequeñas */
+  }
+
+  .iconos {
+    flex-direction: column; /* Apilar iconos verticalmente */
+  }
+
+  .iconos img {
+    max-width: 80%; /* Aumentar la adaptabilidad de tamaño */
+  }
+
+  .contact-form {
+    margin-top: 20px; /* Ajustar el margen en pantallas pequeñas */
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 14px; /* Reducir el tamaño de fuente */
+  }
+
+  .contact-form button {
+    font-size: 14px; /* Reducir el tamaño de fuente */
+  }
+}

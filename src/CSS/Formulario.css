@@ -1,0 +1,99 @@
+/* Estilo del contenedor del formulario */
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f9f9f9; /* Fondo claro */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo de los encabezados */
+h2 {
+    color: #2c3e50; /* Color del encabezado */
+    margin-bottom: 20px;
+}
+
+/* Estilo de las etiquetas */
+.form-label {
+    color: #34495e; /* Color de las etiquetas */
+}
+
+/* Estilo de los inputs y select */
+.form-control, .form-select {
+    border: 2px solid #b2e0e0; /* Bordes celestes */
+    border-radius: 5px;
+    padding: 10px;
+    transition: border-color 0.3s ease;
+}
+
+/* Estilo del input en foco */
+.form-control:focus, .form-select:focus {
+    border-color: #1abc9c; /* Color verde en foco */
+    box-shadow: 0 0 5px rgba(26, 188, 156, 0.5); /* Sombra verde */
+}
+
+/* Estilo del botón */
+.btn-primary {
+    background-color: #1abc9c; /* Color verde para el botón */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+/* Efecto al pasar el mouse sobre el botón */
+.btn-primary:hover {
+    background-color: #16a085; /* Color verde oscuro al pasar el mouse */
+}
+
+/* Estilo del input de fecha y hora */
+.react-datepicker-wrapper {
+    display: block;
+    width: 100%;
+}
+
+.react-datepicker__input-container input {
+    width: 100%;
+    border: 2px solid #b2e0e0; /* Bordes celestes */
+    border-radius: 5px;
+    padding: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.react-datepicker__input-container input:focus {
+    border-color: #1abc9c; /* Color verde en foco */
+    box-shadow: 0 0 5px rgba(26, 188, 156, 0.5); /* Sombra verde */
+}
+
+/* Estilo del calendario */
+.react-datepicker {
+    border: 1px solid #b2e0e0; /* Bordes celestes */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.react-datepicker__day {
+    color: #34495e; /* Color de los días */
+}
+
+.react-datepicker__day:hover {
+    background-color: #1abc9c; /* Fondo verde al pasar el mouse */
+    color: white; /* Texto blanco al pasar el mouse */
+}
+
+.react-datepicker__header {
+    background-color: #1abc9c; /* Color del encabezado del calendario */
+    color: white; /* Texto blanco en el encabezado */
+}
+
+.react-datepicker__navigation {
+    border: 1px solid white; /* Bordes blancos en los botones de navegación */
+}
+
+/* Estilo de los días seleccionados */
+.react-datepicker__day--selected {
+    background-color: #16a085; /* Color verde oscuro para el día seleccionado */
+    color: white; /* Texto blanco para el día seleccionado */
+}

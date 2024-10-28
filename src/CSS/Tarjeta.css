@@ -1,0 +1,65 @@
+.card-container {
+  perspective: 1000px;
+  margin-bottom: 100px; /* Añade más espacio entre las tarjetas */
+  padding-top: 20px;
+  width: 400px;
+  height: 450px;
+  display: flex;
+  flex-direction: column; /* Para apilar elementos en columna */
+  align-items: center;    /* Centrar horizontalmente */
+  justify-content: center; /* Centrar verticalmente */
+  margin: 0 auto;        /* Margen automático para centrar el contenedor */
+  border: 2px #248554;
+}
+
+.card-flip {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.card-front, .card-back {
+  backface-visibility: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.card-front {
+  background-color: white;
+}
+
+.card-back {
+  background-color: #f8f9fa;
+  transform: rotateY(180deg);
+}
+
+.card-flip:hover {
+  transform: rotateY(180deg);
+}
+
+.card-image {
+  width: 100%;          /* Ocupa el 100% del contenedor */
+  max-width: 400px;    /* Ancho máximo que se puede fijar */
+  height: 220px;        /* Mantiene la proporción de la imagen */
+  object-fit: cover;   /* Asegura que la imagen se ajuste bien al contenedor */
+  border-radius: 10px; /* Bordes redondeados si lo deseas */
+}
+
+
+
+@media (min-width: 768px) {
+  .card-container {
+    margin-bottom: 50px; /* Aumenta el espacio entre tarjetas en pantallas más grandes */
+  }
+}

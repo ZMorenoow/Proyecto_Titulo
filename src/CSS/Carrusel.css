@@ -1,0 +1,89 @@
+/* Estilos generales del carrusel */
+.carousel {
+    position:relative;
+    
+  }
+  
+  .carousel-inner {
+    border-radius: 15px; /* Bordes redondeados */
+    overflow: hidden; /* Ocultar contenido que sobresale */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Sombra */
+
+  }
+  
+  .carousel-item img {
+    width: 100%; /* Ajustar el ancho de la imagen */
+    height: 500px; /* Altura fija para las imágenes */
+    object-fit: cover; /* Ajustar imagen sin deformar */
+    transition: transform 0.5s ease, opacity 0.5s ease; /* Transiciones suaves */
+  }
+  
+  .carousel-item img:hover {
+    transform: scale(1.05); /* Zoom al pasar el cursor */
+  }
+  
+  /* Indicadores */
+  .carousel-indicators [data-bs-target] {
+    width: 12px; /* Ancho de los indicadores */
+    height: 12px; /* Alto de los indicadores */
+    border-radius: 50%; /* Bordes redondeados */
+    background-color: rgba(255, 255, 255, 0.7); /* Color de fondo semitransparente */
+    border: none; /* Sin borde */
+  }
+  
+  .carousel-indicators .active {
+    background-color: #fff; /* Color de fondo para el indicador activo */
+  }
+  
+  /* Controles (Botones de Siguiente/Anterior) */
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5); /* Color de fondo de los controles */
+    padding: 15px; /* Espaciado interno */
+    border-radius: 50%; /* Bordes redondeados */
+    transition: background-color 0.3s ease; /* Transición suave al cambiar color */
+  }
+  
+  .carousel-control-prev-icon:hover,
+  .carousel-control-next-icon:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Color de fondo al pasar el cursor */
+  }
+  
+  /* Caption (Texto sobre las imágenes) */
+  .carousel-caption {
+    background: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 10px; /* Bordes redondeados */
+    bottom: 50px; /* Posición desde abajo */
+    text-align: center; /* Centrar texto */
+    
+  }
+  
+  .carousel-caption h5 {
+    color: #fff; /* Color del título */
+    font-size: 24px; /* Tamaño de fuente del título */
+    font-weight: bold; /* Negrita */
+    margin-bottom: 10px; /* Margen inferior */
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8); /* Sombra para mejorar legibilidad */
+  }
+  
+  .carousel-caption p {
+    color: #ddd; /* Color del texto */
+    font-size: 16px; /* Tamaño de fuente del texto */
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7); /* Sombra para mejorar legibilidad */
+  }
+  
+  @media (max-width: 768px) {
+    .carousel-caption {
+      font-size: 14px; /* Tamaño de fuente más pequeño en pantallas pequeñas */
+      bottom: 30px; /* Posición desde abajo */
+    }
+  
+    .carousel-caption h5 {
+      font-size: 18px; /* Tamaño de fuente del título más pequeño */
+    }
+  
+    .carousel-caption p {
+      font-size: 12px; /* Tamaño de fuente del texto más pequeño */
+    }
+}

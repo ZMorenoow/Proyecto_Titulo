@@ -1,0 +1,33 @@
+/* Estilos del Navbar */
+.navbar {
+    background-color: #b2e0e6; /* Celeste claro */
+    border-bottom: 2px solid #74c3d4; /* Franja inferior */
+
+  }
+  
+  /* Estilo para la marca (logo y texto) */
+  .navbar-brand {
+    margin: -18px 10px -18px 70px;
+  }
+  
+  /* Estilo para las opciones del navbar */
+  .nav-link {
+    color: #005f68; /* Color del texto */
+    transition: background-color 0.3s, color 0.3s; /* Transiciones suaves */
+    margin: 0 15px; /* Espacio horizontal entre los botones */
+    padding: 8px 15px; /* Espacio interno para botones */
+  }
+  
+  /* Estilo para la opción activa */
+  .nav-link.active {
+    background-color: #74c3d4; /* Color de fondo al seleccionar */
+    color: #fff; /* Color del texto al seleccionar */
+    border-radius: 5px; /* Esquinas redondeadas */
+  }
+  
+  /* Cambios al pasar el mouse sobre las opciones */
+  .nav-link:hover {
+    background-color: #74c3d4; /* Color de fondo al pasar el mouse */
+    color: #fff; /* Color del texto al pasar el mouse */
+    border-radius: 5px; /* Esquinas redondeadas en hover */
+  }

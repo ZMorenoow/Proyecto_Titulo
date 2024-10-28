@@ -1,0 +1,95 @@
+/* Estilo para la sección entre el navbar y el carrusel */
+.seccion-titulo {
+    background-color:#c5f3f3; /* Imagen de fondo */
+    background-size: cover; /* Para cubrir toda la sección */
+    background-position: center; /* Centrar la imagen de fondo */
+    width: 100vw; /* Asegura que la franja ocupe todo el ancho de la ventana */
+    margin-left: calc(-50vw + 50%); /* Soluciona el desplazamiento lateral */
+    padding: 50px 0; /* Espaciado superior e inferior */
+    border: 2px solid #72d8db; /* Borde ligero */
+}
+
+.seccion-titulo h1 {
+    color: #094636fd; /* Cambiar el color del texto del título */
+    text-shadow: 4px 2px 5px rgba(0, 0, 0, 0.5); /* Sombra para mejor legibilidad */
+    
+}
+
+.seccion-titulo p {
+    color: #ddd; /* Cambiar el color del texto del párrafo */
+    font-size: 18px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); /* Sombra para mejorar legibilidad */
+}
+
+@media (max-width: 768px) {
+    .seccion-titulo {
+        padding: 30px 0; /* Reducir padding en pantallas más pequeñas */
+    }
+
+    .seccion-titulo h1 {
+        font-size: 28px; /* Tamaño de fuente más pequeño */
+    }
+
+    .seccion-titulo p {
+        font-size: 14px; /* Tamaño de fuente más pequeño para el párrafo */
+    }
+}
+/* como funciona nuestro servicio */
+
+.franja-servicio {
+    background-color: #e0f7fa; /* Color de fondo azul claro */
+    width: 100vw; /* Asegura que la franja ocupe todo el ancho de la ventana */
+    margin-left: calc(-50vw + 50%); /* Soluciona el desplazamiento lateral */
+    padding: 50px 0; /* Espaciado superior e inferior */ 
+    border: 2px solid #72d8db; /* Borde ligero */
+    
+}
+.container-servicio{
+    width: 100vw;
+}
+.titulo-servicio {
+    font-size: 32px;
+    font-weight: bold;
+    color: #060b58; /* Color del título */
+    margin-bottom: 30px;
+}
+
+.pasos-servicio {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.paso {
+    flex: 1;
+    padding: 20px;
+}
+
+.paso h3 {
+    font-size: 24px;
+    color: #0e46be; /* Color de los títulos de cada paso */
+    margin-bottom: 10px;
+}
+
+.paso p {
+    font-size: 16px;
+    color: #022a5e; /* Color del texto de los pasos */
+}
+.imagen-paso {
+    width: 100%; /* Asegúrate de que la imagen ocupe todo el ancho del contenedor */
+    height: 180px; /* Mantiene la proporción de la imagen */
+    max-width: 200px; /* Ancho máximo de la imagen */
+    margin-bottom: 15px; /* Espacio inferior entre la imagen y el texto */
+    border-radius: 10px; /* Bordes redondeados para las imágenes */
+}
+
+
+@media (max-width: 768px) {
+    .pasos-servicio {
+        flex-direction: column;
+    }
+
+    .paso {
+        margin-bottom: 30px; /* Separación entre pasos en pantallas pequeñas */
+    }
+}

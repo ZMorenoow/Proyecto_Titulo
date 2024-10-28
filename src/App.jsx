@@ -1,0 +1,65 @@
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import './CSS/App.css';
+import Navbar from './navbar.jsx';
+import Home from './home.jsx';
+
+import Reservas from './Reservas.jsx';
+import Contacto from './Contacto.jsx';
+import Cotiza from './Cotizar.jsx';
+
+import Cart from './Cart.jsx';
+import Login from './Login.jsx';
+
+const App = () => {
+    const [visible, setVisible] = useState(true);
+    let lastScrollY = window.pageYOffset;
+
+    useEffect(() => {
+        const handleScroll = () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            let maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            let scrollPercentage = scrollTop / maxScroll;
+
+            let white = [255, 255, 255]; // Color blanco
+            let lightBlue = [173, 216, 230]; // Color celeste pastel
+
+            let interpolatedColor = white.map((start, i) => {
+                return Math.round(start + (lightBlue[i] - start) * scrollPercentage);
+            });
+
+            document.body.style.backgroundColor = `rgb(${interpolatedColor[0]}, ${interpolatedColor[1]}, ${interpolatedColor[2]})`;
+
+            const currentScrollY = window.pageYOffset;
+            if (currentScrollY > lastScrollY && currentScrollY > 50) {
+                setVisible(false); // Oculta el navbar al desplazarse hacia abajo
+            } else {
+                setVisible(true); // Muestra el navbar al desplazarse hacia arriba
+            }
+
+            lastScrollY = currentScrollY;
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    return (
+        <Router>
+            <Navbar visible={visible} /> {<Navbar/>}
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/reservas" element={<Reservas />} />
+                <Route path="/contacto" element={<Contacto />} />
+                <Route path="/Cotiza" element={<Cotiza/>}/>
+                <Route path="/Cart" element={<Cart/>}/>
+                <Route path="/Login" element={<Login/>}/>
+            </Routes>
+        </Router>
+    );
+};
+
+export default App;
+
