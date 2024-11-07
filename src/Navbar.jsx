@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../img/logo.png'; // Asegúrate de que la ruta sea correcta
+import carro from '../img/carro.png';
 
 const Navbar = ({ visible }) => {
     return (
         <nav className={`navbar navbar-expand-lg fixed-top ${visible ? '' : 'd-none'}`}>
                     <div className="container-fluid">
                         <Link className="navbar-brand" to="/">
-                            <img src={logo} alt="Logo" width="80" height="80" className="d-inline-block align-text-top" />
+                            <img src={logo} alt="Logo"  className="d-inline-block align-text-top" />
                         </Link>
                         <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
@@ -19,10 +20,20 @@ const Navbar = ({ visible }) => {
                                         <Link className="nav-link " aria-current="page" to="/">Inicio</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link className="nav-link" to="/reservas">Reservas</Link>
+                                        <Link className="nav-link" to="/Servicios">Servicios</Link>
                                     </li>
+                                    
                                     <li className="nav-item">
                                         <Link className="nav-link" to="/contacto">Contacto</Link>
+                                    </li>
+                                    
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="/micuenta">Mi cuenta</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="/carrito">
+                                            <img src={carro} alt="CarroCompras" className="carrito" />
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>

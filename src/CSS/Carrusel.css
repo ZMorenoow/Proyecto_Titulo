@@ -36,17 +36,25 @@
   }
   
   /* Controles (Botones de Siguiente/Anterior) */
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: auto; /* Ajusta el ancho */
+    height: auto;
+    background: none !important; /* Elimina cualquier fondo heredado */
+    border: none !important; /* Elimina cualquier borde heredado */
+    box-shadow: none !important; /* Elimina cualquier sombra */
+  }
+
   .carousel-control-prev-icon,
   .carousel-control-next-icon {
-    background-color: rgba(0, 0, 0, 0.5); /* Color de fondo de los controles */
-    padding: 15px; /* Espaciado interno */
-    border-radius: 50%; /* Bordes redondeados */
-    transition: background-color 0.3s ease; /* Transición suave al cambiar color */
+    background-color: transparent !important; /* Fondo transparente */
+    box-shadow: none !important; /* Elimina cualquier sombra */
+    border: none !important; /* Elimina cualquier borde */
   }
-  
+
   .carousel-control-prev-icon:hover,
   .carousel-control-next-icon:hover {
-    background-color: rgba(0, 0, 0, 0.7); /* Color de fondo al pasar el cursor */
+    background-color: rgba(0, 0, 0, 0.3); /* Fondo más claro al pasar el cursor */
   }
   
   /* Caption (Texto sobre las imágenes) */
@@ -59,6 +67,7 @@
     
   }
   
+
   .carousel-caption h5 {
     color: #fff; /* Color del título */
     font-size: 24px; /* Tamaño de fuente del título */

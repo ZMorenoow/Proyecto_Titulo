@@ -1,0 +1,78 @@
+
+.footer {
+    background-color: #d0eef1; /* Color de fondo del footer */
+    color: #1b284d; /* Color del texto */
+    width: 100vw; /* Ocupa exactamente el ancho de la ventana */ 
+    margin-left: calc(-50vw + 50%); /* Centra la sección */
+    padding: 5px;
+    box-sizing: border-box;
+    border: 4px ridge #1b284d;
+    overflow: hidden; /* Evita cualquier desbordamiento */  
+    position: relative;
+    left: 0; /* Pegado al borde izquierdo */
+    right: 0; /* Pegado al borde derecho */
+    bottom: -32px;
+    
+    
+}
+
+.footer-content {
+    max-width: 1200px; /* Ancho máximo del contenido */
+    margin: 0 auto; /* Centra el contenido */
+    display: flex; /* Flexbox para la disposición */
+    flex-direction: column; /* Apila los elementos */
+    align-items: center; /* Alinea al centro */
+
+}
+
+.footer-content p {
+    margin: 10px 0; /* Margen alrededor del texto */
+    font-size: 16px; /* Tamaño de fuente */
+}
+
+.social-media {
+    display: flex; /* Flexbox para la disposición de íconos */
+    justify-content: center; /* Centra los íconos */
+    gap: 20px; /* Espaciado entre íconos */
+    margin-top: 10px; /* Margen superior */
+}
+
+.social-media a {
+    display: inline-block; /* Bloque en línea */
+    width: 40px; /* Ancho del ícono */
+    height: 40px; /* Alto del ícono */
+    overflow: hidden; /* Oculta desbordes */
+    border-radius: 50%; /* Íconos circulares */
+}
+
+.social-media img {
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    object-fit: cover; /* Ajusta la imagen */
+    border-radius: 50%; /* Bordes redondeados */
+    transition: transform 0.3s ease; /* Efecto de zoom en el hover */
+}
+
+.social-media a:hover img {
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño al pasar el cursor */
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    .footer-content {
+        padding: 10px; /* Menor padding en pantallas pequeñas */
+    }
+
+    .footer-content p {
+        font-size: 14px; /* Tamaño de fuente más pequeño */
+    }
+
+    .social-media {
+        gap: 15px; /* Espacio entre íconos en pantallas pequeñas */
+    }
+
+    .social-media a {
+        width: 30px; /* Tamaño de ícono más pequeño */
+        height: 30px; /* Tamaño de ícono más pequeño */
+    }
+}

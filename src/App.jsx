@@ -3,15 +3,17 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './CSS/App.css';
-import Navbar from './navbar.jsx';
+import Navbar from './Navbar.jsx';
 import Home from './home.jsx';
-
+import Servicios from './Servicios.jsx';
 import Reservas from './Reservas.jsx';
 import Contacto from './Contacto.jsx';
 import Cotiza from './Cotizar.jsx';
+import Carrito from './Carrito.jsx';
+import Cuenta from './Cuenta.jsx';
 
-import Cart from './Cart.jsx';
-import Login from './Login.jsx';
+
+
 
 const App = () => {
     const [visible, setVisible] = useState(true);
@@ -53,10 +55,11 @@ const App = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/reservas" element={<Reservas />} />
                 <Route path="/contacto" element={<Contacto />} />
-                <Route path="/Cotiza" element={<Cotiza/>}/>
-                <Route path="/Cart" element={<Cart/>}/>
-                <Route path="/Login" element={<Login/>}/>
-            </Routes>
+                <Route path="/Servicios" element={<Servicios/>}/>
+                <Route path="/Cotiza" element={<Cotiza/>}/>  
+                <Route path="/Carrito" element={<Carrito/>}/>
+                <Route path="/micuenta" element={<Cuenta/>}/>
+            </Routes>   
         </Router>
     );
 };

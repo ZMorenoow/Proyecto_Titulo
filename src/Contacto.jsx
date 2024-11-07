@@ -7,11 +7,12 @@ const Contacto = () => {
     <div className="contacto-container">
       
       <h2>Contacto</h2>
+      
       <div className="social-media">
 
       <div className="contact-form">
         <h3>  Envíanos un correo electrónico:</h3>
-        <br/>
+        
 
         <form
           onSubmit={(e) => {
@@ -31,12 +32,12 @@ const Contacto = () => {
           />
           <button type="submit">Enviar</button>
         </form>
-        <br/>
-        <br/>
+        
+        
       </div>
       <h3>O <br/><br/>
       Síguenos en nuestras redes sociales:</h3>
-      <br/>
+      
       <div className="iconos">
           <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
             <img src="./img/Instagram.jpg" alt="Instagram" />

@@ -1,33 +1,48 @@
 /* Estilos del Navbar */
 .navbar {
-    background-color: #b2e0e6; /* Celeste claro */
-    border-bottom: 2px solid #74c3d4; /* Franja inferior */
+  background-color: #b2e0e6; /* Celeste claro */
+  border-bottom: 2px solid #74c3d4; /* Franja inferior */
+  margin: 0; /* Asegura que no haya margen */
+  width: 100%;
+ position: absolute;
+}
 
-  }
-  
-  /* Estilo para la marca (logo y texto) */
-  .navbar-brand {
-    margin: -18px 10px -18px 70px;
-  }
-  
-  /* Estilo para las opciones del navbar */
-  .nav-link {
-    color: #005f68; /* Color del texto */
-    transition: background-color 0.3s, color 0.3s; /* Transiciones suaves */
-    margin: 0 15px; /* Espacio horizontal entre los botones */
-    padding: 8px 15px; /* Espacio interno para botones */
-  }
-  
-  /* Estilo para la opción activa */
-  .nav-link.active {
-    background-color: #74c3d4; /* Color de fondo al seleccionar */
-    color: #fff; /* Color del texto al seleccionar */
-    border-radius: 5px; /* Esquinas redondeadas */
-  }
-  
-  /* Cambios al pasar el mouse sobre las opciones */
-  .nav-link:hover {
-    background-color: #74c3d4; /* Color de fondo al pasar el mouse */
-    color: #fff; /* Color del texto al pasar el mouse */
-    border-radius: 5px; /* Esquinas redondeadas en hover */
-  }
+/* Estilo para la marca (logo y texto) */
+.navbar-brand {
+  margin: -18px 10px -18px 70px;
+}
+
+.navbar-brand img {
+  width: 80px;
+  height: 80px;
+}
+
+/* Estilo para las opciones del navbar */
+.nav-link {
+  color: #005f68; /* Color del texto */
+  transition: background-color 0.3s, color 0.3s; /* Transiciones suaves */
+  margin: 0 15px; /* Espacio horizontal entre los botones */
+  padding: 8px 15px; /* Espacio interno para botones */
+  border-radius: 5px; /* Esquinas redondeadas */
+}
+
+/* Estilo para la opción activa */
+.nav-link.active {
+  background-color: #74c3d4; /* Color de fondo al seleccionar */
+  color: #fff; /* Color del texto al seleccionar */
+}
+
+/* Cambios al pasar el mouse sobre las opciones */
+.nav-link:hover {
+  background-color: #74c3d4; /* Color de fondo al pasar el mouse */
+  color: #fff; /* Color del texto al pasar el mouse */
+}
+
+/* Ajuste del carrito de compras */
+.nav-link img.carrito {
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  filter: invert(100%) sepia(100%) saturate(500%) hue-rotate(180deg) brightness(70%);
+  mix-blend-mode: multiply;
+}

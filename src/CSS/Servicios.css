@@ -1,0 +1,92 @@
+.pagina-servicios {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+.pagina-servicios h2 {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 2em;
+  color: #333;
+  font-size: 2em;
+  color: #052641;
+  text-transform: uppercase;
+  text-shadow: 4px 2px 5px rgba(255, 255, 255, 0.5);
+}
+
+.lista-servicios {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los servicios ocupen múltiples filas si es necesario */
+  gap: 20px; /* Espacio entre cada servicio */
+  justify-content: center; /* Centra los servicios en la línea */
+  margin-left: calc(-50vw + 50%); /* Centra la sección */
+  padding: 50px 0;
+  box-sizing: border-box;
+  width: 100vw; /* Asegura que la lista ocupe todo el ancho del contenedor */
+  overflow: hidden;
+}
+
+/* Estilos de cada servicio */
+.servicio {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  width: 300px; /* Ajusta el ancho de cada servicio */
+  display: flex;
+  flex-direction: column; /* Coloca el botón al final */
+  align-items: center;
+  text-align: center;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+
+.servicio-imagen {
+  width: 100%;
+  height: 180px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.servicio h3 {
+  font-size: 1.4em;
+  color: #333;
+  margin-top: 10px;
+}
+
+.servicio p {
+  margin: 8px 0;
+  color: #555;
+}
+
+.btn-agregar {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 1em;
+  margin-top: auto;
+  width: 100%;
+}
+
+.btn-agregar:hover {
+  background-color: #45a049;
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 768px) {
+  .lista-servicios {
+    justify-content: center;
+  }
+
+  .servicio {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .pagina-servicios h2 {
+    font-size: 1.8em;
+  }
+}

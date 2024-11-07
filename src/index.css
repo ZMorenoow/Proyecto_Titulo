@@ -66,11 +66,3 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
-.wallet-label-container-3I2vk7.svelte-1yq52fr {
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  margin-top: 1px;
-  padding: 0 var(--form-padding);
-  min-height: 20px; /* Ajusta este valor según el alto que desees */
-}

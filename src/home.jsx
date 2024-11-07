@@ -7,7 +7,7 @@ import './CSS/Tarjeta.css';
 import './CSS/Carrusel.css';
 import './CSS/Navbar.css';
 import './CSS/Home.css';
-import Navbar from './navbar';
+import Navbar from './Navbar';
 import Footer from './footer';
 
 
@@ -34,16 +34,15 @@ const Home = () => {
             <br />
             <br />
             <main>
-                <h1>Bienvenido a nuestro servicio de limpieza</h1>
-                <p>Ofrecemos los mejores servicios de limpieza para todos tus espacios.</p>
-                
+            <h1 className="titulo-bienvenida">Descubre la excelencia en limpieza</h1>
+            <p className="descripcion-servicio">Brindamos soluciones de limpieza personalizadas para cada uno de tus espacios.</p>
                 <section className="seccion-titulo text-center py-5">
                     <div className="container-1">
                         <h1 className="display-4 fw-bold">Limpieza de Pisos, Espacios Amplios, Supermercados y Estacionamientos</h1>
                     </div>
                 </section>
                 <br/>
-                <h2>Conoce nuestros servicios</h2>
+                <h2 className="titulo-servicios">Conoce nuestros servicios</h2>
                 {/* Carrusel */}
                 <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
@@ -108,7 +107,7 @@ const Home = () => {
                         <h2 className="titulo-servicio">¿Cómo funciona nuestro servicio?</h2>
                         <div className="pasos-servicio">
                             <div className="paso">
-                                <Link className="img-servicio" to="/Cotiza">
+                                <Link className="img-servicio" to="/Servicios">
                                     <img src="../img/cotizar.png"alt="Cotizar" className="imagen-paso" />
                                 </Link>           
                                 <h3>Cotizar</h3>
@@ -117,11 +116,7 @@ const Home = () => {
                                
                             </div>
                             <div className="paso">                            
-                                
-                                <Link className="img-servicio" to="/Reservas">
-                                    <img src="../img/reserva.png"alt="Reservar" className="imagen-paso" />  
-                                </Link>  
-                                
+                                    <img src="../img/reserva.png"alt="Reservar" className="imagen-paso" />     
                                 <h3>Reservar el servicio</h3>
                                 <br/>
                                 <p>Selecciona la fecha y hora que mejor te acomode para agendar el servicio y confirma tu cita en pocos pasos.</p>
@@ -139,7 +134,7 @@ const Home = () => {
 
                 <section className="text-center py-5">
                     <div className="container-3">
-                        <h2 className="fw-bold">Recomendaciones</h2>
+                    <h2 className="titulo-recomendaciones">Recomendaciones</h2>
                         <br/>
                         <div className="row">
                         <div className="col-md-4"> 
@@ -151,11 +146,14 @@ const Home = () => {
                                 <h4>¿Por qué debería contratar un servicio de lavado de espacios amplios?</h4>
                                 </div>
                                 <div className="card-back">
-                                <p>
-                                    Eficiencia y calidad garantizada <br />
-                                    Mejora de la imagen y la seguridad <br />
-                                    Ahorro del tiempo y recursos
-                                </p>
+                                    <div>
+                                        <h5>Eficiencia y calidad garantizada</h5>
+                                        <p>Usamos equipos de última generación para una limpieza rápida y profunda, sin interrumpir tu productividad.</p>
+                                        <h5>Mejora de la imagen y la seguridad</h5> 
+                                        <p>Una limpieza impecable mejora la apariencia y previene accidentes, creando un ambiente seguro y acogedor.</p>
+                                        <h5>Ahorro del tiempo y recursos</h5> 
+                                        <p>Deja la limpieza en manos de profesionales y ahorra tiempo y recursos, permitiendo a tus empleados enfocarse en tareas clave.</p>
+                                    </div>
                                 </div>
                             </div>
                             </div>
@@ -171,13 +169,18 @@ const Home = () => {
                                 
                                 </div>
                                 <div className="card-back">
-                                <p>
-                                    Mejora la higiene <br />
-                                    Elimina los malos olores <br />
-                                    Protege la salud <br />
-                                    Mejora la apariencia <br />
-                                    Prolonga la vida de la alfombra
-                                </p>
+                                    <div>
+                                        <h5>Mejora la Higiene</h5>
+                                        <p>Elimina suciedad, polvo y ácaros.</p>
+                                        <h5>Elimina Olores</h5>
+                                        <p>Elimina olores desagradables y no deseados.</p>
+                                        <h5>Protege la Salud</h5>
+                                        <p>Reduce riesgos para personas con alergias.</p>
+                                        <h5>Mejora la Apariencia</h5>
+                                        <p>Alfombras limpias hacen que la habitación luzca ordenada.</p>
+                                        <h5>Prolonga la Vida</h5>
+                                        <p>Limpieza regular mantiene la alfombra como nueva.</p>
+                                    </div>
                                 </div>
                             </div>
                             </div>   
@@ -193,12 +196,16 @@ const Home = () => {
                                 
                                 </div>
                                 <div className="card-back">
-                                <p>
-                                    Pre-remojo si tiene manchas <br />
-                                    Utilizar solo agua fría o tibia <br />
-                                    Uso de detergente normal <br />
-                                    Secar en la posición de calor más baja
-                                </p>
+                                    <div>
+                                        <h5>Pre-remojo si es necesario</h5>
+                                        <p>Si la colcha tiene manchas, ponla en remojo en agua fría o tibia con un detergente suave durante una hora. Luego, lávela normal.</p>
+                                        <h5>Lavado Normal</h5>
+                                        <p>Lave con agua fría o tibia usando un detergente normal sin lejía ni suavizante.</p>
+                                        <h5>Secado</h5>
+                                        <p>Sécala a baja temperatura y asegure que esté completamente seca antes de guardarla.</p>
+                                        <h5>Limpieza Regular</h5>
+                                        <p>Lave su ropa de cama regularmente para mantenerla limpia y saludable, eliminando ácaros y alérgenos.</p>
+                                    </div>
                                 </div>
                             </div>
                             </div>

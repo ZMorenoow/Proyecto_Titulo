@@ -1,0 +1,85 @@
+/* Estilo general del contenedor */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos */
+h2 {
+    text-align: center; /* Mantener el título centrado */
+    color: #10365c; /* Color oscuro para contraste */
+}
+
+/* Estilo del formulario */
+.form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos para los campos de entrada */
+input[type="number"],
+input[type="text"],
+textarea,
+select {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #19c088; /* Color claro para bordes */
+    border-radius: 4px;
+    font-size: 16px;
+    width: 100%; /* Asegura que los campos llenen el contenedor */
+}
+
+/* Alineación de los textos a la izquierda */
+label {
+    text-align: left; /* Alinea las etiquetas a la izquierda */
+    font-weight: bold; /* Aumenta el peso de las etiquetas */
+    margin-bottom: 5px; /* Espacio debajo de las etiquetas */
+}
+
+/* Estilo para los botones */
+button {
+    padding: 8px 12px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+/* Estilo específico para el botón de agregar dimensión */
+button[type="button"] {
+    background-color: #1abc9c; /* Color verde claro */
+    color: white;
+    width: auto; /* Ajustar el ancho automático */
+}
+
+/* Cambiar el color del botón de agregar dimensión al pasar el mouse */
+button[type="button"]:hover {
+    background-color: #16a085; /* Verde más oscuro al pasar el mouse */
+}
+
+/* Estilo para el botón de envío */
+button[type="submit"] {
+    background-color: #063858; /* Color azul claro */
+    color: white;
+    width: 100%; /* Botón ancho */
+    border: 1px solid #043827; /* Color claro para bordes */
+}
+
+/* Cambiar el color del botón de envío al pasar el mouse */
+button[type="submit"]:hover {
+    background-color: #2980b9; /* Azul más oscuro al pasar el mouse */
+}
+
+/* Estilo para el precio */
+.price {
+    text-align: center; /* Este estilo puede mantenerse así si deseas centrar el precio */
+    margin-top: 20px;
+    color: #2ecc71; /* Color verde para el precio */
+}

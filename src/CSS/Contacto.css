@@ -1,113 +1,144 @@
-body {
-  background: url('./img/fondo.jpg') no-repeat center center fixed; /* Cambia esta ruta a tu imagen de fondo */
-  background-size: cover; /* Asegura que la imagen cubra todo el fondo */
-}
-
-/* Contacto.css */
 .contacto-container {
-  padding: 30px 100px 20px 100px; /* Añade espacio alrededor del contenedor */
-  max-width: 1000px; /* Ancho máximo del contenedor */
-  margin-top: 50px; /* Centra el contenedor horizontalmente */
-  font-family: Arial, sans-serif; /* Fuente para el texto */
-  background-color: rgb(255, 255, 255);
-  border-radius: 10px; /* Opcional: bordes redondeados */
-  box-shadow: 0 10px 20px rgba(11, 82, 55, 0.897); /* Sombra suave para dar profundidad */
+  padding: 30px 20px;
+  max-width: 1200px;
+  width: 700px;
+  margin: 50px auto;
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(11, 82, 55, 0.5);
 }
 
 h2 {
-  text-align: center; /* Centra el título principal */
-  margin-bottom: 30px; /* Espacio debajo del título */
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2em;
+  color: #052641;
+  text-transform: uppercase;
+  text-shadow: 4px 2px 5px rgb(134, 230, 214);
 }
 
-.social-media {
-  margin: 20px 0; /* Espacio vertical entre el título y los iconos */
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  
 }
+.social-media {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 
 .iconos {
-  display: flex; /* Para alinear los iconos horizontalmente */
-  justify-content: center; /* Centra los iconos */
-  gap: 15px; /* Espacio entre los iconos */
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.iconos a {
+  display: flex; /* Asegura que el enlace se ajuste al tamaño de la imagen */
+  align-items: center;
+  justify-content: center;
+  width: 100px; /* Asegura el tamaño del círculo */
+  height: 100px;
+  border-radius: 50%; /* Hace el enlace circular */
+  overflow: hidden; /* Recorta cualquier parte de la imagen que sobresalga */
+  background-color: #f0f0f0; /* Color de fondo opcional */
+  text-decoration: none; /* Elimina el subrayado del enlace */
 }
 
 .iconos img {
-  cursor: pointer; /* Cambia el cursor al pasar por encima */
-  transition: transform 0.3s; /* Transición suave al hacer hover */
-  width: 100%; /* Ajustar el ancho a 100% para que sea responsivo */
-  max-width: 150px; /* Ancho máximo */
-  height: auto; /* Mantener la relación de aspecto */
+  width: 100%; /* Hace que la imagen ocupe el ancho del enlace */
+  height: 100%; /* Hace que la imagen ocupe la altura del enlace */
+  object-fit: cover; /* Asegura que la imagen llene el contenedor circular */
+  transition: transform 0.3s; /* Efecto suave al hacer hover */
 }
 
-.iconos img:hover {
-  transform: scale(1.1); /* Aumenta el tamaño al pasar el ratón */
+.iconos a:hover img {
+  transform: scale(1.1); /* Aumenta el tamaño de la imagen al hacer hover */
 }
+
 
 .contact-form {
-  margin-top: 40px; /* Espacio superior para el formulario */
-  display: flex; /* Usa flexbox para alinear elementos */
-  flex-direction: column; /* Apila los elementos verticalmente */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%; /* Cambiar a 100% para hacer el formulario responsivo */
+  max-width: 800px; /* Ancho máximo para el formulario */
 }
 
 .contact-form input,
 .contact-form textarea {
-  margin-bottom: 15px; /* Espacio entre los campos */
-  padding: 15px 40px 20px 40px; /* Espacio interior para los campos */
-  border: 2px solid #248554; /* Borde ligero */
-  border-radius: 10px; /* Bordes redondeados */
-  font-size: 16px; /* Tamaño de fuente */
-  color: aquamarine;
-  box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
-}
-
-.contact-form input {
-  width: 100%; /* Ancho completo para el campo de correo */
+  width: 100%; /* Cambiar a 100% para ocupar el espacio disponible */
+  max-width: 600px; /* Ancho máximo para mantener la estética */
+  padding: 10px;
+  border: 1px solid #248554;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #333;
+  box-sizing: border-box;
 }
 
 .contact-form textarea {
-  width: 100%; /* Ancho completo para el área de texto */
-  height: 100px; /* Altura fija para el área de texto */
+  resize: vertical;
+  height: 120px;
 }
 
 .contact-form button {
-  margin-top: 20px;
-  padding: 10px 50px 10px 50px; /* Espacio interior del botón */
-  border: 2px solid #248554; /* Borde ligero */
-  border-radius: 50px; /* Bordes redondeados */
-  background-color: aquamarine; /* Color de fondo del botón */
-  color: rgb(0, 0, 0); /* Color del texto */
-  font-size: 25px; /* Tamaño de fuente */
-  cursor: pointer; /* Cambia el cursor al pasar por encima */
-  transition: background-color 0.3s; /* Transición suave al hacer hover */
+  padding: 12px 0;
+  border: none;
+  border-radius: 20px;
+  background-color: aquamarine;
+  color: #000;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%; /* Hacer el botón responsivo */
+  max-width: 1000px;
 }
 
 .contact-form button:hover {
-  background-color: #1ad1e9; /* Color de fondo al hacer hover */
-  border-color: #248554; /* Cambia el color del borde al hacer hover */
+  background-color: #1ad1e9;
 }
 
-/* Media queries para hacer el diseño responsivo */
-@media (max-width: 600px) {
+/* Media Queries para Responsividad */
+@media (max-width: 900px) {
   .contacto-container {
-    padding: 10px; /* Reducir el padding en pantallas pequeñas */
+    padding: 20px; /* Reducir el padding */
+    width: 100%; /* Hacer el contenedor ocupar el 100% del ancho */
+    margin: 20px auto; /* Espacio más pequeño en márgenes */
   }
 
-  .iconos {
-    flex-direction: column; /* Apilar iconos verticalmente */
-  }
-
-  .iconos img {
-    max-width: 80%; /* Aumentar la adaptabilidad de tamaño */
+  h2, h3 {
+    font-size: 1.5em; /* Reducir tamaño de fuente para títulos */
   }
 
   .contact-form {
-    margin-top: 20px; /* Ajustar el margen en pantallas pequeñas */
+    max-width: 100%; /* Quitar ancho máximo en pantallas pequeñas */
   }
 
   .contact-form input,
-  .contact-form textarea {
-    font-size: 14px; /* Reducir el tamaño de fuente */
+  .contact-form textarea,
+  .contact-form button {
+    max-width: 90%; /* Ajustar el ancho máximo en dispositivos móviles */
   }
 
-  .contact-form button {
-    font-size: 14px; /* Reducir el tamaño de fuente */
+  .iconos img {
+    width: 100px; /* Hacer iconos más pequeños en pantallas pequeñas */
   }
 }
+
+@media (max-width: 600px) {
+  .iconos img {
+    width: 100px; /* Hacer iconos más pequeños en pantallas muy pequeñas */
+  }
+
+  .contact-form {
+    gap: 10px; /* Reducir el espacio entre elementos en pantallas pequeñas */
+  }
+  
+}
+

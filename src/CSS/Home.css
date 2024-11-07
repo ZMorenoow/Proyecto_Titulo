@@ -1,56 +1,45 @@
-/* Estilo para la sección entre el navbar y el carrusel */
-.seccion-titulo {
-    background-color:#c5f3f3; /* Imagen de fondo */
-    background-size: cover; /* Para cubrir toda la sección */
-    background-position: center; /* Centrar la imagen de fondo */
-    width: 100vw; /* Asegura que la franja ocupe todo el ancho de la ventana */
-    margin-left: calc(-50vw + 50%); /* Soluciona el desplazamiento lateral */
-    padding: 50px 0; /* Espaciado superior e inferior */
-    border: 2px solid #72d8db; /* Borde ligero */
+
+body {
+    background: url('./img/fondo.jpg') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* Previene el desplazamiento horizontal */
 }
 
+.seccion-titulo, .franja-servicio {
+    background-color: #e0f7fa;
+    width: 100vw; /* Ocupa exactamente el ancho de la ventana */
+    border: 2px solid #72d8db;
+    margin-left: calc(-50vw + 50%); /* Centra la sección */
+    padding: 50px 0;
+    box-sizing: border-box;
+    overflow: hidden; /* Evita cualquier desbordamiento */
+}
+
+
 .seccion-titulo h1 {
-    color: #094636fd; /* Cambiar el color del texto del título */
-    text-shadow: 4px 2px 5px rgba(0, 0, 0, 0.5); /* Sombra para mejor legibilidad */
-    
+    color: #094636fd;
+    text-shadow: 4px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .seccion-titulo p {
-    color: #ddd; /* Cambiar el color del texto del párrafo */
+    color: #ddd;
     font-size: 18px;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); /* Sombra para mejorar legibilidad */
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 }
 
-@media (max-width: 768px) {
-    .seccion-titulo {
-        padding: 30px 0; /* Reducir padding en pantallas más pequeñas */
-    }
 
-    .seccion-titulo h1 {
-        font-size: 28px; /* Tamaño de fuente más pequeño */
-    }
+.container-servicio {
+    max-width: 1200px; /* Centra y limita el ancho de la sección */
+    margin: 0 auto; /* Centra el contenedor */
+}
 
-    .seccion-titulo p {
-        font-size: 14px; /* Tamaño de fuente más pequeño para el párrafo */
-    }
-}
-/* como funciona nuestro servicio */
-
-.franja-servicio {
-    background-color: #e0f7fa; /* Color de fondo azul claro */
-    width: 100vw; /* Asegura que la franja ocupe todo el ancho de la ventana */
-    margin-left: calc(-50vw + 50%); /* Soluciona el desplazamiento lateral */
-    padding: 50px 0; /* Espaciado superior e inferior */ 
-    border: 2px solid #72d8db; /* Borde ligero */
-    
-}
-.container-servicio{
-    width: 100vw;
-}
 .titulo-servicio {
     font-size: 32px;
     font-weight: bold;
-    color: #060b58; /* Color del título */
+    color: #060b58;
     margin-bottom: 30px;
 }
 
@@ -58,38 +47,99 @@
     display: flex;
     justify-content: space-around;
     text-align: center;
+    flex-wrap: wrap; /* Permite que los pasos se ajusten en pantallas pequeñas */
+    width: 100%;
 }
 
 .paso {
-    flex: 1;
+    flex: 1 1 200px; /* Permite que el elemento se ajuste en pantallas pequeñas */
     padding: 20px;
+    max-width: 300px; /* Limita el ancho de cada paso */
+    box-sizing: border-box;
 }
 
 .paso h3 {
     font-size: 24px;
-    color: #0e46be; /* Color de los títulos de cada paso */
+    color: #0e46be;
     margin-bottom: 10px;
 }
 
 .paso p {
     font-size: 16px;
-    color: #022a5e; /* Color del texto de los pasos */
+    color: #022a5e;
 }
+
 .imagen-paso {
-    width: 100%; /* Asegúrate de que la imagen ocupe todo el ancho del contenedor */
-    height: 180px; /* Mantiene la proporción de la imagen */
-    max-width: 200px; /* Ancho máximo de la imagen */
-    margin-bottom: 15px; /* Espacio inferior entre la imagen y el texto */
-    border-radius: 10px; /* Bordes redondeados para las imágenes */
+    width: 100%;
+    height: 180px;
+    max-width: 200px;
+    margin-bottom: 15px;
+    border-radius: 10px;
 }
 
+/* Estilo para secciones adicionales */
+.titulo-recomendaciones,
+.titulo-servicios,
+.titulo-bienvenida,
+.descripcion-servicio {
+    text-align: center;
+    font-weight: bold;
+    margin: 20px 0;
+}
 
+.titulo-recomendaciones {
+    font-size: 2em;
+    color: #052641;
+    text-transform: uppercase;
+    text-shadow: 4px 2px 5px rgba(255, 255, 255, 0.5);
+}
+
+.titulo-servicios {
+    font-size: 2em;
+    color: #052641;
+    text-transform: uppercase;
+    text-shadow: 4px 2px 5px rgba(246, 247, 250, 0.5);
+}
+
+.titulo-bienvenida {
+    font-size: 5em;
+    color: #052641;
+    text-shadow: 4px 2px 5px rgb(127, 210, 243);
+}
+
+.descripcion-servicio {
+    font-size: 1.2em;
+    color: #000000;
+}
+
+/* Ajustes para pantallas pequeñas */
 @media (max-width: 768px) {
+    .seccion-titulo, .franja-servicio {
+        padding: 40px 20px; /* Agrega padding uniforme en ambos lados */
+        margin: 0 auto; /* Centra la sección */
+        width: calc(100% - 20px); /* Asegura que la sección sea responsiva */
+    }
+
+    .seccion-titulo h1 {
+        font-size: 28px;
+    }
+
+    .seccion-titulo p,
+    .paso p {
+        font-size: 14px;
+    }
+
+    .titulo-bienvenida {
+        font-size: 3em;
+    }
+
     .pasos-servicio {
         flex-direction: column;
+        align-items: center;
     }
 
     .paso {
-        margin-bottom: 30px; /* Separación entre pasos en pantallas pequeñas */
+        max-width: 90%; /* Limita el ancho de cada paso en pantallas pequeñas */
+        margin-bottom: 30px;
     }
 }
