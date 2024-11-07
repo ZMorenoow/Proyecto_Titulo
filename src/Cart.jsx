@@ -7,8 +7,8 @@ import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 const Cart = () => {
     // Estado inicial del carrito
     const initialCart = [
-        { id: 1, title: "Producto Limpieza de Piso", price: 10000, quantity: 1 },
-        { id: 2, title: "Producto Limpieza Alfombra", price: 15000, quantity: 1 },
+        { id: 1, title: "Producto Limpieza de Piso", price: 1000, quantity: 1 },
+        { id: 2, title: "Producto Limpieza Alfombra", price: 1500, quantity: 1 },
     ];
 
     const [cart, setCart] = useState(initialCart);
