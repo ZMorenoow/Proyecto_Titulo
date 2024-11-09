@@ -1,38 +1,44 @@
-import React, { useState } from 'react';
-import "./CSS/Carrito.css"; // Agrega tu archivo CSS aquí
+import React, { useState, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from './utils/AuthContext.jsx'; // Importa el contexto de autenticación
+import "./CSS/Carrito.css";
 
 const Carrito = () => {
-  // Estado para almacenar los elementos del carrito
   const [carrito, setCarrito] = useState([]);
+  const { isAuthenticated } = useAuth(); // Obtén el estado de autenticación del contexto
+  const navigate = useNavigate();
 
-  // Función para agregar un servicio al carrito
+  // Redirigir si el usuario no está autenticado
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/login'); // Redirigir al inicio de sesión si no está autenticado
+    }
+  }, [isAuthenticated, navigate]);
+
   const agregarAlCarrito = (servicio) => {
     setCarrito((prevCarrito) => [...prevCarrito, servicio]);
   };
 
-  // Función para eliminar un servicio del carrito
   const eliminarDelCarrito = (index) => {
     const nuevoCarrito = carrito.filter((_, i) => i !== index);
     setCarrito(nuevoCarrito);
   };
 
-  // Función para calcular el total del carrito (simulado)
   const calcularTotal = () => {
-    // Aquí puedes sumar los precios de los servicios en el carrito
-    return carrito.length * 1000; // Reemplaza este valor con la lógica real
+    return carrito.length * 1000; // Lógica de ejemplo, puedes reemplazar con la lógica real
   };
+
+  if (!isAuthenticated) return null; // No renderizar el carrito si no está autenticado
 
   return (
     <div className="pagina-carrito">
       <h2>Carrito de Compras</h2>
 
-      {/* Mostrar los servicios en el carrito */}
       {carrito.length > 0 ? (
         <div className="carrito-contenido">
           {carrito.map((servicio, index) => (
             <div key={index} className="servicio-item">
               <h4>{servicio.nombre}</h4>
-              {/* Aquí puedes agregar más detalles del servicio si es necesario */}
               <button onClick={() => eliminarDelCarrito(index)}>Eliminar</button>
             </div>
           ))}
@@ -41,7 +47,6 @@ const Carrito = () => {
         <p>El carrito está vacío.</p>
       )}
 
-      {/* Mostrar total del carrito */}
       {carrito.length > 0 && (
         <div className="carrito-total">
           <p>Total: ${calcularTotal()}</p>
@@ -49,7 +54,6 @@ const Carrito = () => {
         </div>
       )}
 
-      {/* Botón para agregar un servicio al carrito (Ejemplo) */}
       <div>
         <button onClick={() => agregarAlCarrito({ nombre: 'Limpieza de alfombras' })}>
           Agregar Limpieza de Alfombras al Carrito
