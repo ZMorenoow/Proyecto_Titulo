@@ -131,14 +131,14 @@ const Home = () => {
                     </div>
                 </div>
 
-
+                {/* Tarjetas de recomendación*/ }
                 <section className="text-center py-5">
                     <div className="container-3">
                     <h2 className="titulo-recomendaciones">Recomendaciones</h2>
                         <br/>
                         <div className="row">
                         <div className="col-md-4"> 
-                            <div className="card-container">
+                            <div className="card-reco">
                             <div className="card-flip">
                                 <div className="card-front">
                                 <img src="../img/vacuolavadora.png" alt="Servicio de lavado de espacios amplios" className="card-image" />
@@ -160,7 +160,7 @@ const Home = () => {
                         </div>
 
                         <div className="col-md-4">
-                            <div className="card-container">
+                            <div className="card-reco">
                             <div className="card-flip">
                                 <div className="card-front">
                                 <img src="../img/alfombra_reco.jpeg" alt="Limpieza de alfombras" className="card-image"  />
@@ -187,7 +187,7 @@ const Home = () => {
                         </div>
 
                         <div className="col-md-4">
-                            <div className="card-container">
+                            <div className="card-reco">
                             <div className="card-flip">
                                 <div className="card-front">
                                 <img src="../img/cobertor.jpeg" alt="Lavado de cubrecamas" className="card-image"  />

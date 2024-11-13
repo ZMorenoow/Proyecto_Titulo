@@ -1,16 +1,78 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Navigate, useLocation } from 'react-router-dom';
+import { useAuth } from './utils/AuthContext.jsx';
+import { login } from './service/auth.service.js';
+import './CSS/login.css';  
 
 const Login = () => {
-  const handleLogin = () => {
-    window.open('http://localhost:3000/auth/google', '_self');
-  };
+    const { isAuthenticated, login: authenticate } = useAuth();
+    const [correo, setCorreo] = useState('');
+    const [contrasena, setContrasena] = useState('');
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [message, setMessage] = useState('');
 
-  return (
-    <div>
-      <h1>Iniciar Sesión</h1>
-      <button onClick={handleLogin}>Iniciar sesión con Google</button>
-    </div>
-  );
+    useEffect(() => {
+        const queryParams = new URLSearchParams(location.search);
+        const messageFromUrl = queryParams.get('message');
+        if (messageFromUrl) {
+            setMessage(decodeURIComponent(messageFromUrl));
+            navigate('/login', { replace: true });
+        }
+    }, [location.search, navigate]);
+
+    if (isAuthenticated) {
+        return <Navigate to="/" />;
+    }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setError(null);
+
+        const result = await login({ correo, contrasena });
+        if (result.error) {
+            setError(result.message);
+        } else {
+            authenticate(result.token);
+            navigate('/');
+        }
+    };
+
+    return (
+        <div className="login-container">
+            <div className="login-box">
+                <div className="login-left">
+                    <h1>Iniciar sesión</h1>
+                    {message && <p style={{ color: 'green' }}>{message}</p>}
+                    <form onSubmit={handleSubmit}>
+                        <label>Correo electrónico:</label>
+                        <input
+                            type="email"
+                            value={correo}
+                            onChange={(e) => setCorreo(e.target.value)}
+                            required
+                        />
+                        <label>Contraseña:</label>
+                        <input
+                            type="password"
+                            value={contrasena}
+                            onChange={(e) => setContrasena(e.target.value)}
+                            required
+                        />
+                        {error && <p style={{ color: 'red' }}>{error}</p>}
+                        <button type="submit">Iniciar Sesión</button>
+                    </form>
+                    <a href="#">Olvidaste tu contraseña?</a>
+                </div>
+                <div className="login-right">
+                    <h2>Bienvenido!</h2>
+                    <p>Ingresa tus datos y conoce el mundo de la limpieza</p>
+                    <button onClick={() => navigate('/registro')}>Resgistrarse</button>
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default Login;

@@ -3,6 +3,7 @@ import axios from "axios";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { initialOptions, createOrder, onApprove } from "../server/controllers/pagos/paypal.js";
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
+import './CSS/carro.css';
 
 const Cart = () => {
     // Estado inicial del carrito
@@ -47,7 +48,7 @@ const Cart = () => {
     };
 
     return (
-        <div style={{ padding: "20px" }}>
+        <div className = "cart-container" style={{ padding: "20px" }}>
             <h2>Carrito de Compras</h2>
             <ul>
                 {cart.map(item => (

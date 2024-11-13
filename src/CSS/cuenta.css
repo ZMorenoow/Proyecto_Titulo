@@ -1,0 +1,120 @@
+.container {
+    max-width:1200px;
+    width: 1000px;
+    margin: 50px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #052641;
+    margin-bottom: 20px;
+}
+
+.cards-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap; 
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex: 1 1 45%; 
+    margin-bottom: 30px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+
+.profile-card {
+    background-color: #e6faf6;
+}
+
+.profile-card h3 {
+    margin-bottom: 15px;
+    color: #177569;
+    text-align: center;
+}
+
+.profile-card .form-group {
+    margin-bottom: 15px;
+}
+
+.profile-card label {
+    display: block;
+    font-weight: bold;
+    color: #052641;
+}
+
+.profile-card input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-top: 5px;
+}
+
+.purchases-card {
+    background-color: #eaf7f3;
+}
+
+.purchases-card h3 {
+    margin-bottom: 15px;
+    color: #177569;
+    text-align: center;
+}
+
+.purchases-card ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.purchases-card li {
+    background-color: #ffffff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.purchases-card li:hover {
+    background-color: #dff2e1;
+}
+
+.purchases-card p {
+    text-align: center;
+    color: #777;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .cards-container {
+        flex-direction: column;
+    }
+
+    .card {
+        flex: 1 1 100%; 
+    }
+}
+
+@media (max-width: 500px) {
+    .profile-card input {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .purchases-card li {
+        font-size: 14px;
+    }
+}

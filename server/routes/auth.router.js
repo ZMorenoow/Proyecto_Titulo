@@ -1,10 +1,19 @@
-import { Router } from 'express';
-import { googleLogin, googleLoginRedirect } from '../controllers/auth.controller.js';
-import passport from 'passport';
+import express from 'express';
+import { registerUser, loginUser, verifyEmail, getMe } from '../controllers/auth.controller.js';
+import { authRequired} from '../utils/middleware.js';
 
-const router = Router();
+const router = express.Router();
 
-router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-router.get('/google/callback', googleLoginRedirect, googleLogin);
+// Ruta para registro de usuario
+router.post('/register', registerUser);
+
+// Ruta para login de usuario
+router.post('/login', loginUser);
+
+// Ruta para verificar el correo
+router.get('/verify/:verificationToken', verifyEmail);
+
+
+router.get('/me', authRequired, getMe);
 
 export default router;

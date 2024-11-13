@@ -9,17 +9,22 @@ import Servicios from './Servicios.jsx';
 import Reservas from './Reservas.jsx';
 import Contacto from './Contacto.jsx';
 import Cotiza from './Cotizar.jsx';
-import Carrito from './Carrito.jsx';
+import Cart from './Cart.jsx';
 import Cuenta from './Cuenta.jsx';
-
-
+import Login from './Login.jsx';
+import Registro from './Registro.jsx'
+import HomeAdmin from './homeAdmin.jsx';
 
 
 const App = () => {
+    
+    const [userType, setUserType] = useState(null);
+    const [carrito, setCarrito] = useState([]);
     const [visible, setVisible] = useState(true);
     let lastScrollY = window.pageYOffset;
 
     useEffect(() => {
+        
         const handleScroll = () => {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             let maxScroll = document.documentElement.scrollHeight - window.innerHeight;
@@ -43,10 +48,12 @@ const App = () => {
 
             lastScrollY = currentScrollY;
         };
+        
 
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+    
 
     return (
         <Router>
@@ -56,9 +63,13 @@ const App = () => {
                 <Route path="/reservas" element={<Reservas />} />
                 <Route path="/contacto" element={<Contacto />} />
                 <Route path="/Servicios" element={<Servicios/>}/>
-                <Route path="/Cotiza" element={<Cotiza/>}/>  
-                <Route path="/Carrito" element={<Carrito/>}/>
-                <Route path="/micuenta" element={<Cuenta/>}/>
+                <Route path="/Cotiza" element={<Cotiza />}/>  
+                <Route path="/Cart" element={<Cart />} />
+                <Route path="/Login" element={<Login />}/>
+                <Route path="/Registro" element={<Registro />} />
+                <Route path="/Cuenta"  element={ <Cuenta />} />
+                <Route path="/HomeAdmin" element={<HomeAdmin />}/>
+                
             </Routes>   
         </Router>
     );

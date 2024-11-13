@@ -1,59 +1,77 @@
-import React, { useState, useEffect } from 'react';
-import  './CSS/cuenta.css';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getMe } from './service/auth.service.js';
+import './CSS/cuenta.css'
 
-function PerfilUsuario() {
-  // Estado para almacenar los datos del usuario y los servicios contratados
-  const [usuario, setUsuario] = useState(null);
-  const [servicios, setServicios] = useState([]);
 
-  // Función para obtener los datos del usuario y sus servicios
-  useEffect(() => {
-    const fetchPerfil = async () => {
-      try {
-        const response = await fetch('/api/perfil');
-        const data = await response.json();
-        setUsuario(data.usuario);
-        setServicios(data.servicios);
-      } catch (error) {
-        console.error('Error al cargar los datos del perfil:', error);
-      }
-    };
+const Cuenta = () => {
+    const [userData, setUserData] = useState(null);
+    const [purchases, setPurchases] = useState([]);
+    const navigate = useNavigate();
 
-    fetchPerfil();
-  }, []);
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const data = await getMe();
+                if (data.error) {
+                    throw new Error(data.message);
+                }
+                setUserData(data);
+                setPurchases(data.compras || []); 
+            } catch (error) {
+                console.error('Error al obtener los datos del perfil:', error);
+                navigate('/login');
+            }
+        };
 
-  // Si los datos aún no se cargan, mostrar un mensaje de carga
-  if (!usuario) {
-    return <div>Cargando...</div>;
-  }
+        fetchUserData();
+    }, [navigate]);
 
-  return (
-    <div className="container">
-      <h1>Mi Perfil</h1>
+    if (!userData) return <div>Cargando...</div>;
 
-      <div id="datos-personales">
-        <h2>Datos Personales</h2>
-        <p><strong>Nombre:</strong> {usuario.nombre}</p>
-        <p><strong>Correo:</strong> {usuario.correo}</p>
-        <p><strong>Teléfono:</strong> {usuario.telefono}</p>
-        <p><strong>Dirección:</strong> {usuario.direccion}</p>
-      </div>
+    return (
+        <div className="container">
+            <h2>Perfil de Usuario</h2>
+            <div className="cards-container">
+                {/* Tarjeta de perfil */}
+                <div className="card profile-card">
+                    <h3>Datos de Perfil</h3>
+                    <form>
+                        <div className="form-group">
+                            <label htmlFor="nombre">Nombre</label>
+                            <input type="text" id="nombre" defaultValue={userData.nombre} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="apellido">Apellido</label>
+                            <input type="text" id="apellido" defaultValue={userData.apellido} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="correo">Email</label>
+                            <input type="email" id="correo" defaultValue={userData.correo} readOnly />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="direccion">Dirección</label>
+                            <input type="text" id="direccion" defaultValue={userData.direccion} />
+                        </div>
+                    </form>
+                </div>
 
-      <div id="servicios-contratados">
-        <h2>Servicios Contratados</h2>
-        <ul>
-          {servicios.map((servicio) => (
-            <li key={servicio.id_servicio}>
-              <strong>{servicio.nombre_servicio}</strong><br />
-              Descripción: {servicio.descripcion}<br />
-              Fecha de Contratación: {new Date(servicio.fecha_contratacion).toLocaleDateString()}<br />
-              Estado: {servicio.estado_servicio}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
-}
+                {/* Tarjeta de compras */}
+                <div className="card purchases-card">
+                    <h3>Compras Realizadas</h3>
+                    {purchases.length > 0 ? (
+                        <ul>
+                            {purchases.map((compra, index) => (
+                                <li key={index}>{compra}</li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p>No has realizado ninguna compra.</p>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
+};
 
-export default PerfilUsuario;
+export default Cuenta;

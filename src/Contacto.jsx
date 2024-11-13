@@ -1,5 +1,5 @@
 import React from 'react';
-import './CSS/Contacto.css'; // Asegúrate de crear este archivo CSS
+import './CSS/Contacto.css'; 
 
 const Contacto = () => {
   return (
@@ -7,23 +7,32 @@ const Contacto = () => {
     <div className="contacto-container">
       
       <h2>Contacto</h2>
+      <br />
       
       <div className="social-media">
 
       <div className="contact-form">
         <h3>  Envíanos un correo electrónico:</h3>
+        <br />
         
 
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            // Aquí puedes manejar el envío del formulario
             alert('Correo enviado');
           }}
         >
+          <select required>
+              <option value="">Selecciona el tipo de mensaje</option>
+              <option value="reclamo">Reclamo</option>
+              <option value="soporte">Soporte</option>
+              <option value="consulta">Consulta</option>
+              <option value="sugerencia">Sugerencia</option>
+              <option value="otro">Otro</option>
+            </select>
           <input
-            type="email"
-            placeholder="Tu correo electrónico"
+            type="Asunto"
+            placeholder="Asunto del mensaje"
             required
           />
           <textarea

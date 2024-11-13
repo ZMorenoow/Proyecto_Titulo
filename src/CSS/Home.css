@@ -5,17 +5,17 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    overflow-x: hidden; /* Previene el desplazamiento horizontal */
+    overflow-x: hidden; 
 }
 
 .seccion-titulo, .franja-servicio {
     background-color: #e0f7fa;
-    width: 100vw; /* Ocupa exactamente el ancho de la ventana */
+    width: 100vw; 
     border: 2px solid #72d8db;
-    margin-left: calc(-50vw + 50%); /* Centra la sección */
+    margin-left: calc(-50vw + 50%); 
     padding: 50px 0;
     box-sizing: border-box;
-    overflow: hidden; /* Evita cualquier desbordamiento */
+    overflow: hidden; 
 }
 
 
@@ -32,8 +32,8 @@ body {
 
 
 .container-servicio {
-    max-width: 1200px; /* Centra y limita el ancho de la sección */
-    margin: 0 auto; /* Centra el contenedor */
+    max-width: 1200px; 
+    margin: 0 auto; 
 }
 
 .titulo-servicio {
@@ -47,14 +47,14 @@ body {
     display: flex;
     justify-content: space-around;
     text-align: center;
-    flex-wrap: wrap; /* Permite que los pasos se ajusten en pantallas pequeñas */
+    flex-wrap: wrap; 
     width: 100%;
 }
 
 .paso {
-    flex: 1 1 200px; /* Permite que el elemento se ajuste en pantallas pequeñas */
+    flex: 1 1 200px; 
     padding: 20px;
-    max-width: 300px; /* Limita el ancho de cada paso */
+    max-width: 300px; 
     box-sizing: border-box;
 }
 
@@ -77,7 +77,6 @@ body {
     border-radius: 10px;
 }
 
-/* Estilo para secciones adicionales */
 .titulo-recomendaciones,
 .titulo-servicios,
 .titulo-bienvenida,
@@ -112,12 +111,11 @@ body {
     color: #000000;
 }
 
-/* Ajustes para pantallas pequeñas */
 @media (max-width: 768px) {
     .seccion-titulo, .franja-servicio {
-        padding: 40px 20px; /* Agrega padding uniforme en ambos lados */
-        margin: 0 auto; /* Centra la sección */
-        width: calc(100% - 20px); /* Asegura que la sección sea responsiva */
+        padding: 40px 20px; 
+        margin: 0 auto; 
+        width: calc(100% - 20px); 
     }
 
     .seccion-titulo h1 {
@@ -139,7 +137,7 @@ body {
     }
 
     .paso {
-        max-width: 90%; /* Limita el ancho de cada paso en pantallas pequeñas */
+        max-width: 90%; 
         margin-bottom: 30px;
     }
 }

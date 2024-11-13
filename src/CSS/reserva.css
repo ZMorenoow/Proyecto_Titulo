@@ -1,0 +1,96 @@
+/* Estilo del contenedor del formulario */
+
+@import "react-time-picker/dist/TimePicker.css";
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f9f9f9; 
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #2c3e50; 
+    margin-bottom: 20px;
+}
+
+.form-label {
+    color: #34495e; 
+}
+
+.form-control, .form-select {
+    border: 2px solid #b2e0e0; 
+    border-radius: 5px;
+    padding: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #1abc9c; 
+    box-shadow: 0 0 5px rgba(26, 188, 156, 0.5); 
+}
+
+.btn-primary {
+    background-color: #1abc9c;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+
+.btn-primary:hover {
+    background-color: #16a085; 
+}
+
+.react-datepicker-wrapper {
+    display: block;
+    width: 100%;
+}
+
+.react-datepicker__input-container input {
+    width: 100%;
+    border: 2px solid #b2e0e0; 
+    border-radius: 5px;
+    padding: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.react-datepicker__input-container input:focus {
+    border-color: #1abc9c; 
+    box-shadow: 0 0 5px rgba(26, 188, 156, 0.5); 
+}
+
+.react-datepicker {
+    border: 1px solid #b2e0e0; 
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.react-datepicker__day {
+    color: #34495e; 
+}
+
+.react-datepicker__day:hover {
+    background-color: #1abc9c; 
+    color: white; 
+}
+
+.react-datepicker__header {
+    background-color: #1abc9c;
+    color: white; 
+}
+
+.react-datepicker__navigation {
+    border: 1px solid white; 
+}
+
+/* Estilo de los días seleccionados */
+.react-datepicker__day--selected {
+    background-color: #16a085; 
+    color: white; 
+}
+

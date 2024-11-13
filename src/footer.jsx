@@ -1,15 +1,12 @@
 import React from 'react';
 import  './CSS/footer.css';
 
-
-
-
 const Footer = () => {
     return (
         <footer className="footer">
             <div className="footer-content">
                 <p>&copy; 2024 Watch & Wash</p>
-                <div className="social-media">
+                <div className="redes">
                     <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                         <img src="../img/Facebook.jpg" alt="Facebook" />
                     </a>
