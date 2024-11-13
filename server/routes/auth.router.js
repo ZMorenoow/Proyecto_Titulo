@@ -13,7 +13,7 @@ router.post('/login', loginUser);
 // Ruta para verificar el correo
 router.get('/verify/:verificationToken', verifyEmail);
 
-
 router.get('/me', authRequired, getMe);
+
 
 export default router;

@@ -10,7 +10,7 @@ const Navbar = ({ visible }) => {
 
     const handleLogout = () => {
         logout();
-        navigate('/login');
+        navigate('/');
     };
 
     return (
@@ -25,9 +25,6 @@ const Navbar = ({ visible }) => {
                 <div className="offcanvas offcanvas-end" tabIndex={-1} id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                     <div className="offcanvas-body">
                         <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
-                            <li className="nav-item">
-                                <Link className="nav-link" aria-current="page" to="/">Inicio</Link>
-                            </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/Servicios">Servicios</Link>
                             </li>
