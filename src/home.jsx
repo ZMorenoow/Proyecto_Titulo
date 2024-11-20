@@ -29,13 +29,24 @@ const Home = () => {
 
     return (
         <div>
-            <Navbar /> 
+            <Navbar visible={visible} /> {<Navbar/>}
             <br />
             <br />
-            <br />
+            
             <main>
-            <h1 className="titulo-bienvenida">Descubre la excelencia en limpieza</h1>
-            <p className="descripcion-servicio">Brindamos soluciones de limpieza personalizadas para cada uno de tus espacios.</p>
+            <section className="bienvenida">
+            <div className="contenido-bienvenida" >
+                <div className="texto-bienvenida">
+                
+                <h1>Bienvenido a W&W</h1>
+                <h2>Descubre la excelencia en limpieza</h2>
+                <p>Brindamos soluciones de limpieza personalizadas para cada uno de tus espacios.</p>
+                <img className= " imagen-bienvenida"src="../img/fondohome.png" alt="Imagen de limpieza"></img>
+                </div>
+            </div>
+            </section>
+            <br />
+            
                 <section className="seccion-titulo text-center py-5">
                     <div className="container-1">
                         <h1 className="display-4 fw-bold">Limpieza de Pisos, Espacios Amplios, Supermercados y Estacionamientos</h1>
@@ -213,7 +224,6 @@ const Home = () => {
                         </div>
                     </div>
                 </section>
-
             </main>
             <Footer/> 
         </div>

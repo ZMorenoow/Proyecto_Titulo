@@ -1,13 +1,14 @@
 .cotizacion-form {
   max-width: 1000px; 
-  width: 100%; 
+  width: 60%; 
   margin: 0 auto;
-  margin-top: 80px;
+  margin-top: 100px;
   padding: 20px;
   border: 1px solid #177569;
   border-radius: 8px;
   background-color: #dafcf2;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
 }
 
 .cotizacion-form h2 {

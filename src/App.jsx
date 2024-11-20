@@ -14,6 +14,10 @@ import Cuenta from './Cuenta.jsx';
 import Login from './Login.jsx';
 import Registro from './Registro.jsx'
 import HomeAdmin from './homeAdmin.jsx';
+import ServiciosAdm from './serviciosAdm.jsx';
+import TrabajadoresAdm from './trabajadoresAdm.jsx';
+import ReservasAdm from './reservasAdm.jsx';
+import ClientesAdm from './clientesAdm.jsx';
 
 
 const App = () => {
@@ -22,6 +26,8 @@ const App = () => {
     const [carrito, setCarrito] = useState([]);
     const [visible, setVisible] = useState(true);
     let lastScrollY = window.pageYOffset;
+
+    
 
     useEffect(() => {
         
@@ -57,6 +63,7 @@ const App = () => {
 
     return (
         <Router>
+        
             <Navbar visible={visible} /> {<Navbar/>}
             <Routes>
                 <Route path="/" element={<Home />} />
@@ -69,6 +76,10 @@ const App = () => {
                 <Route path="/Registro" element={<Registro />} />
                 <Route path="/Cuenta"  element={ <Cuenta />} />
                 <Route path="/HomeAdmin" element={<HomeAdmin />}/>
+                <Route path="/serviciosAdm" element={<ServiciosAdm/>}/>
+                <Route path="/trabajadoresAdm" element={<TrabajadoresAdm/>}/>
+                <Route path="/reservasAdm" element={<ReservasAdm/>}/>
+                <Route path="/clientesAdm" element={<ClientesAdm/>}/>
                 
             </Routes>   
         </Router>

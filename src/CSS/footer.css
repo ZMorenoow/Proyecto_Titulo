@@ -1,89 +1,53 @@
-.footer {
-    background-color: #d0eef1; 
-    color: #1b284d; 
-    width: 100vw; 
-    margin-left: calc(-50vw + 50%); 
-    padding: 5px;
-    box-sizing: border-box;
-    border: 2px ridge #1b284d;
-    overflow: hidden; 
-    position: relative;
-    left: 0; 
-    right: 0; 
-    bottom: -32px; 
+/* Estilos globales para asegurar que el contenedor root ocupe toda la pantalla */
+html, body,main, #root {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos básicos para el footer */
+.footer { 
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    margin-top: -80px;
+
 }
 
 .footer-content {
-    max-width: 1200px; 
-    margin: 0 auto; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    justify-content: space-between;
+    transition: all 0.3s ease-in-out;
+    
 }
 
 .footer-content p {
-    margin: 10px 0;
-    font-size: 16px; 
+    margin: 0;
+    text-align: center;
+    flex: 1;
 }
 
 .redes {
-    display: flex; 
-    justify-content: center; 
-    gap: 20px; 
-    margin-top: 10px; 
-    flex-wrap: nowrap; 
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    width: auto;
 }
 
-.redes a {
-    display: inline-block; 
-    width: 40px; 
-    height: 40px; 
-    overflow: hidden;
-    border-radius: 50%; 
+.redes a img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    transition: transform 0.3s, width 0.3s, height 0.3s;
 }
 
-.redes img {
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-    border-radius: 50%; 
-    transition: transform 0.3s ease; 
+.redes a img:hover {
+    transform: scale(1.1);
 }
 
-.redes a:hover img {
-    transform: scale(1.1); 
-}
-
-@media (max-width: 768px) {
-    .footer-content {
-        padding: 10px; 
-    }
-
-    .footer-content p {
-        font-size: 14px; 
-    }
-
-    .redes {
-        gap: 15px; 
-    }
-
-    .redes a {
-        width: 30px; 
-        height: 30px; 
-    }
-}
-
-@media (max-width: 480px) {
-    .redes {
-        gap: 10px;
-    }
-
-    .redes a {
-        width: 25px;
-        height: 25px; 
-    }
-
-    .footer-content p {
-        font-size: 12px; 
-    }
-}

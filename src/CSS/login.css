@@ -2,14 +2,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 500px;
     font-family: Arial, sans-serif;
-    margin-top: 40px;
+    margin-top: 100px;
     
 }
 
 .login-box {
-    height: auto;
+    height: 500px;
     display: flex;
     box-shadow: 0 8px 16px rgba(11, 82, 55, 0.5);
     border-radius: 10px;

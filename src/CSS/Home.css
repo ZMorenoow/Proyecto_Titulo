@@ -5,9 +5,57 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
+    height: 100%;
     overflow-x: hidden; 
 }
 
+/* Estilos para la sección de bienvenida */
+.bienvenida {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.contenido-bienvenida {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  padding: 20px;
+}
+
+.imagen-bienvenida {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.texto-bienvenida {
+  background: rgba(0, 0, 0, 0.163); /* Fondo semitransparente para destacar el texto */
+  border-radius: 10px;
+  padding-top: 40px;
+}
+
+.texto-bienvenida h1
+ {
+  margin: 10px 0;
+  color: #0f2b3dfd;
+  font-size: 90px;
+  text-shadow: 4px 2px 5px rgba(171, 243, 220, 0.5);
+}
+.texto-bienvenida p{
+  margin: 10px 0;
+  color: #0f2b3dfd;
+  font-size: 20px;
+}
+
+ 
 .seccion-titulo, .franja-servicio {
     background-color: #e0f7fa;
     width: 100vw; 
@@ -110,8 +158,50 @@ body {
     font-size: 1.2em;
     color: #000000;
 }
+.offcanvas.offcanvas-end {
+  top: 75px;
+  right: 0;
+  width: var(--bs-offcanvas-width);
+  border-left: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
+  transform: translateX(100%);
+}
+
 
 @media (max-width: 768px) {
+  
+  
+  
+    .contenido-bienvenida {
+        padding: 20px;  /* Reducir el padding */
+      }
+    
+      .titulo-bienvenida {
+        font-size: 2em;  /* Reducir el tamaño del título */
+      }
+    
+      .titulo-descripcion {
+        font-size: 1.5em;  /* Reducir el tamaño de la descripción */
+      }
+    
+      .descripcion-servicio {
+        font-size: 1.1em;  /* Reducir el tamaño del párrafo */
+      }
+    
+      .imagen-container {
+        margin-top: 15px;
+        height: 250px;  /* Limitar la altura de la imagen en pantallas más pequeñas */
+      }
+    
+      .imagen-bienvenida {
+        height: 100%;  /* Mantener la imagen responsiva */
+      }
+      .bienvenida{
+        height: auto;
+        padding: 40px 20px;
+      }
+  
+      
+      
     .seccion-titulo, .franja-servicio {
         padding: 40px 20px; 
         margin: 0 auto; 
@@ -140,4 +230,29 @@ body {
         max-width: 90%; 
         margin-bottom: 30px;
     }
-}
+  }
+  
+
+  
+  @media (max-width: 480px) {
+    /* En pantallas muy pequeñas (móviles) */
+    .titulo-bienvenida {
+      font-size: 1.6em;  /* Reducir aún más el tamaño del título */
+    }
+  
+    .titulo-descripcion {
+      font-size: 1.2em;  /* Reducir aún más la descripción */
+    }
+  
+    .descripcion-servicio {
+      font-size: 1em;  /* Reducir el tamaño del párrafo */
+    }
+  
+    .imagen-container {
+      height: 200px;  /* Reducir la altura de la imagen en pantallas más pequeñas */
+    }
+  
+    .imagen-bienvenida {
+      height: 100%;  /* Ajustar la imagen para que ocupe todo el alto del contenedor */
+    }
+  }

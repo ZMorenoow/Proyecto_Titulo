@@ -2,10 +2,11 @@ import express from 'express';
 import cors from 'cors';
 import { MercadoPagoConfig, Preference } from 'mercadopago';
 import authRoutes from '../server/routes/auth.router.js';
+import adminRoutes from '../server/routes/admin.router.js';
+import trabajadorRoutes from '../server/routes/trabajador.router.js';
 import { getServicios,insertCotizacion } from './configs/db.js'; // Importamos la función para obtener servicios
 import { fileURLToPath } from 'url';
 import path from 'path';
-
 
 
 
@@ -17,11 +18,14 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/auth', authRoutes);
+app.use('/admin', adminRoutes);
+app.use('/worker', trabajadorRoutes);
 
 // Ruta principal de prueba
 app.get("/", (req, res) => {
     res.send("Soy el server :) ");
 });
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
@@ -48,6 +52,7 @@ app.post('/cotizaciones', async (req, res) => {
     }
 });
 
+//MercadoPago
 app.post("/create_preference", async (req, res) => {
     try {
         const body = {
@@ -60,8 +65,8 @@ app.post("/create_preference", async (req, res) => {
                 },
             ],
             back_urls: {
-                success: "http://localhost:5173/Success", 
-                failure: "http://localhost:5173/producto", 
+                success: "http://localhost:5173/Cuenta", 
+                failure: "http://localhost:5173/Cart", 
                 pending: "", 
             },
             auto_return: "approved",

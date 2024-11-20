@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom'; 
 import './CSS/HomeAdm.css'
 
-function AdminDashboard() {
+
+
+
+const AdminHome = () => {
   const navigate = useNavigate(); 
+  const [visible, setVisible] = useState(true);
 
   const redirectToPage = (page) => {
     navigate(page);
   };
 
   return (
+    
     <div className="dashboard-container">
       <header>
         <h1>Panel de Administración</h1>
@@ -18,32 +23,33 @@ function AdminDashboard() {
       <main>
         <div className="card-container">
           {/* Tarjeta Editar Servicios */}
-          <div className="card" onClick={() => redirectToPage('/editar-servicios')}>
+          <div className="card" onClick={() => redirectToPage('/serviciosAdm')}>
             <h2>Editar Servicios</h2>
             <p>Administra los servicios que ofrecemos.</p>
           </div>
 
           {/* Tarjeta Gestionar Reservas */}
-          <div className="card" onClick={() => redirectToPage('/gestionar-reservas')}>
+          <div className="card" onClick={() => redirectToPage('/reservasAdm')}>
             <h2>Gestionar Reservas</h2>
             <p>Consulta y administra las reservas realizadas.</p>
           </div>
 
           {/* Tarjeta Historial de Clientes */}
-          <div className="card" onClick={() => redirectToPage('/historial-clientes')}>
+          <div className="card" onClick={() => redirectToPage('/clientesAdm')}>
             <h2>Historial de Clientes</h2>
             <p>Consulta y administra los registros de clientes.</p>
           </div>
 
           {/* Tarjeta Gestionar Trabajadores */}
-          <div className="card" onClick={() => redirectToPage('/gestionar-trabajadores')}>
+          <div className="card" onClick={() => redirectToPage('/trabajadoresAdm')}>
             <h2>Gestionar Trabajadores</h2>
             <p>Administra el personal de limpieza.</p>
           </div>
         </div>
       </main>
     </div>
+  
   );
 }
 
-export default AdminDashboard;
+export default AdminHome;

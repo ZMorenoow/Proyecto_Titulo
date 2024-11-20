@@ -1,0 +1,193 @@
+/* Contenedor principal */
+.gestion-servicios-container {
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    padding: 30px;
+    max-width: 1200px;
+    background-color: #f1f9f9; /* Fondo claro */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 100px;
+  }
+  
+  /* Encabezado */
+  header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  header h1 {
+    font-size: 2.5rem;
+    color: #00796b; /* Verde azulado */
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  /* Formulario para agregar servicios */
+  .form-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    align-items: center;
+  }
+  
+  .form-container input {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: 1px solid #c4c4c4;
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-container input:focus {
+    border-color: #00796b;
+    outline: none;
+  }
+  
+  .form-container button {
+    background-color: #00796b;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .form-container button:hover {
+    background-color: #004d40;
+    transform: scale(1.05);
+  }
+  
+  /* Lista de servicios */
+  .servicios-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Elemento individual de la lista */
+  .servicio-item {
+    display: grid;
+    grid-template-columns: 1fr 250px auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+    background-color: #ffffff;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .servicio-item:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Columna de texto (nombre del servicio) */
+  .servicio-item span.service-name {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #004d4d; /* Verde oscuro */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  /* Columna de precio */
+  .servicio-item span.price {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #00796b; /* Verde azulado */
+    text-align: center;
+  }
+  
+  /* Contenedor de acciones (botones) */
+  .servicio-item .actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+  
+  .servicio-item button {
+    background-color: #22deb2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    justify-content: end;
+  }
+  
+  .servicio-item button:hover {
+    background-color: #00796b;
+    transform: scale(1.05);
+  }
+  
+  .servicio-item button.edit {
+    background-color: #00796b;
+  }
+  
+  .servicio-item button.edit:hover {
+    background-color: #004d40;
+  }
+  
+  /* Responsividad */
+  @media (max-width: 768px) {
+    .servicio-item {
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+    }
+  
+    .servicio-item span.price {
+      text-align: left; /* Precio alineado a la izquierda */
+    }
+  
+    .servicio-item .actions {
+      justify-content: flex-start; /* Botones a la derecha del texto */
+    }
+  
+    .servicio-item {
+      flex-wrap: wrap;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    header h1 {
+      font-size: 1.8rem;
+    }
+  
+    .form-container input {
+      font-size: 0.9rem;
+      padding: 10px;
+    }
+  
+    .form-container button {
+      font-size: 0.9rem;
+      padding: 10px;
+    }
+  
+    .servicio-item {
+      grid-template-columns: 1fr;
+      text-align: left;
+    }
+  
+    .servicio-item span.price {
+      font-size: 1rem;
+      margin-top: 5px;
+    }
+  
+    .servicio-item button {
+      font-size: 0.8rem;
+      padding: 8px 15px;
+    }
+  }
+  

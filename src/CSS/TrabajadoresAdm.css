@@ -1,0 +1,161 @@
+/* Estilo general */
+.gestionar-trabajadores-container {
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    padding: 30px;
+    max-width: 1200px;
+    background-color: #f1f9f9; /* Fondo claro */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 100px;
+  }
+  
+  /* Encabezado */
+  header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  header h1 {
+    font-size: 2.5rem;
+    color: #00796b; /* Verde azulado */
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  /* Lista de trabajadores */
+  .trabajadores-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Elemento individual de la lista */
+  .trabajador-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+    background-color: #ffffff;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .trabajador-item:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Información del trabajador */
+  .worker-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .worker-name, .worker-position, .worker-status {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  
+  .worker-name {
+    color: #004d4d; /* Verde oscuro */
+  }
+  
+  .worker-position, .worker-status {
+    color: #00796b; /* Verde azulado */
+    text-align: center;
+  }
+  
+  /* Contenedor de asignación de tareas */
+  .task-assignments {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .task-assignments div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .task-assignments span {
+    font-weight: bold;
+    color: #004d40;
+  }
+  
+  .task-assignments p {
+    color: #00796b;
+    font-size: 1rem;
+    margin: 0;
+  }
+  
+  /* Contenedor de acciones (botones) */
+  .actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+  
+  .actions button {
+    background-color: #00796b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .actions button:hover {
+    background-color: #004d40;
+    transform: scale(1.05);
+  }
+  
+  .actions button.delete {
+    background-color: #d32f2f;
+  }
+  
+  .actions button.delete:hover {
+    background-color: #b71c1c;
+  }
+  
+  /* Responsividad */
+  @media (max-width: 768px) {
+    .trabajador-item {
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+    }
+  
+    .task-assignments {
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+  
+    .task-assignments div {
+      margin-right: 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    header h1 {
+      font-size: 1.8rem;
+    }
+  
+    .trabajador-item {
+      grid-template-columns: 1fr;
+      text-align: left;
+    }
+  
+    .task-assignments {
+      flex-direction: column;
+    }
+  
+    .actions {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  
