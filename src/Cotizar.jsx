@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';  
+import React, { useState } from 'react';
+import { useLocation,useNavigate  } from 'react-router-dom';
 import './CSS/Cotizar.css';
 
-
 const CotizacionForm = () => {
-  const location = useLocation();  
+  const location = useLocation();
   const navigate = useNavigate();
   const [error, setError] = useState('');
-  const servicioSeleccionado = location.state?.servicio || { nombre: 'Servicio no especificado', id_servicio: null };
+  const [valorCotizacion, setValorCotizacion] = useState(null); // Inicializar como null
   const [mostrarEspecificaciones, setMostrarEspecificaciones] = useState(false);
+  const [idCotizacion, setIdCotizacion] = useState(null); // Para almacenar el ID de la última cotización
 
   const [cotizacion, setCotizacion] = useState({
-    id_servicio: servicioSeleccionado.id_servicio||'',
+    id_servicio: location.state?.servicio?.id_servicio || '',
     cantidad: '',
     medidas: '',
     material: '',
@@ -20,155 +20,191 @@ const CotizacionForm = () => {
     especificaciones_adicionales: ''
   });
 
+  const servicioSeleccionado = location.state?.servicio || { nombre_servicio: 'No especificado', id_servicio: null };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setCotizacion({
-      ...cotizacion,
-      [name]: value
-    });
+    setCotizacion({ ...cotizacion, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Validar campos requeridos
-    if (
-      !cotizacion.cantidad.trim() ||
-      !cotizacion.medidas.trim() ||
-      !cotizacion.material.trim() ||
-      !cotizacion.estado_producto.trim() ||
-      !cotizacion.antiguedad.trim()
-    ) {
+    const { cantidad, medidas, material } = cotizacion;
+
+    if (!cantidad.trim() || !medidas.trim() || !material.trim()) {
       setError('Por favor, complete todos los campos obligatorios.');
       return;
     }
-    setError(''); 
 
-   
-    console.log("Datos de cotización:", cotizacion); // mostrar datos que se enviarán
-
-    fetch('http://localhost:3000/cotizaciones', {
+    setError('');
+    try {
+      const response = await fetch('http://localhost:3000/cotizaciones', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          
         },
-        body: JSON.stringify(cotizacion),  
-    })
-    .then((response) => {
-        if (!response.ok) {
-            throw new Error('Error en la solicitud: ' + response.statusText);
-        }
-        return response.json();
-    })
-    .then((data) => {
-        console.log('Cotización enviada correctamente:', data);
-    })
-    .catch((error) => {
-        console.error('Error al enviar la cotización:', error);
-    });
-};
+        body: JSON.stringify(cotizacion),
+      });
+
+      if (!response.ok) throw new Error('Error en el servidor');
+
+      const data = await response.json();
+      console.log('Cotización enviada correctamente:', data);
+      setValorCotizacion(data.precioFinal); 
+      setIdCotizacion(data.idCotizacion); // Guardar la última ID de cotización
+      console.log('Valor de cotización actualizado:', data.precioFinal);
+      console.log('id ultima cotizacion:', data.idCotizacion);// Actualizar el estado con el valor de la cotización
+    } catch (error) {
+      console.error('Error al enviar la cotización:', error);
+      setError('Hubo un problema al enviar la cotización. Intenta de nuevo.');
+    }
+  };
+
+
+  const handleAddToCart = async () => {
+    if (!idCotizacion) {
+      setError('No hay una cotización válida para agregar al carrito.');
+      return;
+    }
+    const body = {
+      id_cotizacion: idCotizacion,
+  };
+    console.log('Datos enviados al backend:', body);
+
+    setError('');
+    try {
+      const response = await fetch('http://localhost:3000/carrito/agregar', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({ id_cotizacion: idCotizacion }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+            console.error('Error en la respuesta del backend:', errorData);
+            throw new Error(errorData.message || 'Error al agregar al carrito');
+      }
+
+      const data = await response.json();
+      console.log('Cotización agregada al carrito:', data);
+      alert('Cotización agregada al carrito correctamente');
+      navigate('/cart');
+    } catch (error) {
+      console.error('Error al agregar al carrito:', error);
+      setError('Hubo un problema al agregar la cotización al carrito.');
+    }
+  };
+
   return (
     <div className="cotizacion-form">
       <h2>Formulario de Cotización</h2>
       <form onSubmit={handleSubmit}>
-        <label>
-          Servicio: {servicioSeleccionado.nombre_servicio}
-        </label>
+        <label>Servicio: {servicioSeleccionado.nombre_servicio}</label>
         <br />
 
-        
-          <label htmlFor="cantidad">Cantidad</label>
-          
-          <input
-            type="number"
-            id="cantidad" 
-            name="cantidad"
-            value={cotizacion.cantidad}
-            onChange={handleInputChange}
-            placeholder="Agregar cantidad de productos"
-            required
-          />
-          <br />
+        <label htmlFor="cantidad">Cantidad</label>
+        <input
+          type="number"
+          id="cantidad"
+          name="cantidad"
+          value={cotizacion.cantidad}
+          onChange={handleInputChange}
+          placeholder="Agregar cantidad de productos"
+          required
+        />
+        <br />
 
-          <label htmlFor="medidas">Medidas</label>
-          <input
-            type="text"
-            id="medidas" 
-            name="medidas"
-            value={cotizacion.medidas}
-            onChange={handleInputChange}
-            placeholder="Agregar medidas, sepárelos por ',' "
-            required
-          />
-          <br />
+        <label htmlFor="medidas">Medidas</label>
+        <input
+          type="text"
+          id="medidas"
+          name="medidas"
+          value={cotizacion.medidas}
+          onChange={handleInputChange}
+          placeholder="Agregar medidas, sepárelos por ',' "
+          required
+        />
+        <br />
 
-          <label htmlFor="material">Material</label>
-          <input
-            type="text"
-            id="material" 
-            name="material"
-            value={cotizacion.material}
-            onChange={handleInputChange}
-             placeholder="Agregar materiales, sepárelos por ',' "
-             required
-          />
-          <br />
+        <label htmlFor="material">Material</label>
+        <input
+          type="text"
+          id="material"
+          name="material"
+          value={cotizacion.material}
+          onChange={handleInputChange}
+          placeholder="Agregar materiales, sepárelos por ',' "
+          required
+        />
+        <br />
 
-          <label htmlFor="estado_producto">Estado del Producto</label>
-          <select
-            id="estado_producto" 
-            name="estado_producto"
-            value={cotizacion.estado_producto}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="Bueno">Bueno</option>
-            <option value="Regular">Regular</option>
-            <option value="Malo">Malo</option>
-          </select>
-          <br />
+        <label htmlFor="estado_producto">Estado del Producto</label>
+        <select
+          id="estado_producto"
+          name="estado_producto"
+          value={cotizacion.estado_producto}
+          onChange={handleInputChange}
+        >
+          <option value="Bueno">Bueno</option>
+          <option value="Regular">Regular</option>
+          <option value="Malo">Malo</option>
+        </select>
+        <br />
 
-          <label htmlFor="antiguedad">Antigüedad</label>
-          <select
-            id="antiguedad" 
-            name="antiguedad"
-            value={cotizacion.antiguedad}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="Menos de 1 año">Menos de 1 año</option>
-            <option value="1-3 años">1-3 años</option>
-            <option value="Más de 3 años">Más de 3 años</option>
-          </select>
-          <br />
-          <button
+        <label htmlFor="antiguedad">Antigüedad</label>
+        <select
+          id="antiguedad"
+          name="antiguedad"
+          value={cotizacion.antiguedad}
+          onChange={handleInputChange}
+        >
+          <option value="Menos de 1 año">Menos de 1 año</option>
+          <option value="1-3 años">1-3 años</option>
+          <option value="Más de 3 años">Más de 3 años</option>
+        </select>
+        <br />
+
+        <button
           type="button"
           onClick={() => setMostrarEspecificaciones(!mostrarEspecificaciones)}
         >
           {mostrarEspecificaciones ? 'Ocultar Especificaciones' : 'Agregar Especificaciones'}
         </button>
         <br />
+
         {mostrarEspecificaciones && (
           <>
-
-          <label htmlFor="especificaciones_adicionales">Especificaciones Adicionales (Opcional)</label>
-          <textarea
-            id="especificaciones_adicionales" 
-            name="especificaciones_adicionales"
-            value={cotizacion.especificaciones_adicionales}
-            onChange={handleInputChange}
-            placeholder="Agregar detalles adicionales sobre el producto"
-          />
-          <br />
+            <label htmlFor="especificaciones_adicionales">Especificaciones Adicionales (Opcional)</label>
+            <textarea
+              id="especificaciones_adicionales"
+              name="especificaciones_adicionales"
+              value={cotizacion.especificaciones_adicionales}
+              onChange={handleInputChange}
+              placeholder="Agregar detalles adicionales sobre el producto"
+            />
+            <br />
           </>
         )}
 
-          <button type="submit">Enviar Cotización</button>
-          <br />
-          <button type="submit">Agregar a la bolsa de compras</button>
+        <button type="submit">Enviar Cotización</button>
       </form>
-      
 
-        
+      {error && <p className="error">{error}</p>}
+
+      {/* Mostrar el valor de la cotización cuando esté disponible */}
+      {valorCotizacion !== null && (
+        <p className="resultado">
+          Valor calculado: <strong>${valorCotizacion}</strong>
+        </p>
+      )}
+      {idCotizacion && (
+        <button onClick={handleAddToCart}>Agregar al Carrito</button>
+      )}
     </div>
   );
 };

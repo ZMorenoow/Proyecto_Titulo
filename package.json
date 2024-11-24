@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
+    "@google/generative-ai": "^0.21.0",
     "@mercadopago/sdk-react": "^0.0.19",
     "@paypal/react-paypal-js": "^8.7.0",
     "axios": "^1.7.7",
@@ -19,6 +21,7 @@
     "date-fns": "^4.1.0",
     "express": "^4.21.1",
     "i": "^0.3.7",
+    "mapbox-gl": "^3.8.0",
     "nodemon": "^3.1.7",
     "react": "^18.3.1",
     "react-datepicker": "^7.4.0",

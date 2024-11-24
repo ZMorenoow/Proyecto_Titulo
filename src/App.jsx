@@ -17,7 +17,14 @@ import HomeAdmin from './homeAdmin.jsx';
 import ServiciosAdm from './serviciosAdm.jsx';
 import TrabajadoresAdm from './trabajadoresAdm.jsx';
 import ReservasAdm from './reservasAdm.jsx';
-import ClientesAdm from './clientesAdm.jsx';
+import ClientesAdm from './clientesAdmin.jsx';
+import Footer from './footer.jsx';
+import HomeWorker from './HomeWorker.jsx';
+import PrivateRoute from './PrivateRoute.jsx';
+import Mapbox from './Mapbox.jsx';
+import ReservasTrabajador from './ReservasTrabajador.jsx';
+
+
 
 
 const App = () => {
@@ -26,8 +33,6 @@ const App = () => {
     const [carrito, setCarrito] = useState([]);
     const [visible, setVisible] = useState(true);
     let lastScrollY = window.pageYOffset;
-
-    
 
     useEffect(() => {
         
@@ -55,15 +60,12 @@ const App = () => {
             lastScrollY = currentScrollY;
         };
         
-
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
     
-
     return (
         <Router>
-        
             <Navbar visible={visible} /> {<Navbar/>}
             <Routes>
                 <Route path="/" element={<Home />} />
@@ -71,17 +73,47 @@ const App = () => {
                 <Route path="/contacto" element={<Contacto />} />
                 <Route path="/Servicios" element={<Servicios/>}/>
                 <Route path="/Cotiza" element={<Cotiza />}/>  
-                <Route path="/Cart" element={<Cart />} />
                 <Route path="/Login" element={<Login />}/>
                 <Route path="/Registro" element={<Registro />} />
                 <Route path="/Cuenta"  element={ <Cuenta />} />
-                <Route path="/HomeAdmin" element={<HomeAdmin />}/>
-                <Route path="/serviciosAdm" element={<ServiciosAdm/>}/>
-                <Route path="/trabajadoresAdm" element={<TrabajadoresAdm/>}/>
-                <Route path="/reservasAdm" element={<ReservasAdm/>}/>
-                <Route path="/clientesAdm" element={<ClientesAdm/>}/>
+                <Route path="/map" element={<Mapbox/>}/>
+            
+                {/* Rutas protegidas */}
+                <Route 
+                path="/HomeAdmin" 
+                element={<PrivateRoute element={<HomeAdmin />} allowedRoles={['Administrador']} />} 
+                />
+                <Route 
+                path="/HomeWorker" 
+                element={<PrivateRoute element={<HomeWorker />} allowedRoles={['Trabajador']} />} 
+                />
+                <Route 
+                path="/serviciosAdm" 
+                element={<PrivateRoute element={<ServiciosAdm />} allowedRoles={['Administrador']} />} 
+                />
+                <Route 
+                path="/trabajadoresAdm" 
+                element={<PrivateRoute element={<TrabajadoresAdm />} allowedRoles={['Administrador']} />} 
+                />
+                <Route 
+                path="/reservasAdm" 
+                element={<PrivateRoute element={<ReservasAdm />} allowedRoles={['Administrador']} />} 
+                />
+                <Route 
+                path="/clientesAdm" 
+                element={<PrivateRoute element={<ClientesAdm />} allowedRoles={['Administrador']} />} 
+                />
+                <Route 
+                path="/reservas-trabajador" 
+                element={<PrivateRoute element={<ReservasTrabajador/>} allowedRoles={['Administrador']} />} 
+                />
+                <Route 
+                path="/cart" 
+                element={<PrivateRoute element={<Cart/>} allowedRoles={['Usuario']} />} 
+                />
                 
             </Routes>   
+            <Footer visible={visible} /> 
         </Router>
     );
 };

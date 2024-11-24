@@ -1,0 +1,25 @@
+
+  /* Mensajes de error y carga */
+  .error-message {
+    text-align: center;
+    margin: 20px 0;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #B71C1C; /* Rojo oscuro */
+    background-color: #FFCDD2; /* Fondo rojo claro */
+  }
+  
+  .loading-message {
+    text-align: center;
+    margin: 20px 0;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #FBC02D; /* Amarillo oscuro */
+    background-color: #FFF9C4; /* Fondo amarillo claro */
+  }
+  h1{
+    margin-top: 100px;
+  }
+  

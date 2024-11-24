@@ -43,11 +43,27 @@ export const createOrder = async (data, actions, totalCLP, cart) => {
     });
 };
 
-
-
-export const onApprove = (data, actions) => {
-    return actions.order.capture().then(function(details) {
+export const onApprove = async (data, actions) => {
+    try {
+        const details = await actions.order.capture();
         alert("Transacción completada por " + details.payer.name.given_name);
-    });
+
+        const token = localStorage.getItem("token");
+
+        await axios.put(
+            "http://localhost:3000/carrito/pagar",
+            {}, 
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            }
+        );
+
+    } catch (error) {
+        console.error("Error al completar la transacción:", error);
+        alert("Hubo un error al procesar la transacción.");
+    }
 };
 

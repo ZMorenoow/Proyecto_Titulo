@@ -1,96 +1,82 @@
-/* Estilo del contenedor del formulario */
-
-@import "react-time-picker/dist/TimePicker.css";
-
-.container {
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    background-color: #f9f9f9; 
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.reservation-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Alinea todo el contenido a la izquierda */
+    height: 100vh; /* Toda la altura de la ventana */
+    width: 100%;
+    background: url('https://picsum.photos/1920/1080') no-repeat center center; /* Imagen como fondo */
+    background-size: cover; /* La imagen ocupa todo el fondo */
+    overflow: hidden;
+    margin-top: 100px;
+    border-radius: 20px;
 }
 
-h2 {
-    color: #2c3e50; 
+.reservation-form {
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0px 4px 10px rgb(0, 0, 0);
+    width: 400px;
+    height: 900px;
+    
+}
+form.form-reserva{
+    height: 700px;
+    background-color: #b5d6ca;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.671);
+
+}
+.form-title {
+    font-size: 24px;
     margin-bottom: 20px;
+    color: #333;
+    text-align: center;
 }
 
-.form-label {
-    color: #34495e; 
+.form-group {
+    margin-bottom: 15px;
 }
 
-.form-control, .form-select {
-    border: 2px solid #b2e0e0; 
-    border-radius: 5px;
-    padding: 10px;
-    transition: border-color 0.3s ease;
-}
-
-.form-control:focus, .form-select:focus {
-    border-color: #1abc9c; 
-    box-shadow: 0 0 5px rgba(26, 188, 156, 0.5); 
-}
-
-.btn-primary {
-    background-color: #1abc9c;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-
-.btn-primary:hover {
-    background-color: #16a085; 
-}
-
-.react-datepicker-wrapper {
+.form-group label {
     display: block;
-    width: 100%;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
 }
 
-.react-datepicker__input-container input {
+
+.form-control,
+.form-group input ,
+.form-group select #hora {
     width: 100%;
-    border: 2px solid #b2e0e0; 
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #00c2a8; /* Borde verde */
+    background-color: #000000; /* Fondo negro */
+    color: #ffffff; /* Texto blanco */
     border-radius: 5px;
-    padding: 10px;
-    transition: border-color 0.3s ease;
+    box-sizing: border-box;
 }
 
-.react-datepicker__input-container input:focus {
-    border-color: #1abc9c; 
-    box-shadow: 0 0 5px rgba(26, 188, 156, 0.5); 
+.form-control::placeholder,
+.form-group input::placeholder {
+    color: #a0a0a0; /* Placeholder gris */
 }
 
-.react-datepicker {
-    border: 1px solid #b2e0e0; 
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.submit-button {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #09634c; /* Borde verde */
+    background-color: #37d699; /* Fondo verde */
+    color: #ffffff; /* Texto blanco */
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-weight: bold;
 }
 
-.react-datepicker__day {
-    color: #34495e; 
+.submit-button:hover {
+    background-color: #1a574d; /* Verde más oscuro en hover */
+    border-color: #008f78;
 }
-
-.react-datepicker__day:hover {
-    background-color: #1abc9c; 
-    color: white; 
-}
-
-.react-datepicker__header {
-    background-color: #1abc9c;
-    color: white; 
-}
-
-.react-datepicker__navigation {
-    border: 1px solid white; 
-}
-
-/* Estilo de los días seleccionados */
-.react-datepicker__day--selected {
-    background-color: #16a085; 
-    color: white; 
-}
-

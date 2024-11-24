@@ -7,13 +7,12 @@ html, body,main, #root {
     flex-direction: column;
 }
 
-/* Estilos básicos para el footer */
 .footer { 
     color: #fff;
     padding: 20px;
     text-align: center;
     width: 100%;
-    margin-top: -80px;
+    margin-top: auto;
 
 }
 

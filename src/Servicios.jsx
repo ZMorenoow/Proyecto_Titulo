@@ -5,21 +5,20 @@ import "./CSS/Servicios.css";
 const Servicios = () => {
   const [servicios, setServicios] = useState([]);
   const navigate = useNavigate(); 
-  const [carrito, setCarrito] = useState([]);
+  
 
 
   useEffect(() => {
     fetch('http://localhost:3000/servicios')
         .then(response => response.json())
-        .then(data => {
-            console.log(data); 
+        .then(data => {  
             setServicios(data);
         })
         .catch(error => console.error('Error al obtener los servicios:', error));
 }, [])
 
   const cotizar = (servicio) => {
-    setCarrito([...carrito, servicio]);
+    
     navigate('/cotiza', { state: { servicio } }); 
   };
 

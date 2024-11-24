@@ -1,10 +1,10 @@
 import express from 'express';
-import { getUsersByService } from '../controllers/trabajador.controller.js';
+import { getAllWorkerReservations } from '../controllers/trabajador.controller.js';
 import { authRequired, trabajadorRequired } from '../utils/middleware.js';
 
 const router = express.Router();
 
-
-router.get('/getUser/:id_servicio', authRequired, trabajadorRequired, getUsersByService);
+// Ruta para obtener las reservas asignadas al trabajador autenticado
+router.get('/reservas-trabajador/todas', authRequired, trabajadorRequired, getAllWorkerReservations);
 
 export default router;
