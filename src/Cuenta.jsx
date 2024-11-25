@@ -93,7 +93,7 @@ const Cuenta = () => {
                       <strong>Cantidad:</strong> {reserva.cantidad}
                     </p>
                     <p>
-                      <strong>Monto Total:</strong> ${reserva.valor}
+                      <strong>Monto Total:</strong> ${reserva.monto}
                     </p>
                   </div>
                 </div>
