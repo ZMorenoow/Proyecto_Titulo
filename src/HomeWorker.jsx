@@ -8,7 +8,7 @@ const HomeWorker = () => {
     // Función para obtener reservas asignadas al trabajador
     const fetchReservations = async () => {
         try {
-            const token = localStorage.getItem('token'); 
+            const token = localStorage.getItem('token'); // Obtén el token del almacenamiento local
             if (!token) {
                 setError('No se encontró un token en el almacenamiento local. Inicia sesión nuevamente.');
                 return;

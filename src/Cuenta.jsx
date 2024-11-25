@@ -83,7 +83,7 @@ const Cuenta = () => {
                   <div className="pagos-header">
                     <strong>{reserva.nombre_destinatario}</strong>
                     <span className="pago-fecha">{new Date(reserva.fecha_reserva).toLocaleDateString()}</span>
-                    <span className="pago-hora">{new Date(reserva.hora_reserva).toLocaleTimeString()}</span>
+                    <span className="pago-hora">{(reserva.hora_reserva).toLocaleString()}</span>
                   </div>
                   <div className="pago-detalles">
                     <p>
