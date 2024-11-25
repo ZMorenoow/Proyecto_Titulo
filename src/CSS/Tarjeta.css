@@ -1,8 +1,8 @@
-.card-container {
+.card-reco {
   perspective: 1000px;
   width: 400px;
   height: 450px;
-  margin: 0 auto 100px auto; /* Centra y añade margen inferior */
+  margin: 0 auto 100px auto; 
   padding-top: 20px;
   display: flex;
   flex-direction: column;
@@ -27,7 +27,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: start; /* Alinea el contenido al inicio */
+  justify-content: start; 
   align-items: center;
   text-align: center;
   padding: 20px;
@@ -43,54 +43,76 @@
 }
 
 .card-front img {
-  width: 100%;         /* Ocupa el 100% del contenedor */
-  max-width: 360px;    /* Ancho máximo de la imagen */
-  height: 250px;       /* Altura fija */
-  object-fit: cover;   /* Ajusta bien la imagen */
-  border-radius: 10px; /* Bordes redondeados */
-  margin-bottom: 15px; /* Espacio debajo de la imagen */
+  width: 100%;         
+  max-width: 360px;    
+  height: 250px;       
+  object-fit: cover;   
+  border-radius: 10px; 
+  margin-bottom: 15px; 
 }
 
 .card-front h4 {
-  margin-top: 0;      /* Elimina cualquier margen superior */
+  margin-top: 0;      
   font-size: 22px;
-  max-width: 340px;   /* Ancho máximo del título */
-  padding: 0 10px;    /* Padding para separar del borde */
+  max-width: 340px;   
+  padding: 0 10px;    
 }
 
 .card-back {
   transform: rotateY(180deg);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Alinea el contenido al inicio */
+  justify-content: flex-start; 
   padding-top: 40px; 
 }
 
 .card-back div {
-  max-width: 340px;   /* Ancho máximo del contenido de texto */
-  margin-bottom: 1em; /* Espacio entre secciones de texto */
-  padding: 0 10px;    /* Padding para separar del borde */
-  text-align: left;   /* Alinea el texto a la izquierda */
+  max-width: 340px;   
+  margin-bottom: 1em; 
+  padding: 0 10px;    
+  text-align: left;  
 }
 
 .card-back h5 {
   margin: 0;
-  text-align: center; /* Centra los títulos de las secciones */
+  text-align: center; 
   margin: 0 0 8px 0; 
 }
 
 .card-back p {
-  margin-top: 5px;             /* Espacio adicional entre los párrafos */
+  margin-top: 5px;          
   font-size: smaller;
 }
 
 .card-flip:hover {
-  transform: rotateY(180deg); /* Efecto de giro */
+  transform: rotateY(180deg); 
+}
+.card-front h4, .card-back h5 {
+  font-size: clamp(16px, 2.5vw, 22px); /* Tamaño dinámico */
 }
 
-/* Responsive adjustments */
-@media (min-width: 768px) {
-  .card-container {
-    margin-bottom: 50px; /* Reduce el espacio en pantallas más grandes */
+.card-back p {
+  font-size: clamp(12px, 1.8vw, 14px); /* Tamaño dinámico */
+}
+
+@media (max-width: 1200px) and (min-width: 768px) {
+  .card-reco {
+    width: calc(100% - 20px); /* Dos tarjetas por fila */
+    margin-bottom: 50px; /* Espaciado inferior */
+  }
+}
+
+/* Pantallas menores a 768px */
+@media (max-width: 768px) {
+  .card-reco {
+    width: 60%; /* Ocupa toda la fila */
+    margin-bottom: 30px; /* Espaciado inferior */
+  }
+  .card-front h4, .card-back h5 {
+    font-size: 16px; /* Tamaño más pequeño pero legible */
+  }
+
+  .card-back p {
+    font-size: 12px; /* Ajuste más pequeño */
   }
 }

@@ -1,0 +1,139 @@
+/* Estilos generales para el contenedor del carrito */
+.cart-container {
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #f4f4f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 100px;
+}
+
+/* Título del carrito */
+.cart-container h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Lista de productos */
+.cart-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.cart-container li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cart-container li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para los botones de cantidad (más y menos) */
+.cart-container li button {
+    background-color: #1e9c5d;
+    color: white;
+    border: none;
+    padding: 5px 10px; /* Reducir el tamaño del padding */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    margin: 0 5px; /* Espacio entre los botones */
+    width: 25px;
+    
+}
+
+.cart-container li button:hover {
+    background-color: #36d8d8;
+}
+
+
+.cart-container li button:first-of-type, 
+.cart-container li button:last-of-type { 
+    padding: 3px 8px; 
+    font-size: 0.9rem; 
+}
+
+/* Total del carrito */
+.cart-container h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-top: 30px;
+    color: #333;
+    text-align: center;
+}
+
+/* Botones de pago */
+.cart-container button {
+    background-color: #6cddb8;
+    color: white;
+    border:2px solid #052641;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s;
+    display: block;
+    width: 100%;
+    max-width: 220px;
+    margin: 20px auto;
+}
+
+.cart-container button:hover {
+    background-color: #6dcece;
+    border-color: #052641;
+}
+
+
+.cart-container .payment-options {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.cart-container .payment-options h4 {
+    font-size: 1.4rem;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+
+@media (max-width: 768px) {
+    .cart-container h2 {
+        font-size: 2rem;
+    }
+
+    
+    .cart-container li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+ 
+    .cart-container button {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+
+    .cart-container h3 {
+        font-size: 1.4rem;
+    }
+
+   
+    .cart-container ul li {
+        padding: 12px;
+    }
+}

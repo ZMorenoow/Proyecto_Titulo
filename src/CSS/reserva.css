@@ -1,0 +1,106 @@
+.reservation-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Alinea todo el contenido a la izquierda */
+    height: 100vh; /* Altura completa de la ventana */
+    width: 100%;
+    background: url('https://picsum.photos/1920/1080') no-repeat center center; /* Imagen como fondo */
+    background-size: cover; /* La imagen ocupa todo el fondo */
+    overflow: hidden;
+    border-radius: 20px;
+    padding: 0 30px; /* Espaciado lateral */
+    box-sizing: border-box; /* Incluye padding en el ancho */
+    margin-top: 100px;
+}
+
+.reservation-form {
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    width: 400px; /* Ancho fijo del formulario */
+    height: 100%; /* Ocupa toda la altura del contenedor */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+    margin-left: -30px;
+}
+
+form.form-reserva {
+    background-color: #b5d6ca;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.671);
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.form-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+.form-control,
+.form-group input,
+.form-group select #hora{
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #00c2a8; /* Borde verde */
+    background-color: #000000; /* Fondo negro */
+    color: #ffffff; /* Texto blanco */
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.form-control::placeholder,
+.form-group input::placeholder {
+    color: #a0a0a0; /* Placeholder gris */
+}
+
+/* Selector específico para el input generado por DatePicker */
+.react-datepicker-wrapper {
+    width: 100%; /* Ancho consistente */
+}
+
+.react-datepicker__input-container input {
+    width: 100%; /* Ancho igual al resto de los inputs */
+    padding: 12px; /* Padding igual que otros inputs */
+    font-size: 14px;
+    border: 1px solid #00c2a8;
+    background-color: #000000;
+    color: #ffffff;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: -25px;
+    margin-left: 10px; /* Espaciado entre inputs */
+}
+
+.submit-button {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #09634c; /* Borde verde */
+    background-color: #37d699; /* Fondo verde */
+    color: #ffffff; /* Texto blanco */
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.submit-button:hover {
+    background-color: #1a574d; /* Verde más oscuro en hover */
+    border-color: #008f78;
+}

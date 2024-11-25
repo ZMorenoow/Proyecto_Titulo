@@ -7,9 +7,6 @@ import './CSS/Tarjeta.css';
 import './CSS/Carrusel.css';
 import './CSS/Navbar.css';
 import './CSS/Home.css';
-import Navbar from './Navbar';
-import Footer from './footer';
-
 
 
 const Home = () => {
@@ -28,14 +25,21 @@ const Home = () => {
     }, []);
 
     return (
-        <div>
-            <Navbar /> 
-            <br />
-            <br />
-            <br />
+        <div>   
             <main>
-            <h1 className="titulo-bienvenida">Descubre la excelencia en limpieza</h1>
-            <p className="descripcion-servicio">Brindamos soluciones de limpieza personalizadas para cada uno de tus espacios.</p>
+            <section className="bienvenida">
+            <div className="contenido-bienvenida" >
+                <div className="texto-bienvenida">
+                
+                <h1>Bienvenido a W&W</h1>
+                <h2>Descubre la excelencia en limpieza</h2>
+                <p>Brindamos soluciones de limpieza personalizadas para cada uno de tus espacios.</p>
+                <img className= " imagen-bienvenida"src="../img/fondohome.png" alt="Imagen de limpieza"></img>
+                </div>
+            </div>
+            </section>
+            <br />
+            
                 <section className="seccion-titulo text-center py-5">
                     <div className="container-1">
                         <h1 className="display-4 fw-bold">Limpieza de Pisos, Espacios Amplios, Supermercados y Estacionamientos</h1>
@@ -131,14 +135,14 @@ const Home = () => {
                     </div>
                 </div>
 
-
+                {/* Tarjetas de recomendación*/ }
                 <section className="text-center py-5">
                     <div className="container-3">
                     <h2 className="titulo-recomendaciones">Recomendaciones</h2>
                         <br/>
                         <div className="row">
                         <div className="col-md-4"> 
-                            <div className="card-container">
+                            <div className="card-reco">
                             <div className="card-flip">
                                 <div className="card-front">
                                 <img src="../img/vacuolavadora.png" alt="Servicio de lavado de espacios amplios" className="card-image" />
@@ -160,7 +164,7 @@ const Home = () => {
                         </div>
 
                         <div className="col-md-4">
-                            <div className="card-container">
+                            <div className="card-reco">
                             <div className="card-flip">
                                 <div className="card-front">
                                 <img src="../img/alfombra_reco.jpeg" alt="Limpieza de alfombras" className="card-image"  />
@@ -187,7 +191,7 @@ const Home = () => {
                         </div>
 
                         <div className="col-md-4">
-                            <div className="card-container">
+                            <div className="card-reco">
                             <div className="card-flip">
                                 <div className="card-front">
                                 <img src="../img/cobertor.jpeg" alt="Lavado de cubrecamas" className="card-image"  />
@@ -213,9 +217,8 @@ const Home = () => {
                         </div>
                     </div>
                 </section>
-
             </main>
-            <Footer/> 
+            
         </div>
     );
 };

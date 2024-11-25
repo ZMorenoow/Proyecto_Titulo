@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from './utils/AuthContext.jsx';
+import { useAuth } from '../src/utils/AuthContext.jsx'
 import logo from '../img/logo.png';
 import carro from '../img/carro.png';
+import './CSS/Navbar.css';
 
 const Navbar = ({ visible }) => {
-    const { isAuthenticated, logout } = useAuth();
+    const { isAuthenticated, rol, logout } = useAuth();
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -25,11 +26,26 @@ const Navbar = ({ visible }) => {
                 <div className="offcanvas offcanvas-end" tabIndex={-1} id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                     <div className="offcanvas-body">
                         <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        {rol === 'Administrador' && (
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/HomeAdmin">Admin</Link>
+                                </li>
+                        )}
+
+                            {rol === 'Trabajador' && (
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/HomeWorker">Trabajador</Link>
+                                </li>
+                            )}
                             <li className="nav-item">
                                 <Link className="nav-link" to="/Servicios">Servicios</Link>
                             </li>
+                            
                             <li className="nav-item">
                                 <Link className="nav-link" to="/contacto">Contacto</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/map">Mapa</Link>
                             </li>
                             <li className="nav-item d-flex align-items-center">
                                 {isAuthenticated ? (
@@ -45,7 +61,13 @@ const Navbar = ({ visible }) => {
                                 )}
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/carrito">
+                                <Link 
+                                    className="nav-link" 
+                                    to={isAuthenticated ? "/cart" : "/login"}
+                                    onClick={() => {
+                                        if (!isAuthenticated) alert("Debes iniciar sesión para acceder al carrito.");
+                                    }}
+                                >
                                     <img src={carro} alt="CarroCompras" className="carrito" />
                                 </Link>
                             </li>

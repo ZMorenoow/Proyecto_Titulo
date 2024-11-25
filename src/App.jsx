@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './CSS/App.css';
@@ -9,24 +9,40 @@ import Servicios from './Servicios.jsx';
 import Reservas from './Reservas.jsx';
 import Contacto from './Contacto.jsx';
 import Cotiza from './Cotizar.jsx';
-import Carrito from './Carrito.jsx';
 import Cart from './Cart.jsx';
 import Cuenta from './Cuenta.jsx';
 import Login from './Login.jsx';
 import Registro from './Registro.jsx'
+import HomeAdmin from './homeAdmin.jsx';
+import ServiciosAdm from './serviciosAdm.jsx';
+import TrabajadoresAdm from './trabajadoresAdm.jsx';
+import ReservasAdm from './reservasAdm.jsx';
+import ClientesAdm from './clientesAdmin.jsx';
+import Footer from './footer.jsx';
+import HomeWorker from './HomeWorker.jsx';
+import PrivateRoute from './PrivateRoute.jsx';
+import Mapbox from './Mapbox.jsx';
+import ReservasTrabajador from './ReservasTrabajador.jsx';
+
+
+
 
 const App = () => {
+    
+    const [userType, setUserType] = useState(null);
+    const [carrito, setCarrito] = useState([]);
     const [visible, setVisible] = useState(true);
     let lastScrollY = window.pageYOffset;
 
     useEffect(() => {
+        
         const handleScroll = () => {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             let maxScroll = document.documentElement.scrollHeight - window.innerHeight;
             let scrollPercentage = scrollTop / maxScroll;
 
-            let white = [255, 255, 255];
-            let lightBlue = [173, 216, 230];
+            let white = [255, 255, 255]; // Color blanco
+            let lightBlue = [173, 216, 230]; // Color celeste pastel
 
             let interpolatedColor = white.map((start, i) => {
                 return Math.round(start + (lightBlue[i] - start) * scrollPercentage);
@@ -36,33 +52,68 @@ const App = () => {
 
             const currentScrollY = window.pageYOffset;
             if (currentScrollY > lastScrollY && currentScrollY > 50) {
-                setVisible(false);
+                setVisible(false); // Oculta el navbar al desplazarse hacia abajo
             } else {
-                setVisible(true);
+                setVisible(true); // Muestra el navbar al desplazarse hacia arriba
             }
 
             lastScrollY = currentScrollY;
         };
-
+        
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
-
+    
     return (
         <Router>
-            <Navbar visible={visible} />
+            <Navbar visible={visible} /> {<Navbar/>}
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/reservas" element={<Reservas />} />
                 <Route path="/contacto" element={<Contacto />} />
-                <Route path="/Servicios" element={<Servicios />} />
-                <Route path="/Cotiza" element={<Cotiza />} />
-                <Route path="/Carrito" element={<Carrito />} />
-                <Route path="/Cart" element={<Cart />} />
-                <Route path="/Login" element={<Login />} />
+                <Route path="/Servicios" element={<Servicios/>}/>
+                <Route path="/Cotiza" element={<Cotiza />}/>  
+                <Route path="/Login" element={<Login />}/>
                 <Route path="/Registro" element={<Registro />} />
                 <Route path="/Cuenta"  element={ <Cuenta />} />
-            </Routes>
+                <Route path="/map" element={<Mapbox/>}/>
+            
+                {/* Rutas protegidas */}
+                <Route 
+                path="/HomeAdmin" 
+                element={<PrivateRoute element={<HomeAdmin />} allowedRoles={['Administrador']} />} 
+                />
+                <Route 
+                path="/HomeWorker" 
+                element={<PrivateRoute element={<HomeWorker />} allowedRoles={['Trabajador']} />} 
+                />
+                <Route 
+                path="/serviciosAdm" 
+                element={<PrivateRoute element={<ServiciosAdm />} allowedRoles={['Administrador']} />} 
+                />
+                <Route 
+                path="/trabajadoresAdm" 
+                element={<PrivateRoute element={<TrabajadoresAdm />} allowedRoles={['Administrador']} />} 
+                />
+                <Route 
+                path="/reservasAdm" 
+                element={<PrivateRoute element={<ReservasAdm />} allowedRoles={['Administrador']} />} 
+                />
+                <Route 
+                path="/clientesAdm" 
+                element={<PrivateRoute element={<ClientesAdm />} allowedRoles={['Administrador']} />} 
+                />
+                <Route 
+                path="/reservas-trabajador" 
+                element={<PrivateRoute element={<ReservasTrabajador/>} allowedRoles={['Administrador']} />} 
+                />
+                <Route 
+                path="/cart" 
+                element={<PrivateRoute element={<Cart/>} allowedRoles={['Usuario']} />} 
+                />
+                
+            </Routes>   
+            <Footer visible={visible} /> 
         </Router>
     );
 };

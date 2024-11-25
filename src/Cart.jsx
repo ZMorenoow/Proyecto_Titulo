@@ -1,96 +1,103 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { initialOptions, createOrder, onApprove } from "../server/controllers/pagos/paypal.js";
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
+import './CSS/carro.css';
 
 const Cart = () => {
-    // Estado inicial del carrito
-    const initialCart = [
-        { id: 1, title: "Producto Limpieza de Piso", price: 1000, quantity: 1 },
-        { id: 2, title: "Producto Limpieza Alfombra", price: 1500, quantity: 1 },
-    ];
-
-    const [cart, setCart] = useState(initialCart);
+    const [cart, setCart] = useState([]);
     const [total, setTotal] = useState(0);
-    const [showPaymentOptions, setShowPaymentOptions] = useState(false); // Controla la visibilidad de las opciones de pago
-    const [preferenceId, setPreferenceId] = useState(null); // Controla el ID de preferencia de Mercado Pago
+    const navigate = useNavigate();
 
-    // Inicializar Mercado Pago
-    initMercadoPago("APP_USR-35a3f979-d2ec-4856-aa93-41e176c1aa88", { locale: "es-CL" });
+    useEffect(() => {
+        const fetchCart = async () => {
+            const token = localStorage.getItem("token");
+            try {
+                const response = await axios.get("http://localhost:3000/carrito/obtener", {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setCart(response.data.carrito);
+            } catch (error) {
+                console.error("Error al obtener el carrito:", error);
+            }
+        };
+
+        fetchCart();
+    }, []);
 
     useEffect(() => {
         // Calcular el total
-        const calculatedTotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+        const calculatedTotal = cart.reduce((acc, item) => acc + item.valor * item.cantidad, 0);
         setTotal(calculatedTotal);
     }, [cart]);
 
-    const handleQuantityChange = (id, delta) => {
-        setCart(prevCart => prevCart.map(item =>
-            item.id === id ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item
-        ));
+    const handleReserva = () => {
+        navigate("/reservas", { state: { totalCarrito: total, carrito: cart } });
     };
 
-    const handlePaymentClick = async () => {
-        // Generar preferencia para Mercado Pago y mostrar opciones de pago
+    const handleEliminar = async (id_carrito) => {
+        const token = localStorage.getItem("token");
         try {
-            const response = await axios.post("http://localhost:3000/create_preference", {
-                title: "Compra en W&W",
-                quantity: 1,
-                price: total
-            });
-            setPreferenceId(response.data.id); // Almacenar ID de preferencia
-            setShowPaymentOptions(true); // Mostrar opciones de pago
+            await axios.post(
+                "http://localhost:3000/carrito/eliminar",
+                { id_carrito },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            setCart(cart.filter(item => item.id_carrito !== id_carrito));
         } catch (error) {
-            console.error("Error al procesar el pago con Mercado Pago", error);
+            console.error("Error al eliminar el artículo del carrito:", error);
         }
     };
 
     return (
-        <div style={{ padding: "20px" }}>
+        <div className="cart-container" style={{ padding: "20px" }}>
             <h2>Carrito de Compras</h2>
             <ul>
                 {cart.map(item => (
-                    <li key={item.id} style={{ marginBottom: "10px" }}>
-                        {item.title} - ${item.price} x {item.quantity}
-                        <button onClick={() => handleQuantityChange(item.id, 1)}>+</button>
-                        <button onClick={() => handleQuantityChange(item.id, -1)}>-</button>
+                    <li key={item.id_carrito} style={{ marginBottom: "10px" }}>
+                        {item.nombre_servicio} - ${item.valor} x {item.cantidad} = ${item.valor * item.cantidad}
+                        <button
+                            onClick={() => handleEliminar(item.id_carrito)}
+                            style={{
+                                marginLeft: "10px",
+                                backgroundColor: "red",
+                                color: "white",
+                                border: "none",
+                                padding: "5px 10px",
+                                cursor: "pointer"
+                            }}
+                        >
+                            Eliminar
+                        </button>
                     </li>
                 ))}
             </ul>
             <h3>Total: ${total}</h3>
-
-            <div style={{ marginTop: "20px" }}>
-                {!showPaymentOptions ? (
-                    <button onClick={handlePaymentClick} style={{ marginRight: "10px" }}>
-                        Pagar
-                    </button>
-                ) : (
-                    <div>
-                        {/* Mercado Pago */}
-                        {preferenceId && (
-                            <Wallet
-                                initialization={{ preferenceId: preferenceId }}
-                                customization={{ texts: { valueProp: 'smart_option' } }}
-                            />
-                        )}
-                        
-                        {/* PayPal */}
-                        <PayPalScriptProvider options={initialOptions}>
-                        <PayPalButtons
-                                style={{
-                                    layout: "horizontal",
-                                    color: "blue",
-                                    shape: "rect",
-                                    label: "paypal"
-                                }}
-                                createOrder={async (data, actions) => await createOrder(data, actions, total, cart)} // Pasa el cart
-                                onApprove={onApprove}
-                            />
-                        </PayPalScriptProvider>
-                    </div>
-                )}
-            </div>
+            <button
+                onClick={handleReserva}
+                disabled={total === 0} // Botón deshabilitado si el total es 0
+                style={{
+                    backgroundColor: total === 0 ? "#ccc" : "#007bff",
+                    color: "#fff",
+                    padding: "10px 20px",
+                    border: "none",
+                    borderRadius: "5px",
+                    cursor: total === 0 ? "not-allowed" : "pointer",
+                    marginTop: "10px",
+                }}
+            >
+                Ir a Reservas
+            </button>
+            {total === 0 && (
+                <p style={{ color: "red", marginTop: "10px" }}>
+                    Tu carrito está vacío. Agrega servicios para continuar.
+                </p>
+            )}
         </div>
     );
 };

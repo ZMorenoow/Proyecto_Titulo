@@ -1,14 +1,17 @@
 import express from 'express';
 import cors from 'cors';
-import { MercadoPagoConfig, Preference } from 'mercadopago';
 import authRoutes from '../server/routes/auth.router.js';
 import adminRoutes from '../server/routes/admin.router.js';
 import trabajadorRoutes from '../server/routes/trabajador.router.js';
+import carritoRoutes from '../server/routes/carrito.router.js';
+import reservaRoutes from '../server/routes/reserva.router.js'
+import contactoRoutes from '../server/routes/contacto.router.js';
+import { getServicios,insertCotizacion } from './configs/db.js'; 
+import { fileURLToPath } from 'url';
+import path from 'path';
+import { geminiApiCall } from './utils/GeminiAPI.js';
 
 const app = express();
-
-// Configura Mercado Pago
-const client = new MercadoPagoConfig({ accessToken: "APP_USR-3603337471654012-101417-73046df5da2f0ca7e92fab28b8fbc592-2035500959", });
 
 app.use(express.json());
 app.use(cors());
@@ -16,7 +19,9 @@ app.use(cors());
 app.use('/auth', authRoutes);
 app.use('/admin', adminRoutes);
 app.use('/worker', trabajadorRoutes);
-
+app.use('/carrito', carritoRoutes);
+app.use('/reserva', reservaRoutes);
+app.use('/contacto',contactoRoutes);
 
 
 // Ruta principal de prueba
@@ -24,44 +29,50 @@ app.get("/", (req, res) => {
     res.send("Soy el server :) ");
 });
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
-//MercadoPago
-app.post("/create_preference", async (req, res) => {
+// Ruta para obtener los servicios desde la base de datos
+app.get("/servicios", async (req, res) => {
     try {
-        const body = {
-            items: [
-                {
-                    title: req.body.title,
-                    quantity: Number(req.body.quantity),
-                    unit_price: Number(req.body.price),
-                    currency_id: "CLP", 
-                },
-            ],
-            back_urls: {
-                success: "http://localhost:5173/Cuenta", 
-                failure: "http://localhost:5173/Cart", 
-                pending: "", 
-            },
-            auto_return: "approved",
-        };
-
-        const preference = new Preference(client);
-        const result = await preference.create({ body });
-
-        res.json({
-            id: result.id,
-        });
-
+        const servicios = await getServicios(); // Obtener los servicios desde la base de datos
+        res.json(servicios); // Devolver los servicios como respuesta JSON
     } catch (error) {
-        console.log(error);
-        res.status(500).json({
-            error: "Error al crear la preferencia",
-        });
+        console.error("Error al obtener los servicios:", error);
+        res.status(500).json({ error: "Error al obtener los servicios" });
     }
 });
+
+// Ruta para recibir y guardar la cotizacion en la base de datos
+app.post('/cotizaciones', async (req, res) => {
+    try {
+        const cotizacion = req.body;
+
+        // Llamada a Gemini para calcular el valor
+        const geminiValor = await geminiApiCall(cotizacion);
+
+        // Asegurarse de que el valor calculado de Gemini sea un número
+        const valorCalculado = parseFloat(geminiValor.replace(/[^0-9.-]+/g, ""));
+
+        // Insertar la cotización con el valor calculado
+        cotizacion.valor = valorCalculado;
+
+        const { insertId } = await insertCotizacion(cotizacion);
+
+        res.status(200).json({
+            message: 'Cotización insertada correctamente',
+            idCotizacion: insertId,
+            precioFinal: valorCalculado
+        });
+    } catch (error) {
+        console.error('Error al procesar la cotización:', error);
+        res.status(500).json({ error: 'Error al procesar la cotización' });
+    }
+});
+
 
 // Iniciar el servidor
 const PORT = 3000;
 app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });

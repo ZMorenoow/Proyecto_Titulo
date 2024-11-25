@@ -1,0 +1,175 @@
+/* General styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Heading styling */
+h1 {
+  text-align: center;
+  margin-bottom: 40px;
+  margin-top: 40px;
+  color: #052641;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgb(134, 230, 214);
+}
+
+/* Table styling */
+table {
+  width: 1300px;
+  border-collapse: separate;
+  margin: 20px 0;
+  background: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px; /* Bordes redondeados */
+  overflow: hidden;
+}
+
+thead {
+  background-color: #0f6153; /* Verde pastel */
+  color: rgb(255, 255, 255);
+}
+
+thead th {
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: bold;
+}
+
+tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tbody td {
+  padding: 12px 15px;
+}
+
+tbody tr:hover {
+  background-color: #e0f7fa; /* Celeste claro en hover */
+}
+
+tbody td select {
+  padding: 5px 10px;
+  border-radius: 8px; /* Bordes redondeados */
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background-color: #d4f1eb;
+  color: #333;
+}
+
+/* Form styling */
+form {
+  margin: 20px 0;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+form div {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+select {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px; /* Bordes redondeados */
+  font-size: 14px;
+}
+
+input:focus,
+select:focus {
+  border-color: #4a90e2; /* Celeste cuando se enfoca */
+  outline: none;
+}
+
+/* Loading/Error styles */
+div {
+  text-align: center;
+  font-size: 18px;
+}
+
+div.error {
+  color: #e74c3c; /* Rojo para errores */
+  font-weight: bold;
+}
+
+div.loading {
+  font-style: italic;
+  color: #999;
+}
+
+/* Contenedor de los botones */
+.botones-acciones {
+  display: flex; /* Alinear botones horizontalmente */
+  gap: 15px; /* Separación uniforme entre botones */
+  justify-content: center; /* Centrar botones */
+  align-items: center; /* Alinear verticalmente */
+}
+
+/* Estilo base de los botones */
+.boton-editar,
+.boton-eliminar,
+.boton-guardar, 
+.boton-cancelar {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 15px; /* Bordes completamente redondeados */
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombras suaves para un toque elegante */
+}
+
+/* Estilo del botón "Editar" */
+.boton-editar,
+.boton-guardar {
+  background-color: #a3d5d3; /* Verde pastel */
+  color: #000000;
+}
+
+.boton-editar:hover,
+.boton-guardar:hover {
+  background-color: #89c2be; /* Verde más oscuro al pasar el mouse */
+  transform: scale(1.05); /* Efecto de zoom */
+}
+
+/* Estilo del botón "Eliminar" */
+.boton-eliminar,
+.boton-cancelar {
+  background-color: #8a1a06; /* Celeste pastel */
+  color: #ffffff;
+}
+
+.boton-eliminar:hover, 
+.boton-cancelar:hover {
+  background-color: #41140c; /* Celeste más oscuro al pasar el mouse */
+  transform: scale(1.05); /* Efecto de zoom */
+}
+
+/* Efecto al presionar */
+.boton-editar:active,
+.boton-eliminar:active,
+.boton-guardar:active, 
+.boton-cancelar:active {
+  transform: scale(0.95); /* Reducir un poco el tamaño */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Sombras más profundas */
+}

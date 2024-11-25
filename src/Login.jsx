@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from './utils/AuthContext.jsx';
 import { login } from './service/auth.service.js';
+import { decodeToken } from './service/helpers.js';  // Importamos la función decodeToken
+import './CSS/login.css';  
 
 const Login = () => {
     const { isAuthenticated, login: authenticate } = useAuth();
@@ -10,7 +12,6 @@ const Login = () => {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
     const location = useLocation();
-
     const [message, setMessage] = useState('');
 
     useEffect(() => {
@@ -34,37 +35,50 @@ const Login = () => {
         if (result.error) {
             setError(result.message);
         } else {
-            authenticate(result.token);
-            navigate('/');
+            // Decodificamos el token JWT para extraer el rol
+            const decodedToken = decodeToken(result.token);  // Usamos decodeToken aquí
+            if (decodedToken) {
+                const rol = decodedToken.rol;  // Obtenemos el rol del token
+                authenticate(result.token, rol);  // Pasamos el token y rol al contexto de autenticación
+                navigate('/');  // Redirigimos al home
+            } else {
+                setError('Error al decodificar el token.');
+            }
         }
     };
 
     return (
-        <div>
-            <h1>Iniciar Sesión</h1>
-            {message && <p style={{ color: 'green' }}>{message}</p>} 
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Correo electrónico:</label>
-                    <input
-                        type="email"
-                        value={correo}
-                        onChange={(e) => setCorreo(e.target.value)}
-                        required
-                    />
+        <div className="login-container">
+            <div className="login-box">
+                <div className="login-left">
+                    <h1>Iniciar sesión</h1>
+                    {message && <p style={{ color: 'green' }}>{message}</p>}
+                    <form onSubmit={handleSubmit}>
+                        <label>Correo electrónico:</label>
+                        <input
+                            type="email"
+                            value={correo}
+                            onChange={(e) => setCorreo(e.target.value)}
+                            required
+                        />
+                        <label>Contraseña:</label>
+                        <input
+                            type="password"
+                            value={contrasena}
+                            onChange={(e) => setContrasena(e.target.value)}
+                            required
+                        />
+                        {error && <p style={{ color: 'red' }}>{error}</p>}
+                        <button type="submit">Iniciar Sesión</button>
+                    </form>
+                    <a href="#">Olvidaste tu contraseña?</a>
                 </div>
-                <div>
-                    <label>Contraseña:</label>
-                    <input
-                        type="password"
-                        value={contrasena}
-                        onChange={(e) => setContrasena(e.target.value)}
-                        required
-                    />
+                <div className="login-right">
+                    <h2>Bienvenido!</h2>
+                    <p>Ingresa tus datos y conoce el mundo de la limpieza</p>
+                    <button onClick={() => navigate('/registro')}>Registrarse</button>
                 </div>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-                <button type="submit">Iniciar Sesión</button>
-            </form>
+            </div>
         </div>
     );
 };

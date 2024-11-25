@@ -1,13 +1,12 @@
 /* Estilos del Navbar */
 .navbar {
-  background-color: #b2e0e6; /* Celeste claro */
-  border-bottom: 2px solid #74c3d4; /* Franja inferior */
-  margin: 0; /* Asegura que no haya margen */
+  background-color: #b2e0e6; 
+  border-bottom: 2px solid #74c3d4; 
+  margin: 0; 
   width: 100%;
- position: absolute;
+  position: fixed;
 }
 
-/* Estilo para la marca (logo y texto) */
 .navbar-brand {
   margin: -18px 10px -18px 70px;
 }
@@ -17,32 +16,85 @@
   height: 80px;
 }
 
-/* Estilo para las opciones del navbar */
 .nav-link {
-  color: #005f68; /* Color del texto */
-  transition: background-color 0.3s, color 0.3s; /* Transiciones suaves */
-  margin: 0 15px; /* Espacio horizontal entre los botones */
-  padding: 8px 15px; /* Espacio interno para botones */
-  border-radius: 5px; /* Esquinas redondeadas */
+  color: #005f68; 
+  transition: background-color 0.3s, color 0.3s; 
+  margin: 0 15px; 
+  padding: 8px 15px; 
+  border-radius: 5px; 
+  font-weight: 500; 
+  display:inline-flex;
+  text-align: center; 
+  
+  
+  
+}
+.navbar-nav .nav-item .nav-link {
+  text-align: center; 
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  padding: 10px 15px; 
+ 
 }
 
-/* Estilo para la opción activa */
 .nav-link.active {
-  background-color: #74c3d4; /* Color de fondo al seleccionar */
-  color: #fff; /* Color del texto al seleccionar */
+  background-color: #74c3d4; 
+  color: #fff; 
 }
 
-/* Cambios al pasar el mouse sobre las opciones */
 .nav-link:hover {
-  background-color: #74c3d4; /* Color de fondo al pasar el mouse */
-  color: #fff; /* Color del texto al pasar el mouse */
+  background-color: #74c3d4; 
+  color: #fff; 
 }
 
-/* Ajuste del carrito de compras */
 .nav-link img.carrito {
   width: 30px;
   height: 30px;
   vertical-align: middle;
   filter: invert(100%) sepia(100%) saturate(500%) hue-rotate(180deg) brightness(70%);
   mix-blend-mode: multiply;
+}
+
+@media (max-width: 992px){
+  .navbar .offcanvas-body {
+    flex-direction: column; 
+    align-items: center;
+  
+  }
+
+  .nav-item .nav-link {
+    width: 100%; 
+    margin-top: 10px; 
+    text-align: center; 
+  }
+}
+@media (max-width: 768px) {
+  .navbar .offcanvas-body {
+    
+    flex-direction: column; 
+    align-items: center; 
+  
+  }
+
+  .nav-item .nav-link {
+    width: 100%; 
+    margin-top: 10px; 
+    text-align: center; 
+  }
+
+  .navbar-toggler {
+    background-color: transparent;
+    border: none;
+  }
+
+  .navbar-toggler-icon {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+  }
+
+  .navbar .offcanvas-body .nav-item {
+    text-align: center; 
+  }
 }

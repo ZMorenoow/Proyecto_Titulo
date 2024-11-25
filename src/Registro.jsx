@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { register } from './service/auth.service.js';  // Importa la función de registro
+import { register } from './service/auth.service.js';  
+import './CSS/registro.css';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -51,106 +52,121 @@ const Register = () => {
     };
 
     return (
-        <div className="container">
-            <h2>Registro de Usuario</h2>
-            {error && <div className="alert alert-danger">{error}</div>}
-            <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                    <label htmlFor="nombre" className="form-label">Nombre</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="nombre"
-                        name="nombre"
-                        value={formData.nombre}
-                        onChange={handleChange}
-                        required
-                    />
+        <div className="register-container">
+            <div className="register-box">
+                
+                <div className="register-left">
+                    <h1>Bienvenido</h1>
+                    <p>Únete a nosotros creando una cuenta para empezar.</p>
                 </div>
+                
+                <div className="register-right">
+                    <h2>Registro de Usuario</h2>
+                    {error && <div className="alert alert-danger">{error}</div>}
+                    <form onSubmit={handleSubmit}>
+                    <div className="input-group">
+                        <div className="mb-3">
+                            <label htmlFor="nombre" className="form-label">Nombre</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="nombre"
+                                name="nombre"
+                                value={formData.nombre}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
 
-                <div className="mb-3">
-                    <label htmlFor="apellido" className="form-label">Apellido</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="apellido"
-                        name="apellido"
-                        value={formData.apellido}
-                        onChange={handleChange}
-                        required
-                    />
+                        <div className="mb-3">
+                            <label htmlFor="apellido" className="form-label">Apellido</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="apellido"
+                                name="apellido"
+                                value={formData.apellido}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div className="input-group">
+                        <div className="mb-3">
+                            <label htmlFor="telefono" className="form-label">Teléfono</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="telefono"
+                                name="telefono"
+                                value={formData.telefono}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+
+                        <div className="mb-3">
+                            <label htmlFor="direccion" className="form-label">Dirección</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="direccion"
+                                name="direccion"
+                                value={formData.direccion}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                    </div>
+                        <div className="mb-3">
+                            <label htmlFor="correo" className="form-label">Correo Electrónico</label>
+                            <input
+                                type="email"
+                                className="form-control"
+                                id="correo"
+                                name="correo"
+                                value={formData.correo}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+
+                        <div className="input-group">
+                            <div className="mb-3">
+                                <label htmlFor="password" className="form-label">Contraseña</label>
+                                <input
+                                    type="password"
+                                    className="form-control"
+                                    id="password"
+                                    name="password"
+                                    value={formData.password}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+
+                            <div className="mb-3">
+                                <label htmlFor="confirmPassword" className="form-label">Confirmar Contraseña</label>
+                                <input
+                                    type="password"
+                                    className="form-control"
+                                    id="confirmPassword"
+                                    name="confirmPassword"
+                                    value={formData.confirmPassword}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <button type="submit" className="btn btn-primary">Registrar</button>
+                    </form>
+                    <p className="mt-3">
+                        ¿Ya tienes una cuenta? <a href="/login">Inicia sesión</a>
+                    </p>
                 </div>
-
-                <div className="mb-3">
-                    <label htmlFor="correo" className="form-label">Correo Electrónico</label>
-                    <input
-                        type="email"
-                        className="form-control"
-                        id="correo"
-                        name="correo"
-                        value={formData.correo}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-
-                <div className="mb-3">
-                    <label htmlFor="telefono" className="form-label">Teléfono</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="telefono"
-                        name="telefono"
-                        value={formData.telefono}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-
-                <div className="mb-3">
-                    <label htmlFor="direccion" className="form-label">Dirección</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="direccion"
-                        name="direccion"
-                        value={formData.direccion}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-
-                <div className="mb-3">
-                    <label htmlFor="password" className="form-label">Contraseña</label>
-                    <input
-                        type="password"
-                        className="form-control"
-                        id="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-
-                <div className="mb-3">
-                    <label htmlFor="confirmPassword" className="form-label">Confirmar Contraseña</label>
-                    <input
-                        type="password"
-                        className="form-control"
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        value={formData.confirmPassword}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-
-                <button type="submit" className="btn btn-primary">Registrar</button>
-            </form>
-            <p className="mt-3">
-                ¿Ya tienes una cuenta? <a href="/login">Inicia sesión</a>
-            </p>
+            </div>
         </div>
     );
 };
