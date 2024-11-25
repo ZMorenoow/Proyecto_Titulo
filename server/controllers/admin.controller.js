@@ -313,18 +313,24 @@ export const getReservationsForWorkers = async (req, res) => {
 
         const [reservations] = await connection.execute(`
             SELECT 
-                rt.id_reserva_trabajador,
-                r.id_reserva,
-                GROUP_CONCAT(CONCAT(u.nombre, ' ', u.apellido) SEPARATOR ', ') AS trabajadores,
-                r.fecha_reserva,
-                r.hora_reserva,
-                e.tipo_estado AS estado
+            rt.id_reserva_trabajador,
+            r.id_reserva,
+            GROUP_CONCAT(CONCAT(u.nombre, ' ', u.apellido) SEPARATOR ', ') AS trabajadores,
+            r.fecha_reserva,
+            r.hora_reserva,
+            s.nombre_servicio AS servicio,
+            e.tipo_estado AS estado
             FROM reserva_trabajador rt
             JOIN reservas r ON rt.id_reserva = r.id_reserva
+            JOIN carrito c ON r.id_carrito = c.id_carrito
+            JOIN cotizaciones co ON c.id_cotizacion = co.id_cotizacion -- Nuevo JOIN para conectar con cotizaciones
+            JOIN servicios s ON co.id_servicio = s.id_servicio -- Ahora conectamos el id_servicio desde cotizaciones
             JOIN usuario_rol ur ON rt.id_usuario_rol = ur.id_usuario_rol
             JOIN usuario u ON ur.id_usuario = u.id_usuario
             JOIN estados e ON r.estado = e.id_estado
-            GROUP BY r.id_reserva, rt.id_reserva_trabajador
+            WHERE e.id_estado = 2
+            GROUP BY r.id_reserva, rt.id_reserva_trabajador;
+
         `);
 
         res.status(200).json(reservations);
@@ -333,6 +339,7 @@ export const getReservationsForWorkers = async (req, res) => {
         res.status(500).json({ message: 'Error al obtener las reservas de trabajadores.' });
     }
 };
+
 
 ;
 export const addWorkerReservation = async (req, res) => {
@@ -350,7 +357,7 @@ export const addWorkerReservation = async (req, res) => {
 
         // Verificar que la reserva existe y está en estado pendiente
         const [reservation] = await connection.execute(
-            `SELECT * FROM reservas WHERE id_reserva = ? AND estado = 1`,
+            `SELECT * FROM reservas WHERE id_reserva = ? AND estado = 2`,
             [id_reserva]
         );
 

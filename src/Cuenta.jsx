@@ -84,7 +84,8 @@ const Cuenta = () => {
                                     <strong>Fecha de Reserva:</strong> {new Date(reserva.fecha_reserva).toLocaleDateString()} <br />
                                     <strong>Cantidad:</strong> {reserva.cantidad} <br />
                                     <strong>Monto Total:</strong> ${reserva.monto} <br />
-                                    <strong>Estado:</strong> {reserva.tipo_estado} <br />
+                                    <strong>Hora:</strong> {reserva.hora_reserva} <br />
+
                                 </li>
                             ))}
                         </ul>

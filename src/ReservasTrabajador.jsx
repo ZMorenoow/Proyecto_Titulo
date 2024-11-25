@@ -200,10 +200,10 @@ const ReservasTrabajador = () => {
                         <option value="">Seleccione una reserva</option>
                         {reservations.map((reservation) => (
                             <option key={reservation.id_reserva} value={reservation.id_reserva}>
-                                {reservation.fecha_reserva} - {reservation.hora_reserva}
+                            {new Date(reservation.fecha_reserva).toLocaleDateString('es-CL')} - {reservation.hora_reserva}
                             </option>
                         ))}
-                    </select>
+                    </select> 
                 </div>
                 <button type="submit">Asignar Reserva</button>
             </form>

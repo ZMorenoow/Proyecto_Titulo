@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.21.0",
     "@mercadopago/sdk-react": "^0.0.19",
     "@paypal/react-paypal-js": "^8.7.0",
     "axios": "^1.7.7",
