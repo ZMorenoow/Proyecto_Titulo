@@ -1,0 +1,25 @@
+/* Botón de eliminar */
+.btn-delete {
+    background-color: #D32F2F; /* Rojo */
+    color: #FFFFFF; /* Texto blanco */
+    border: none;
+    border-radius: 5px;
+    padding: 8px 10px;
+    margin-top: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-delete:hover {
+    background-color: #B71C1C; /* Rojo más oscuro */
+  }
+  
+.reserva {
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 100px;
+    color: #052641;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgb(134, 230, 214);
+}

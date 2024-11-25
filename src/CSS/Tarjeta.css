@@ -87,9 +87,32 @@
 .card-flip:hover {
   transform: rotateY(180deg); 
 }
+.card-front h4, .card-back h5 {
+  font-size: clamp(16px, 2.5vw, 22px); /* Tamaño dinámico */
+}
 
-@media (min-width: 768px) {
-  .card-container {
-    margin-bottom: 50px; 
+.card-back p {
+  font-size: clamp(12px, 1.8vw, 14px); /* Tamaño dinámico */
+}
+
+@media (max-width: 1200px) and (min-width: 768px) {
+  .card-reco {
+    width: calc(100% - 20px); /* Dos tarjetas por fila */
+    margin-bottom: 50px; /* Espaciado inferior */
+  }
+}
+
+/* Pantallas menores a 768px */
+@media (max-width: 768px) {
+  .card-reco {
+    width: 60%; /* Ocupa toda la fila */
+    margin-bottom: 30px; /* Espaciado inferior */
+  }
+  .card-front h4, .card-back h5 {
+    font-size: 16px; /* Tamaño más pequeño pero legible */
+  }
+
+  .card-back p {
+    font-size: 12px; /* Ajuste más pequeño */
   }
 }

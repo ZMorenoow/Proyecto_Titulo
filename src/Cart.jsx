@@ -1,99 +1,134 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { initialOptions, createOrder, onApprove } from "../server/controllers/pagos/paypal.js";
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import './CSS/carro.css';
 
 const Cart = () => {
-    // Estado inicial del carrito
-    const initialCart = [
-        { id: 1, title: "Producto Limpieza de Piso", price: 1000, quantity: 1 },
-        { id: 2, title: "Producto Limpieza Alfombra", price: 1500, quantity: 1 },
-    ];
-
-    const [cart, setCart] = useState(initialCart);
+    const [cart, setCart] = useState([]);
     const [total, setTotal] = useState(0);
-    const [showPaymentOptions, setShowPaymentOptions] = useState(false); // Controla la visibilidad de las opciones de pago
-    const [preferenceId, setPreferenceId] = useState(null); // Controla el ID de preferencia de Mercado Pago
+    const navigate = useNavigate();
 
-    // Inicializar Mercado Pago
-    initMercadoPago("APP_USR-35a3f979-d2ec-4856-aa93-41e176c1aa88", { locale: "es-CL" });
+    useEffect(() => {
+        const fetchCart = async () => {
+            const token = localStorage.getItem("token");
+            try {
+                const response = await axios.get("http://localhost:3000/carrito/obtener", {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setCart(response.data.carrito);
+            } catch (error) {
+                console.error("Error al obtener el carrito:", error);
+            }
+        };
+
+        fetchCart();
+    }, []);
 
     useEffect(() => {
         // Calcular el total
-        const calculatedTotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+        const calculatedTotal = cart.reduce((acc, item) => acc + item.valor * item.cantidad, 0);
         setTotal(calculatedTotal);
     }, [cart]);
 
-    const handleQuantityChange = (id, delta) => {
-        setCart(prevCart => prevCart.map(item =>
-            item.id === id ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item
-        ));
+    const handleReserva = () => {
+        navigate("/reservas", { state: { totalCarrito: total, carrito: cart } });
     };
 
-    const handlePaymentClick = async () => {
-        // Generar preferencia para Mercado Pago y mostrar opciones de pago
+    const handleEliminar = async (id_carrito) => {
+        const token = localStorage.getItem("token");
         try {
-            const response = await axios.post("http://localhost:3000/create_preference", {
-                title: "Compra en W&W",
-                quantity: 1,
-                price: total
-            });
-            setPreferenceId(response.data.id); // Almacenar ID de preferencia
-            setShowPaymentOptions(true); // Mostrar opciones de pago
+            await axios.post(
+                "http://localhost:3000/carrito/eliminar",
+                { id_carrito },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            setCart(cart.filter(item => item.id_carrito !== id_carrito));
         } catch (error) {
-            console.error("Error al procesar el pago con Mercado Pago", error);
+            console.error("Error al eliminar el artículo del carrito:", error);
         }
     };
 
     return (
-        <div className = "cart-container" style={{ padding: "20px" }}>
+        <div className="cart-container">
             <h2>Carrito de Compras</h2>
-            <ul>
-                {cart.map(item => (
-                    <li key={item.id} style={{ marginBottom: "10px" }}>
-                        {item.title} - ${item.price} x {item.quantity}
-                        <button onClick={() => handleQuantityChange(item.id, 1)}>+</button>
-                        <button onClick={() => handleQuantityChange(item.id, -1)}>-</button>
-                    </li>
-                ))}
-            </ul>
-            <h3>Total: ${total}</h3>
+            <table className="cart-table">
+                <thead>
+                    <tr>
+                        <th>Servicio</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {cart.map(item => (
+                        <tr key={item.id_carrito}>
+                            <td>{item.nombre_servicio}</td>
+                            <td>${item.valor}</td>
+                            <td>{item.cantidad}</td>
+                            <td>${item.valor * item.cantidad}</td>
+                            <td>
+                            <button className="delete-button" onClick={() => handleEliminar(item.id_carrito)}>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="trash-icon"
+                                    viewBox="0 0 100 120"
+                                    width="48"
+                                    height="48"
+                                >
+                                    
+                                    <g className="trash-lid">
+                                        <path
+                                            d="M20 30 L80 30 Q90 30 85 20 L15 20 Q10 30 20 30"
+                                            fill="#555"
+                                            stroke="#333"
+                                            strokeWidth="2"
+                                        />
+                                    </g>
 
-            <div style={{ marginTop: "20px" }}>
-                {!showPaymentOptions ? (
-                    <button onClick={handlePaymentClick} style={{ marginRight: "10px" }}>
-                        Pagar
-                    </button>
-                ) : (
-                    <div>
-                        {/* Mercado Pago */}
-                        {preferenceId && (
-                            <Wallet
-                                initialization={{ preferenceId: preferenceId }}
-                                customization={{ texts: { valueProp: 'smart_option' } }}
-                            />
-                        )}
-                        
-                        {/* PayPal */}
-                        <PayPalScriptProvider options={initialOptions}>
-                        <PayPalButtons
-                                style={{
-                                    layout: "horizontal",
-                                    color: "blue",
-                                    shape: "rect",
-                                    label: "paypal"
-                                }}
-                                createOrder={async (data, actions) => await createOrder(data, actions, total, cart)} // Pasa el cart
-                                onApprove={onApprove}
-                            />
-                        </PayPalScriptProvider>
-                    </div>
-                )}
-            </div>
+                                    <g className="trash-body">
+                                        <rect
+                                            x="20"
+                                            y="30"
+                                            width="60"
+                                            height="80"
+                                            fill="#999"
+                                            stroke="#333"
+                                            strokeWidth="2"
+                                            rx="10"
+                                        />
+                                       
+                                        <line x1="35" y1="40" x2="35" y2="100" stroke="#ccc" strokeWidth="2" />
+                                        <line x1="50" y1="40" x2="50" y2="100" stroke="#ccc" strokeWidth="2" />
+                                        <line x1="65" y1="40" x2="65" y2="100" stroke="#ccc" strokeWidth="2" />
+                                    </g>
+                                </svg>
+                            </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            <br/>
+            <br/>
+            <h3 className="valor-total">Total: ${total}</h3>
+            <br/>
+            <button className="cart-button" onClick={handleReserva} disabled={total === 0}>Continuar compra</button>
+            {total === 0 && (
+                <p>
+                    Tu carrito está vacío. Agrega servicios para continuar.
+                </p>
+            )}
         </div>
     );
 };
+
 
 export default Cart;

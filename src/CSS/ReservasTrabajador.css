@@ -1,0 +1,127 @@
+
+  /* Mensajes de error y carga */
+  .error-message {
+    text-align: center;
+    margin: 20px 0;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #B71C1C; /* Rojo oscuro */
+    background-color: #FFCDD2; /* Fondo rojo claro */
+  }
+  
+  .loading-message {
+    text-align: center;
+    margin: 20px 0;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #FBC02D; /* Amarillo oscuro */
+    background-color: #FFF9C4; /* Fondo amarillo claro */
+  }
+  .res-trabajador {
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 100px;
+    color: #052641;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgb(134, 230, 214);
+}
+  /* Contenedor General del Formulario */
+form.asignar-reserva {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.938);
+  font-family: Arial, sans-serif;
+  
+}
+
+/* Estilo para las Etiquetas */
+.asignar-reserva label {
+  display: block;
+  font-weight: bold;
+  color: #003366;
+  margin-bottom: 5px;
+  font-size: 1rem;
+}
+
+/* Contenedor de cada Campo */
+.asignar-reserva div {
+  margin-bottom: 20px;
+}
+
+/* Estilo para los Select */
+.dropdown-select {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #ffffff;
+  color: #333;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.3s ease;
+  box-shadow: 0 0 5px rgba(7, 82, 72, 0.897);
+}
+
+.dropdown-select:focus {
+  border-color: #177569;
+  box-shadow: 0 5px 10px rgba(23, 117, 105, 0.5);
+}
+
+/* Placeholder para los Select */
+.dropdown-select option:disabled {
+  color: #999;
+  font-style: italic;
+}
+
+/* Botón de Envío */
+.borrar-button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 15px; /* Bordes completamente redondeados */
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+  background-color: #B71C1C;
+  color:rgba(255, 255, 255, 0.897)
+}
+
+.asignar-trabajador{
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    color: #052641;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgb(134, 230, 214);
+}
+.borrar-button:hover {
+  background-color: #8a1a06; /* Celeste pastel */
+  color: #ffffff;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .asignar-reserva {
+      padding: 15px;
+  }
+
+  .asignar-reserva label {
+      font-size: 0.9rem;
+  }
+
+  .dropdown-select {
+      font-size: 0.9rem;
+  }
+
+  .asignar-reserva button {
+      font-size: 0.9rem;
+  }
+}

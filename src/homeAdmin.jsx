@@ -1,23 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from 'react-router-dom'; 
 import './CSS/HomeAdm.css'
 
-
-
-
 const AdminHome = () => {
   const navigate = useNavigate(); 
-  const [visible, setVisible] = useState(true);
-
   const redirectToPage = (page) => {
     navigate(page);
   };
 
   return (
-    
     <div className="dashboard-container">
       <header>
-        <h1>Panel de Administración</h1>
+        <h1 className="panel-adm">Panel de Administración</h1>
       </header>
 
       <main>

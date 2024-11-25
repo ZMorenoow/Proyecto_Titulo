@@ -7,9 +7,6 @@ import './CSS/Tarjeta.css';
 import './CSS/Carrusel.css';
 import './CSS/Navbar.css';
 import './CSS/Home.css';
-import Navbar from './Navbar';
-import Footer from './footer';
-
 
 
 const Home = () => {
@@ -28,11 +25,7 @@ const Home = () => {
     }, []);
 
     return (
-        <div>
-            <Navbar visible={visible} /> {<Navbar/>}
-            <br />
-            <br />
-            
+        <div>   
             <main>
             <section className="bienvenida">
             <div className="contenido-bienvenida" >
@@ -225,7 +218,7 @@ const Home = () => {
                     </div>
                 </section>
             </main>
-            <Footer/> 
+            
         </div>
     );
 };

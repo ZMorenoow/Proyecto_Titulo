@@ -1,30 +1,39 @@
 import db from '../configs/db.js';
 
-// Obtener el listado de usuarios que han solicitado un servicio específico
-export const getUsersByService = async (req, res) => {
-    const { id_servicio } = req.params;
-
+export const getAllWorkerReservations = async (req, res) => {
     try {
         const connection = await db();
 
-        // Consulta para obtener la información de los usuarios que solicitaron un servicio específico
-        const [users] = await connection.execute(
-            `SELECT u.id_usuario, u.nombre, u.apellido, u.correo, u.telefono, u.direccion
-             FROM servicio_usuario su
-             JOIN usuario u ON su.id_usuario = u.id_usuario
-             WHERE su.id_servicio = ?`,
-            [id_servicio]
+        const [reservations] = await connection.execute(
+            `
+            SELECT 
+                rt.id_reserva_trabajador,
+                r.id_reserva,
+                r.fecha_reserva,
+                r.hora_reserva,
+                e.tipo_estado AS estado,
+                s.nombre_servicio,
+                u.nombre AS nombre_cliente
+            FROM reserva_trabajador rt
+            JOIN reservas r ON rt.id_reserva = r.id_reserva
+            JOIN estados e ON r.estado = e.id_estado
+            JOIN carrito c ON r.id_carrito = c.id_carrito
+            JOIN cotizaciones co ON c.id_cotizacion = co.id_cotizacion
+            JOIN servicios s ON co.id_servicio = s.id_servicio
+            JOIN usuario u ON r.id_usuario = u.id_usuario
+            WHERE rt.id_usuario_rol = (
+                SELECT ur.id_usuario_rol
+                FROM usuario_rol ur
+                WHERE ur.id_usuario = ?
+            );
+
+            `,
+            [req.user.id_usuario]
         );
 
-        // Verificar si se encontraron usuarios para el servicio solicitado
-        if (users.length === 0) {
-            return res.status(404).json({ message: 'No se encontraron usuarios para este servicio.' });
-        }
-
-        // Enviar el listado de usuarios como respuesta
-        res.status(200).json(users);
+        res.status(200).json(reservations);
     } catch (error) {
-        console.error('Error al obtener el listado de usuarios por servicio:', error);
-        res.status(500).json({ message: 'Error interno al obtener el listado de usuarios' });
+        console.error('Error al obtener las reservas de trabajadores:', error);
+        res.status(500).json({ message: 'Error al obtener las reservas de trabajadores.' });
     }
 };
