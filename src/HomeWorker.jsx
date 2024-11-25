@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './CSS/HomeWorker.css'; // Archivo CSS para estilos
+import './CSS/HomeWorker.css'; 
 
 const HomeWorker = () => {
     const [reservations, setReservations] = useState([]);
@@ -8,7 +8,7 @@ const HomeWorker = () => {
     // Función para obtener reservas asignadas al trabajador
     const fetchReservations = async () => {
         try {
-            const token = localStorage.getItem('token'); // Obtén el token del almacenamiento local
+            const token = localStorage.getItem('token'); 
             if (!token) {
                 setError('No se encontró un token en el almacenamiento local. Inicia sesión nuevamente.');
                 return;

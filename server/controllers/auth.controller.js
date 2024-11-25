@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 import  db  from '../configs/db.js';
-import { sendEmail } from '../utils/email.js';  // Asegúrate de tener la función sendEmail configurada
+import { sendEmail } from '../utils/email.js';
 
 
 // Registrar un nuevo usuario

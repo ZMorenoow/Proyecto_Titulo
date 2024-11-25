@@ -1,10 +1,7 @@
-// src/components/PrivateRoute.jsx
-
 import React from 'react';
-import { Navigate } from 'react-router-dom';  // Usamos Navigate para redirigir
+import { Navigate } from 'react-router-dom';  
 import { useAuth } from './utils/AuthContext.jsx';
 
-// Este componente ahora simplemente redirige según las condiciones
 const PrivateRoute = ({ element, allowedRoles, ...rest }) => {
   const { isAuthenticated, rol } = useAuth();
 
@@ -19,7 +16,7 @@ const PrivateRoute = ({ element, allowedRoles, ...rest }) => {
   }
 
   // Si está autorizado, mostramos el elemento de la ruta
-  return element;  // Retornamos el componente como prop "element"
+  return element;  
 };
 
 export default PrivateRoute;

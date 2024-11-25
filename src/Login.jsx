@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from './utils/AuthContext.jsx';
 import { login } from './service/auth.service.js';
-import { decodeToken } from './service/helpers.js';  // Importamos la función decodeToken
+import { decodeToken } from './service/helpers.js';
 import './CSS/login.css';  
 
 const Login = () => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Cambia useHistory por useNavigate
+import { useNavigate } from 'react-router-dom';
 import './CSS/TrabajadoresAdm.css';
 
 const Usuarios = () => {
