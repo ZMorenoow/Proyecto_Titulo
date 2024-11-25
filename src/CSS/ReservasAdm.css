@@ -14,7 +14,12 @@
   .btn-delete:hover {
     background-color: #B71C1C; /* Rojo más oscuro */
   }
-  h1{
-    margin-top: 100px;
-  }
   
+.reserva {
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 100px;
+    color: #052641;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgb(134, 230, 214);
+}

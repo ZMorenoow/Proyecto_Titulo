@@ -124,7 +124,7 @@ const Servicios = () => {
       {/* Formulario para agregar un servicio */}
       {(editingService || showAddService) && (
         <div>
-          <h2>{editingService ? 'Editar Servicio' : 'Agregar Nuevo Servicio'}</h2>
+          <h2 className='nuevo-serv'>{editingService ? 'Editar Servicio' : 'Agregar Nuevo Servicio'}</h2>
           <form>
             <div>
               <label>Nombre del Servicio</label>
@@ -158,7 +158,6 @@ const Servicios = () => {
         </div>
       )}
 
-      <button className='boton-agregar' onClick={() => setShowAddService(true)}>Agregar Servicio</button>
 
       <table>
         <thead>
@@ -185,6 +184,7 @@ const Servicios = () => {
           ))}
         </tbody>
       </table>
+      <button className='boton-agregar' onClick={() => setShowAddService(true)}>Agregar Servicio</button>
     </div>
   );
 };

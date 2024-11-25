@@ -1,45 +1,42 @@
-.container {
-    max-width:1200px;
-    width: 1000px;
+/* Contenedor General */
+.container-perfil {
+    max-width: 1200px;
+    width: 90%;
     margin: 50px auto;
     padding: 20px;
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-top: 100px;
 }
 
-h2 {
-    text-align: center;
-    color: #052641;
-    margin-bottom: 20px;
+/* Títulos Generales */
+.section-title {
+font-size: 3rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #052641;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgb(134, 230, 214);
 }
 
-.cards-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 30px;
-    flex-wrap: wrap; 
+.cart-title {
+    font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #052641;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgb(134, 230, 214);
 }
 
-.card {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    flex: 1 1 45%; 
-    margin-bottom: 30px;
-    transition: transform 0.3s ease-in-out;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-
+/* Perfil del Usuario */
 .profile-card {
     background-color: #e6faf6;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.404);
+    margin-bottom: 40px;
 }
 
 .profile-card h3 {
@@ -48,14 +45,19 @@ h2 {
     text-align: center;
 }
 
-.profile-card .form-group {
-    margin-bottom: 15px;
+.profile-form {
+    display: contents;
+    width: 795px;
+    gap: 20px;   
+    
 }
+
 
 .profile-card label {
     display: block;
     font-weight: bold;
     color: #052641;
+    margin-bottom: 5px;
 }
 
 .profile-card input {
@@ -63,59 +65,101 @@ h2 {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ddd;
-    margin-top: 5px;
-}
-
-.purchases-card {
-    background-color: #eaf7f3;
-}
-
-.purchases-card h3 {
-    margin-bottom: 15px;
-    color: #177569;
-    text-align: center;
-}
-
-.purchases-card ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.purchases-card li {
     background-color: #ffffff;
-    padding: 10px;
+    color: #333;
+    box-sizing: border-box;
+}
+
+/* Responsividad para el perfil */
+@media (max-width: 768px) {
+    .form-group-perfil {
+        flex: 1 1 100%; /* Una columna en pantallas pequeñas */
+    }
+}
+
+/* Pagos Realizados */
+.pagos-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Tarjetas de pagos */
+.pagos-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    text-align: center; /* Centrar todo el contenido */
+}
+
+/* Efecto hover */
+.pagos-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Cabecera de la tarjeta */
+.pagos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
     margin-bottom: 10px;
 }
 
-.purchases-card li:hover {
-    background-color: #dff2e1;
+.pagos-header strong {
+    color: #093a2f;
+    font-size: 1.2rem;
 }
 
-.purchases-card p {
+.pagos-header .pago-fecha {
+    font-size: 0.9rem;
+    color: #666;
+    text-align: right;
+    white-space: nowrap;
+}
+
+/* Detalles del pago */
+.pago-detalles p {
+    font-size: 1rem;
+    margin: 5px 0;
+    color: #333;
+    text-align: left;
+}
+
+.pago-detalles strong {
+    color: #093a2f;
+    
+}
+
+/* Mensaje cuando no hay pagos */
+.no-pagos {
     text-align: center;
+    font-size: 1.1rem;
     color: #777;
+    margin-top: 20px;
 }
 
-/* Estilos responsivos */
+/* Responsividad para pagos */
 @media (max-width: 768px) {
-    .cards-container {
-        flex-direction: column;
+    .pagos-card {
+        padding: 15px;
+        font-size: 0.9rem;
     }
 
-    .card {
-        flex: 1 1 100%; 
-    }
-}
-
-@media (max-width: 500px) {
-    .profile-card input {
-        padding: 8px;
-        font-size: 14px;
-    }
-
-    .purchases-card li {
-        font-size: 14px;
+    .pagos-header .pago-fecha {
+        font-size: 0.8rem;
     }
 }

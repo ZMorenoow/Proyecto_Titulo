@@ -97,6 +97,7 @@ const Contacto = () => {
   return (
     <>
       <div className="contacto-container">
+      <br />
         <h2>Contacto</h2>
         <br />
 
@@ -136,7 +137,7 @@ const Contacto = () => {
           <h3>
             O <br />
             <br />
-            Síguenos en nuestras redes sociales:
+            Síguenos en nuestras redes sociales
           </h3>
 
           <div className="iconos">
@@ -155,7 +156,7 @@ const Contacto = () => {
 
       <div className="valoracion">
         <div className="rating-section">
-          <h3>Califica nuestro servicio:</h3>
+          <h3>Califica nuestro servicio</h3>
           <div className="stars">
             {[1, 2, 3, 4, 5].map((star) => (
               <span
@@ -179,7 +180,7 @@ const Contacto = () => {
             style={{ width: '100%', height: '80px', marginTop: '10px' }}
           />
           {!submitted && (
-            <button
+            <button className='calificacion'
               onClick={submitRating}
               disabled={!rating}
               style={{ marginTop: '10px', padding: '10px 20px' }}
@@ -197,7 +198,7 @@ const Contacto = () => {
               {valoraciones.map((valoracion) => (
                 <li key={valoracion.id_valoracion} className="valoracion-item">
                   <div className="valoracion-header">
-                    <strong>{valoracion.usuario}</strong> - <small>{new Date(valoracion.fecha).toLocaleString()}</small>
+                    <strong>{valoracion.usuario}</strong>  <small>{new Date(valoracion.fecha).toLocaleString()}</small>
                   </div>
                   <div className="valoracion-comentario">
                     {valoracion.comentario ? <em>"{valoracion.comentario}"</em> : <em>Sin comentario</em>}

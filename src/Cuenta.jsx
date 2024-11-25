@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getMe } from './service/auth.service.js'; 
+import { getMe } from './service/auth.service.js';
 import axios from 'axios';
 import './CSS/cuenta.css';
 
@@ -10,7 +10,6 @@ const Cuenta = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Obtener los datos del usuario
         const fetchUserData = async () => {
             try {
                 const data = await getMe();
@@ -24,7 +23,6 @@ const Cuenta = () => {
             }
         };
 
-        // Obtener las reservas del usuario
         const fetchReservas = async () => {
             try {
                 const token = localStorage.getItem("token");
@@ -43,55 +41,56 @@ const Cuenta = () => {
         fetchReservas();
     }, [navigate]);
 
-    if (!userData) return <div>Cargando...</div>;
+    if (!userData) return <div className="loading">Cargando...</div>;
 
     return (
-        <div className="container">
-            <h2>Perfil de Usuario</h2>
-            <div className="cards-container">
-                {/* Tarjeta de perfil */}
-                <div className="card profile-card">
-                    <h3>Datos de Perfil</h3>
-                    <form>
-                        <div className="form-group">
-                            <label htmlFor="nombre">Nombre</label>
-                            <input type="text" id="nombre" defaultValue={userData.nombre} disabled/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="apellido">Apellido</label>
-                            <input type="text" id="apellido" defaultValue={userData.apellido} disabled/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="correo">Email</label>
-                            <input type="email" id="correo" defaultValue={userData.correo} readOnly disabled/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="direccion">Dirección</label>
-                            <input type="text" id="direccion" defaultValue={userData.direccion} disabled/>
-                        </div>
-                    </form>
-                </div>
+        <div className="container-perfil">
+            <h2 className="section-title">Mi Cuenta</h2>
 
-                {/* Tarjeta de reservas */}
-                <div className="card reservas-card">
-                    <h3>Pagos Realizados</h3>
-                    {reservas.length > 0 ? (
-                        <ul>
-                            {reservas.map((reserva, index) => (
-                                <li key={index} style={{ marginBottom: '10px' }}>
-                                    <strong>Destinatario:</strong> {reserva.nombre_destinatario} <br />
-                                    <strong>Servicio:</strong> {reserva.nombre_servicio} <br />
-                                    <strong>Fecha de Reserva:</strong> {new Date(reserva.fecha_reserva).toLocaleDateString()} <br />
-                                    <strong>Cantidad:</strong> {reserva.cantidad} <br />
-                                    <strong>Monto Total:</strong> ${reserva.monto} <br />
-                                    <strong>Estado:</strong> {reserva.tipo_estado} <br />
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p>No has realizado ninguna reserva.</p>
-                    )}
+            {/* Sección del perfil */}
+            <div className="profile-card">
+                <h3 className="card-title">Datos del Perfil</h3>
+                <form className="profile-form">
+                    <div className="form-group-perfil">
+                        <label htmlFor="nombre">Nombre</label>
+                        <input type="text" id="nombre" defaultValue={userData.nombre} disabled />
+                    </div>
+                    <div className="form-group-perfil">
+                        <label htmlFor="apellido">Apellido</label>
+                        <input type="text" id="apellido" defaultValue={userData.apellido} disabled />
+                    </div>
+                    <div className="form-group-perfil">
+                        <label htmlFor="correo">Email</label>
+                        <input type="email" id="correo" defaultValue={userData.correo} readOnly disabled />
+                    </div>
+                    <div className="form-group-perfil">
+                        <label htmlFor="direccion">Dirección</label>
+                        <input type="text" id="direccion" defaultValue={userData.direccion} disabled />
+                    </div>
+                </form>
+            </div>
+
+            {/* Sección de pagos realizados */}
+            <h3 className="cart-title">Pagos Realizados</h3>
+            <div className="pagos-container">
+            {reservas.length > 0 ? (
+                reservas.map((reserva, index) => (
+                <div key={index} className="pagos-card">
+                    <div className="pagos-header">
+                    <strong>{reserva.nombre_destinatario}</strong>
+                    <span className="pago-fecha">{new Date(reserva.fecha_reserva).toLocaleDateString()}</span>
+                    <span className="pago-hora">{(reserva.hora_reserva).toLocaleString()}</span>
+                    </div>
+                    <div className="pago-detalles">
+                    <p><strong>Servicio:</strong> {reserva.nombre_servicio}</p>
+                    <p><strong>Cantidad:</strong> {reserva.cantidad}</p>
+                    <p><strong>Monto Total:</strong> ${reserva.valor}</p>
+                    </div>
                 </div>
+                ))
+            ) : (
+                <p className="no-pagos">No has realizado ningun pago.</p>
+            )}
             </div>
         </div>
     );

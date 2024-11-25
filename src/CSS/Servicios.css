@@ -4,13 +4,14 @@
   margin-bottom: 50px;
 }
 
-.pagina-servicios h2 {
-  font-size: 2rem;
+.titulo-serv {
+  font-size: 3rem;
   margin-bottom: 20px;
   text-align: center;
   color: #052641;
   text-transform: uppercase;
   text-shadow: 2px 2px 4px rgb(134, 230, 214);
+  margin-top: 20px;
 }
 
 .lista-servicios {

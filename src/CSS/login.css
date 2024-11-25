@@ -53,6 +53,13 @@
     border: 1px solid #ddd;
     border-radius: 5px;
 }
+.login-left .login{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
 
 .login-left button {
     background-color: #6cddb8;

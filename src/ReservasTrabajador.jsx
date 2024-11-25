@@ -122,7 +122,7 @@ const ReservasTrabajador = () => {
 
     return (
         <div>
-            <h1>Reservas de Trabajadores</h1>
+            <h1 className='res-trabajador'>Reservas de Trabajadores</h1>
                                 <table>
                         <thead>
                             <tr>
@@ -140,13 +140,13 @@ const ReservasTrabajador = () => {
                                     <tr key={reservation.id_reserva_trabajador}>
                                         <td>{reservation.id_reserva}</td>
                                         <td>{reservation.trabajadores}</td>
-                                        <td>{new Date(reservation.fecha_reserva).toLocaleDateString('es-CL')}</td>
-                                        <td>{reservation.hora_reserva}</td>
+                                        <td>{new Date(reservation.fecha_reserva).toLocaleDateString()}</td>
+                                        <td>{(reservation.hora_reserva).toLocaleString()}</td>
                                         <td>{reservation.estado}</td>
                                         <td>
                                             <button
                                                 onClick={() => handleDelete(reservation.id_reserva_trabajador)}
-                                                className="delete-button"
+                                                className="borrar-button"
                                             >
                                                 Eliminar
                                             </button>
@@ -161,8 +161,8 @@ const ReservasTrabajador = () => {
                         </tbody>
                     </table>
 
-            <h2>Asignar nueva reserva a trabajadores</h2>
-            <form onSubmit={handleSubmit}>
+            <h2 className='asignar-trabajador'>Asignar nueva reserva a trabajadores</h2>
+            <form className= "asignar-reserva" onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="trabajadores">Trabajadores:</label>
                     <select
@@ -198,12 +198,15 @@ const ReservasTrabajador = () => {
                         required
                     >
                         <option value="">Seleccione una reserva</option>
-                        {reservations.map((reservation) => (
-                            <option key={reservation.id_reserva} value={reservation.id_reserva}>
-                            {new Date(reservation.fecha_reserva).toLocaleDateString('es-CL')} - {reservation.hora_reserva}
-                            </option>
-                        ))}
-                    </select> 
+                        {reservations
+                            .filter((reservation) => reservation.estado === 'Aceptado') // Filtra reservas con estado "Aceptado"
+                            .map((reservation) => (
+                                <option key={reservation.id_reserva} value={reservation.id_reserva}>
+                                    {reservation.nombre_servicio} - {new Date(reservation.fecha_reserva).toLocaleDateString('es-CL')} - {reservation.hora_reserva}
+                                </option>
+                            ))}
+                    </select>
+
                 </div>
                 <button type="submit">Asignar Reserva</button>
             </form>

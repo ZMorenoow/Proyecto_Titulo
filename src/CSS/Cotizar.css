@@ -1,63 +1,81 @@
-.cotizacion-form {
-  max-width: 1000px; 
-  width: 60%; 
+.cotizacion-form__container {
+  max-width: 1000px;
+  width: 60%;
   margin: 0 auto;
   margin-top: 100px;
   padding: 20px;
   border: 1px solid #177569;
   border-radius: 8px;
   background-color: #dafcf2;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(3, 45, 100, 0.486);
   margin-bottom: 40px;
 }
 
-.cotizacion-form h2 {
-  text-align: center;
+.form-coti{
+  font-size: 3rem;
   margin-bottom: 20px;
-  color: #333;
-  margin-top: 10px;
+  text-align: center;
+  color: #052641;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgb(134, 230, 214);
+  margin-top: 20px;
 }
 
-.cotizacion-form form {
+.cotizacion-form__form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%; 
+  width: 100%;
+  box-shadow: 2px 2px 10px rgba(3, 45, 100, 0.486);
 }
 
-.cotizacion-form label {
+.cotizacion-form__form label {
   margin-bottom: 5px;
   font-weight: bold;
   color: #062a1e;
-  width: 100%; 
+  width: 100%;
 }
 
-.cotizacion-form input,
-.cotizacion-form select,
-.cotizacion-form textarea {
+.cotizacion-form__form input,
+.cotizacion-form__form select,
+.cotizacion-form__form textarea {
   margin-bottom: 15px;
   padding: 12px;
   font-size: 16px;
   border: 2px solid #177569;
   border-radius: 8px;
-  width: 100%; 
+  width: 100%;
+  box-sizing: border-box;
+  color: #ffffff;
+  font-style: italic;
+}
+#medidas, #material {
+  margin-bottom: 15px;
+  padding: 12px;
+  font-size: 16px;
+  border: 2px solid #177569;
+  border-radius: 8px;
+  width: 100%;
   box-sizing: border-box;
   color: #ffffff;
   font-style: italic;
 }
 
-.cotizacion-form input::placeholder,
-.cotizacion-form textarea::placeholder {
+
+/* Placeholder styling */
+.cotizacion-form__form input::placeholder,
+.cotizacion-form__form textarea::placeholder {
   color: #ffffff;
   font-style: italic;
 }
 
-.cotizacion-form textarea {
+
+.cotizacion-form__form textarea {
   resize: vertical;
   min-height: 100px;
 }
 
-.cotizacion-form button {
+.cotizacion-form__form button {
   padding: 10px;
   font-size: 16px;
   background-color: #6cddb8;
@@ -66,12 +84,24 @@
   border-radius: 8px;
   cursor: pointer;
   margin-top: 10px;
-  width: 100%; 
+  width: 100%;
 }
 
-.cotizacion-form button:hover {
+.cotizacion-form__form button:hover {
   background-color: #6dcece;
   border-color: #062a1e;
 }
 
+.cotizacion-form__error {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+}
 
+.cotizacion-form__resultado {
+  color: rgb(0, 128, 75);
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+}

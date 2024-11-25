@@ -30,13 +30,13 @@ const Navbar = ({ visible }) => {
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/HomeAdmin">Admin</Link>
                                 </li>
-                        )}
-
+                            )}
                             {rol === 'Trabajador' && (
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/HomeWorker">Trabajador</Link>
                                 </li>
                             )}
+
                             <li className="nav-item">
                                 <Link className="nav-link" to="/Servicios">Servicios</Link>
                             </li>

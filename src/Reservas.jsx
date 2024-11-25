@@ -4,11 +4,12 @@ import "react-datepicker/dist/react-datepicker.css";
 import { es } from "date-fns/locale";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { initialOptions, createOrder, onApprove } from "../server/controllers/pagos/paypal.js";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import './CSS/reserva.css';
 
 const Reserva = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedTime, setSelectedTime] = useState("");
     const [name, setName] = useState("");
@@ -29,7 +30,6 @@ const Reserva = () => {
         }
 
         const horaReserva = selectedTime ? `${selectedTime}:00` : null;
-        
 
         const requestData = {
             nombre_destinatario: name,
@@ -39,7 +39,7 @@ const Reserva = () => {
             direccion: address
         };
 
-        console.log("Datos enviados al backend:", requestData); 
+        console.log("Datos enviados al backend:", requestData);
 
         setShowPayPal(true);
         setRequestData(requestData);
@@ -48,15 +48,15 @@ const Reserva = () => {
     const handlePayPalApprove = async (data, actions) => {
         await onApprove(data, actions, requestData);
         alert("Reserva completada exitosamente.");
-        window.location.reload(); 
+        navigate("/");
     };
 
     return (
-        <div className="reservation-container">
-            <div className="reservation-form">
-                <h2 className="form-title">Reserva tu Servicio</h2>
-                <form className="form-reserva" onSubmit={handleReserveSubmit}>
-                    <div className="form-group">
+        <div className="reservation__container">
+            <div className="reservation__form">
+                <h2 className="reservation__title">Reserva tu Servicio</h2>
+                <form className="reservation__form-content" onSubmit={handleReserveSubmit}>
+                    <div className="reservation__group">
                         <label htmlFor="nombre">Nombre</label>
                         <input
                             type="text"
@@ -67,11 +67,11 @@ const Reserva = () => {
                             required
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="reservation__group">
                         <label htmlFor="fecha_reserva">Fecha</label>
                         <DatePicker
                             id="fecha_reserva"
-                            className="form-control"
+                            className="reservation__control"
                             dateFormat="dd/MM/yyyy"
                             selected={selectedDate}
                             onChange={(date) => setSelectedDate(date)}
@@ -80,7 +80,7 @@ const Reserva = () => {
                             placeholderText="Selecciona una fecha"
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="reservation__group">
                         <label htmlFor="hora_reserva">Hora</label>
                         <select
                             id="hora_reserva"
@@ -98,7 +98,7 @@ const Reserva = () => {
                             ))}
                         </select>
                     </div>
-                    <div className="form-group">
+                    <div className="reservation__group">
                         <label htmlFor="comuna">Comuna</label>
                         <input
                             type="text"
@@ -109,7 +109,7 @@ const Reserva = () => {
                             required
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="reservation__group">
                         <label htmlFor="direccion">Dirección</label>
                         <input
                             type="text"
@@ -121,19 +121,19 @@ const Reserva = () => {
                         />
                     </div>
                     {!showPayPal && (
-                        <button className="submit-button" type="submit">
+                        <button className="reservation__button" type="submit">
                             Continuar a Pagar
                         </button>
                     )}
                 </form>
 
                 {showPayPal && (
-                    <div className="paypal-container">
+                    <div className="reservation__paypal">
                         <PayPalScriptProvider options={initialOptions}>
                             <PayPalButtons
                                 style={{ layout: "horizontal", color: "blue", shape: "rect", label: "paypal" }}
                                 createOrder={(data, actions) =>
-                                    createOrder(data, actions, totalCarrito, cart) 
+                                    createOrder(data, actions, totalCarrito, cart)
                                 }
                                 onApprove={handlePayPalApprove}
                             />

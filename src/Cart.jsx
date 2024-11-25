@@ -55,51 +55,80 @@ const Cart = () => {
     };
 
     return (
-        <div className="cart-container" style={{ padding: "20px" }}>
+        <div className="cart-container">
             <h2>Carrito de Compras</h2>
-            <ul>
-                {cart.map(item => (
-                    <li key={item.id_carrito} style={{ marginBottom: "10px" }}>
-                        {item.nombre_servicio} - ${item.valor} x {item.cantidad} = ${item.valor * item.cantidad}
-                        <button
-                            onClick={() => handleEliminar(item.id_carrito)}
-                            style={{
-                                marginLeft: "10px",
-                                backgroundColor: "red",
-                                color: "white",
-                                border: "none",
-                                padding: "5px 10px",
-                                cursor: "pointer"
-                            }}
-                        >
-                            Eliminar
-                        </button>
-                    </li>
-                ))}
-            </ul>
-            <h3>Total: ${total}</h3>
-            <button
-                onClick={handleReserva}
-                disabled={total === 0} // Botón deshabilitado si el total es 0
-                style={{
-                    backgroundColor: total === 0 ? "#ccc" : "#007bff",
-                    color: "#fff",
-                    padding: "10px 20px",
-                    border: "none",
-                    borderRadius: "5px",
-                    cursor: total === 0 ? "not-allowed" : "pointer",
-                    marginTop: "10px",
-                }}
-            >
-                Ir a Reservas
-            </button>
+            <table className="cart-table">
+                <thead>
+                    <tr>
+                        <th>Servicio</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {cart.map(item => (
+                        <tr key={item.id_carrito}>
+                            <td>{item.nombre_servicio}</td>
+                            <td>${item.valor}</td>
+                            <td>{item.cantidad}</td>
+                            <td>${item.valor * item.cantidad}</td>
+                            <td>
+                            <button className="delete-button" onClick={() => handleEliminar(item.id_carrito)}>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="trash-icon"
+                                    viewBox="0 0 100 120"
+                                    width="48"
+                                    height="48"
+                                >
+                                    
+                                    <g className="trash-lid">
+                                        <path
+                                            d="M20 30 L80 30 Q90 30 85 20 L15 20 Q10 30 20 30"
+                                            fill="#555"
+                                            stroke="#333"
+                                            strokeWidth="2"
+                                        />
+                                    </g>
+
+                                    <g className="trash-body">
+                                        <rect
+                                            x="20"
+                                            y="30"
+                                            width="60"
+                                            height="80"
+                                            fill="#999"
+                                            stroke="#333"
+                                            strokeWidth="2"
+                                            rx="10"
+                                        />
+                                       
+                                        <line x1="35" y1="40" x2="35" y2="100" stroke="#ccc" strokeWidth="2" />
+                                        <line x1="50" y1="40" x2="50" y2="100" stroke="#ccc" strokeWidth="2" />
+                                        <line x1="65" y1="40" x2="65" y2="100" stroke="#ccc" strokeWidth="2" />
+                                    </g>
+                                </svg>
+                            </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            <br/>
+            <br/>
+            <h3 className="valor-total">Total: ${total}</h3>
+            <br/>
+            <button className="cart-button" onClick={handleReserva} disabled={total === 0}>Continuar compra</button>
             {total === 0 && (
-                <p style={{ color: "red", marginTop: "10px" }}>
+                <p>
                     Tu carrito está vacío. Agrega servicios para continuar.
                 </p>
             )}
         </div>
     );
 };
+
 
 export default Cart;

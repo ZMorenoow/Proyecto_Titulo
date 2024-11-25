@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './CSS/HomeWorker.css'; // Archivo CSS para estilos
 
 const HomeWorker = () => {
     const [reservations, setReservations] = useState([]);
@@ -38,7 +39,7 @@ const HomeWorker = () => {
     }, []);
 
     return (
-        <div>
+        <div className='reservas-asignadas'>
             <h2>Reservas Asignadas</h2>
             {error && <p style={{ color: 'red', fontWeight: 'bold' }}>{error}</p>}
             {reservations.length > 0 ? (
@@ -46,18 +47,20 @@ const HomeWorker = () => {
                     <thead>
                         <tr>
                             <th>ID Reserva</th>
+                            <th>Cliente</th>
+                            <th>Servicio</th>
                             <th>Fecha</th>
                             <th>Hora</th>
-                            <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody>
                         {reservations.map((reservation) => (
                             <tr key={reservation.id_reserva}>
                                 <td>{reservation.id_reserva}</td>
+                                <td>{reservation.nombre_cliente}</td>
+                                <td>{reservation.nombre_servicio}</td>
                                 <td>{new Date(reservation.fecha_reserva).toLocaleDateString('es-CL')}</td>
                                 <td>{reservation.hora_reserva}</td>
-                                <td>{reservation.estado}</td>
                             </tr>
                         ))}
                     </tbody>

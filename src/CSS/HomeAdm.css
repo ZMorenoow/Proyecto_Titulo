@@ -24,11 +24,14 @@ header {
     background-color: transparent; 
     width: 100%; 
 }
-
-header h1 {
-    margin: 0;
-    font-size: 2.5rem;
-    transition: font-size 0.3s ease; /* Transición en el tamaño de fuente */
+.panel-adm{
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: -60px;
+    color: #052641;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgb(134, 230, 214);
 }
 
 .card-container {

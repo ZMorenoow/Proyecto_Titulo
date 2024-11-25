@@ -119,7 +119,7 @@ const Usuarios = () => {
   }
 
   return (
-    <div>
+    <div className='usuarios'>
       <br />
       <br />
       <br />

@@ -7,19 +7,9 @@ body {
     padding: 20px;
 }
 
-/* Heading styling */
-h1 {
-    text-align: center;
-    margin-bottom: 40px;
-    margin-top: 40px;
-    color: #052641;
-    text-transform: uppercase;
-    text-shadow: 2px 2px 4px rgb(134, 230, 214);
-}
-
 /* Table styling */
 table {
-    width: 1300px;
+    width: 1280px;
     border-collapse: separate;
     margin: 20px 0;
     background: #ffffff;
@@ -101,9 +91,10 @@ select:focus {
 }
 
 /* Loading/Error styles */
-div {
+.usuarios{
     text-align: center;
     font-size: 18px;
+    height: 570px;
 }
 
 div.error {

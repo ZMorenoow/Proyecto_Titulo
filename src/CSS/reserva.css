@@ -1,72 +1,73 @@
-.reservation-container {
+.reservation__container {
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Alinea todo el contenido a la izquierda */
-    height: 100vh; /* Altura completa de la ventana */
+    justify-content: flex-start;
+    height: 800px;
     width: 100%;
-    background: url('https://picsum.photos/1920/1080') no-repeat center center; /* Imagen como fondo */
-    background-size: cover; /* La imagen ocupa todo el fondo */
+    background: url('https://picsum.photos/1920/1080') no-repeat center center;
+    background-size: cover;
     overflow: hidden;
     border-radius: 20px;
-    padding: 0 30px; /* Espaciado lateral */
-    box-sizing: border-box; /* Incluye padding en el ancho */
-    margin-top: 100px;
+    padding: 0 30px;
+    box-sizing: border-box;
+    margin-top: 150px;
 }
 
-.reservation-form {
-    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
+.reservation__form {
+    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 20px;
     padding: 30px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-    width: 400px; /* Ancho fijo del formulario */
-    height: 100%; /* Ocupa toda la altura del contenedor */
+    width: 400px;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centra el contenido verticalmente */
+    justify-content: center;
     margin-left: -30px;
+    padding-top: 15px;
 }
 
-form.form-reserva {
+.reservation__form-content {
     background-color: #b5d6ca;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.671);
     border-radius: 15px;
     padding: 20px;
 }
 
-.form-title {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
-    text-align: center;
+.reservation__title {
+        font-size: 30px;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #052641;
+        text-transform: uppercase;
+        text-shadow: 2px 2px 4px rgb(134, 230, 214);
+        
 }
 
-.form-group {
+.reservation__group {
     margin-bottom: 15px;
 }
 
-.form-group label {
+.reservation__group label {
     display: block;
     margin-bottom: 5px;
     font-size: 14px;
     color: #333;
 }
 
-.form-control,
-.form-group input,
-.form-group select #hora{
+.reservation__control,
+.reservation__control label ,
+.reservation__group input,
+.reservation__group select #hora_reserva {
     width: 100%;
     padding: 12px;
     font-size: 14px;
-    border: 1px solid #00c2a8; /* Borde verde */
-    background-color: #000000; /* Fondo negro */
-    color: #ffffff; /* Texto blanco */
+    border: 1px solid #00c2a8;
+    background-color: #000000;
+    color: #ffffff;
     border-radius: 5px;
     box-sizing: border-box;
-}
-
-.form-control::placeholder,
-.form-group input::placeholder {
-    color: #a0a0a0; /* Placeholder gris */
+    margin-top: 20px;
 }
 
 /* Selector específico para el input generado por DatePicker */
@@ -84,15 +85,21 @@ form.form-reserva {
     border-radius: 5px;
     box-sizing: border-box;
     margin-bottom: -25px;
-    margin-left: 10px; /* Espaciado entre inputs */
+    /* Espaciado entre inputs */
+}
+
+
+.reservation__control::placeholder,
+.reservation__group input::placeholder {
+    color: #a0a0a0;
 }
 
 .submit-button {
     width: 100%;
     padding: 12px;
-    border: 2px solid #09634c; /* Borde verde */
-    background-color: #37d699; /* Fondo verde */
-    color: #ffffff; /* Texto blanco */
+    border: 2px solid #09634c;
+    background-color: #37d699;
+    color: #ffffff;
     font-size: 16px;
     cursor: pointer;
     margin-top: 10px;
@@ -101,6 +108,10 @@ form.form-reserva {
 }
 
 .submit-button:hover {
-    background-color: #1a574d; /* Verde más oscuro en hover */
+    background-color: #1a574d;
     border-color: #008f78;
+}
+
+.reservation__paypal {
+    margin-top: 20px;
 }

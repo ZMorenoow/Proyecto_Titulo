@@ -126,12 +126,12 @@ const Usuarios = () => {
   }
 
   return (
-    <div>
+    <div className='trabajadores-adm'>
       <br />
       <br />
       <br />
       <h1>Trabajadores</h1>
-      <button onClick={() => handleAsignarTareas()}>Asignar tareas</button> {/* Botón para redirigir */}
+       
       {editingUser && (
         <div>
           <h2>Editar Usuario</h2>
@@ -203,6 +203,7 @@ const Usuarios = () => {
           ))}
         </tbody>
       </table>
+      <button className='boton-asignar'onClick={() => handleAsignarTareas()}>Asignar tareas</button>
     </div>
   );
 };

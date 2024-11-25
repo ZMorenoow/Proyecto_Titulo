@@ -45,8 +45,6 @@ body {
   flex-direction: column;
   justify-content: center; 
   align-items: center;
- 
-  
 }
 
 .texto-bienvenida h1
@@ -84,7 +82,6 @@ body {
     font-size: 18px;
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 }
-
 
 .container-servicio {
     max-width: 1200px; 

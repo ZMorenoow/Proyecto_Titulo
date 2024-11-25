@@ -7,13 +7,15 @@ html, body,main, #root {
     flex-direction: column;
 }
 
+
 .footer { 
     color: #fff;
     padding: 20px;
     text-align: center;
     width: 100%;
-    margin-top: auto;
-
+    display: grid;
+    
+    
 }
 
 .footer-content {
@@ -23,7 +25,6 @@ html, body,main, #root {
     gap: 20px;
     justify-content: space-between;
     transition: all 0.3s ease-in-out;
-    
 }
 
 .footer-content p {

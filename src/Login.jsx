@@ -54,15 +54,15 @@ const Login = () => {
                     <h1>Iniciar sesión</h1>
                     {message && <p style={{ color: 'green' }}>{message}</p>}
                     <form onSubmit={handleSubmit}>
-                        <label>Correo electrónico:</label>
-                        <input
+                        <label>Correo electrónico</label>
+                        <input className="login"
                             type="email"
                             value={correo}
                             onChange={(e) => setCorreo(e.target.value)}
                             required
                         />
-                        <label>Contraseña:</label>
-                        <input
+                        <label>Contraseña</label>
+                        <input className="login"
                             type="password"
                             value={contrasena}
                             onChange={(e) => setContrasena(e.target.value)}

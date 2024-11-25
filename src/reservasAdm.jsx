@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './CSS/reservasAdm.css';
 
 const Reservas = () => {
   const [reservas, setReservas] = useState([]);
@@ -16,22 +17,24 @@ const Reservas = () => {
   // Obtener las reservas desde el backend
   useEffect(() => {
     const fetchReservas = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/admin/reservas', {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        });
-        setReservas(response.data);
-        setLoading(false);
-      } catch (error) {
-        setError('Error al cargar las reservas');
-        setLoading(false);
-      }
+        try {
+            const response = await axios.get('http://localhost:3000/admin/reservas', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
+            console.log(response.data); // Verifica que `nombre_servicio` esté presente
+            setReservas(response.data);
+            setLoading(false);
+        } catch (error) {
+            setError('Error al cargar las reservas');
+            setLoading(false);
+        }
     };
 
     fetchReservas();
-  }, []);
+}, []);
+
 
   // Función para formatear las fechas
   const formatDate = (dateString) => {
@@ -103,11 +106,12 @@ const Reservas = () => {
 
   return (
     <div>
-      <h1>Reservas</h1>
+      <h1 className='reserva'>Reservas</h1>
       <table>
         <thead>
           <tr>
             <th>Usuario</th>
+            <th>Servicio</th>
             <th>Valor</th>
             <th>Fecha</th>
             <th>Hora</th>
@@ -119,6 +123,7 @@ const Reservas = () => {
           {reservas.map((reserva) => (
             <tr key={reserva.id_reserva}>
               <td>{reserva.usuario}</td>
+              <td>{reserva.nombre_servicio}</td>
               <td>{reserva.monto}</td>
               <td>{formatDate(reserva.fecha_reserva)}</td>
               <td>{reserva.hora_reserva}</td>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation,useNavigate  } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './CSS/Cotizar.css';
 
 const CotizacionForm = () => {
@@ -43,7 +43,6 @@ const CotizacionForm = () => {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
-          
         },
         body: JSON.stringify(cotizacion),
       });
@@ -52,27 +51,19 @@ const CotizacionForm = () => {
 
       const data = await response.json();
       console.log('Cotización enviada correctamente:', data);
-      setValorCotizacion(data.precioFinal); 
-      setIdCotizacion(data.idCotizacion); // Guardar la última ID de cotización
-      console.log('Valor de cotización actualizado:', data.precioFinal);
-      console.log('id ultima cotizacion:', data.idCotizacion);// Actualizar el estado con el valor de la cotización
+      setValorCotizacion(data.precioFinal);
+      setIdCotizacion(data.idCotizacion);
     } catch (error) {
       console.error('Error al enviar la cotización:', error);
       setError('Hubo un problema al enviar la cotización. Intenta de nuevo.');
     }
   };
 
-
   const handleAddToCart = async () => {
     if (!idCotizacion) {
       setError('No hay una cotización válida para agregar al carrito.');
       return;
     }
-    const body = {
-      id_cotizacion: idCotizacion,
-  };
-    console.log('Datos enviados al backend:', body);
-
     setError('');
     try {
       const response = await fetch('http://localhost:3000/carrito/agregar', {
@@ -86,12 +77,10 @@ const CotizacionForm = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
-            console.error('Error en la respuesta del backend:', errorData);
-            throw new Error(errorData.message || 'Error al agregar al carrito');
+        throw new Error(errorData.message || 'Error al agregar al carrito');
       }
 
       const data = await response.json();
-      console.log('Cotización agregada al carrito:', data);
       alert('Cotización agregada al carrito correctamente');
       navigate('/cart');
     } catch (error) {
@@ -101,9 +90,9 @@ const CotizacionForm = () => {
   };
 
   return (
-    <div className="cotizacion-form">
-      <h2>Formulario de Cotización</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="cotizacion-form__container">
+      <h2 className='form-coti'>Formulario de Cotización</h2>
+      <form className="cotizacion-form__form" onSubmit={handleSubmit}>
         <label>Servicio: {servicioSeleccionado.nombre_servicio}</label>
         <br />
 
@@ -194,11 +183,10 @@ const CotizacionForm = () => {
         <button type="submit">Enviar Cotización</button>
       </form>
 
-      {error && <p className="error">{error}</p>}
+      {error && <p className="cotizacion-form__error">{error}</p>}
 
-      {/* Mostrar el valor de la cotización cuando esté disponible */}
       {valorCotizacion !== null && (
-        <p className="resultado">
+        <p className="cotizacion-form__resultado">
           Valor calculado: <strong>${valorCotizacion}</strong>
         </p>
       )}

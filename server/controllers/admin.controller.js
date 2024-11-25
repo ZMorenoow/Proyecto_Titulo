@@ -228,21 +228,24 @@ export const getReservationsList = async (req, res) => {
             SELECT 
                 r.id_reserva, 
                 u.nombre AS usuario, 
-                p.monto,
+                p.monto, 
                 r.fecha_reserva, 
                 r.hora_reserva, 
                 r.fecha_creacion, 
-                e.tipo_estado AS estado
+                e.tipo_estado AS estado, 
+                s.nombre_servicio
             FROM reservas r
             JOIN usuario u ON r.id_usuario = u.id_usuario
             JOIN carrito c ON r.id_carrito = c.id_carrito
-            JOIN cotizaciones co ON c.id_cotizacion = co.id_cotizacion
-            JOIN estados e ON r.estado = e.id_estado
-
             JOIN pagos p ON r.id_reserva = p.id_reserva
+            JOIN cotizaciones co ON c.id_cotizacion = co.id_cotizacion
+            JOIN servicios s ON co.id_servicio = s.id_servicio
+            JOIN estados e ON r.estado = e.id_estado;
+
         `);
 
         // Responder con las reservas en formato JSON
+        console.log(reservations);
         res.status(200).json(reservations);
     } catch (error) {
         console.error('Error al obtener las reservas:', error);
@@ -313,23 +316,23 @@ export const getReservationsForWorkers = async (req, res) => {
 
         const [reservations] = await connection.execute(`
             SELECT 
-            rt.id_reserva_trabajador,
-            r.id_reserva,
-            GROUP_CONCAT(CONCAT(u.nombre, ' ', u.apellido) SEPARATOR ', ') AS trabajadores,
-            r.fecha_reserva,
-            r.hora_reserva,
-            s.nombre_servicio AS servicio,
-            e.tipo_estado AS estado
+                rt.id_reserva_trabajador,
+                r.id_reserva,
+                GROUP_CONCAT(CONCAT(u.nombre, ' ', u.apellido) SEPARATOR ', ') AS trabajadores,
+                r.fecha_reserva,
+                r.hora_reserva,
+                e.tipo_estado AS estado,
+                s.nombre_servicio AS servicio
             FROM reserva_trabajador rt
             JOIN reservas r ON rt.id_reserva = r.id_reserva
-            JOIN carrito c ON r.id_carrito = c.id_carrito
-            JOIN cotizaciones co ON c.id_cotizacion = co.id_cotizacion -- Nuevo JOIN para conectar con cotizaciones
-            JOIN servicios s ON co.id_servicio = s.id_servicio -- Ahora conectamos el id_servicio desde cotizaciones
             JOIN usuario_rol ur ON rt.id_usuario_rol = ur.id_usuario_rol
             JOIN usuario u ON ur.id_usuario = u.id_usuario
             JOIN estados e ON r.estado = e.id_estado
+            JOIN carrito c ON r.id_carrito = c.id_carrito
+            JOIN cotizaciones cot ON c.id_cotizacion = cot.id_cotizacion
+            JOIN servicios s ON cot.id_servicio = s.id_servicio
             WHERE e.id_estado = 2
-            GROUP BY r.id_reserva, rt.id_reserva_trabajador;
+            GROUP BY r.id_reserva, rt.id_reserva_trabajador, s.nombre_servicio;
 
         `);
 
@@ -339,7 +342,6 @@ export const getReservationsForWorkers = async (req, res) => {
         res.status(500).json({ message: 'Error al obtener las reservas de trabajadores.' });
     }
 };
-
 
 ;
 export const addWorkerReservation = async (req, res) => {
@@ -363,7 +365,7 @@ export const addWorkerReservation = async (req, res) => {
 
         if (reservation.length === 0) {
             return res.status(400).json({
-                message: 'La reserva no está disponible para ser asignada (puede no existir o no estar pendiente).',
+                message: 'La reserva no está disponible para ser asignada (puede no existir o no estar aceptada).',
             });
         }
 
@@ -489,3 +491,4 @@ export const getWorkersList = async (req, res) => {
         res.status(500).json({ message: 'Error al obtener el listado de trabajadores' });
     }
 };
+

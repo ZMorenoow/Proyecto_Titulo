@@ -11,7 +11,7 @@ const AdminHome = () => {
   return (
     <div className="dashboard-container">
       <header>
-        <h1>Panel de Administración</h1>
+        <h1 className="panel-adm">Panel de Administración</h1>
       </header>
 
       <main>
