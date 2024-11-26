@@ -17,7 +17,7 @@ const Reserva = () => {
     const [commune, setCommune] = useState("");
     const [showPayPal, setShowPayPal] = useState(false);
     const [requestData, setRequestData] = useState(null);
-    const timeSlots = ["9:00", "12:00", "3:00", "6:00"];
+    const timeSlots = ["9:00", "12:00", "15:00", "18:00"];
 
     const totalCarrito = location.state?.totalCarrito || 1000; 
     const cart = location.state?.carrito || []; 
