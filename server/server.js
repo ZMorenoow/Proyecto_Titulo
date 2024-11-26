@@ -5,6 +5,7 @@ import adminRoutes from '../server/routes/admin.router.js';
 import trabajadorRoutes from '../server/routes/trabajador.router.js';
 import carritoRoutes from '../server/routes/carrito.router.js';
 import reservaRoutes from '../server/routes/reserva.router.js'
+import recoveryRouter from '../server/routes/recovery.router.js';
 import contactoRoutes from '../server/routes/contacto.router.js';
 import { getServicios,insertCotizacion } from './configs/db.js'; 
 import { fileURLToPath } from 'url';
@@ -22,6 +23,7 @@ app.use('/worker', trabajadorRoutes);
 app.use('/carrito', carritoRoutes);
 app.use('/reserva', reservaRoutes);
 app.use('/contacto',contactoRoutes);
+app.use('/recovery',recoveryRouter);
 
 
 // Ruta principal de prueba

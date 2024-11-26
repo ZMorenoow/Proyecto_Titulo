@@ -477,7 +477,8 @@ export const getWorkersList = async (req, res) => {
                 ur.id_usuario_rol, 
                 u.id_usuario, 
                 u.nombre, 
-                u.apellido, 
+                u.apellido,
+                u.correo,
                 r.rol 
             FROM usuario u
             JOIN usuario_rol ur ON u.id_usuario = ur.id_usuario

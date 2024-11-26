@@ -23,7 +23,7 @@ import HomeWorker from './HomeWorker.jsx';
 import PrivateRoute from './PrivateRoute.jsx';
 import Mapbox from './Mapbox.jsx';
 import ReservasTrabajador from './ReservasTrabajador.jsx';
-
+import ResetPassword  from './ResetPassword.jsx';
 
 
 
@@ -77,6 +77,7 @@ const App = () => {
                 <Route path="/Registro" element={<Registro />} />
                 <Route path="/Cuenta"  element={ <Cuenta />} />
                 <Route path="/map" element={<Mapbox/>}/>
+                <Route path="/reset" element={<ResetPassword/>}/>
             
                 {/* Rutas protegidas */}
                 <Route 
