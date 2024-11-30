@@ -129,10 +129,7 @@ export const realizarPago = async (req, res) => {
             return res.status(400).json({ message: 'Fecha y hora de reserva son obligatorias' });
         }
 
-        // Variable para calcular el monto total
-        let montoTotal = 0;
-
-        // Inserta la reserva para cada artículo en el carrito
+        // Procesa cada artículo del carrito
         for (let item of carritoItems) {
             const [existingReserva] = await connection.execute(
                 `SELECT * FROM reservas WHERE id_usuario = ? AND id_carrito = ?`,
@@ -151,14 +148,14 @@ export const realizarPago = async (req, res) => {
                 [id_usuario, item.id_carrito, fechaReserva, horaReserva, comuna, direccion, nombreDestinatario, 1]
             );
 
-            // Calcula el monto total (valor * cantidad)
-            montoTotal += item.valor * item.cantidad;
-            
+            // Calcula el monto para este artículo
+            const monto = item.valor * item.cantidad;
+
             // Inserta el pago en la tabla pagos
             await connection.execute(
                 `INSERT INTO pagos (id_reserva, id_usuario, monto, fecha_pago)
                  VALUES (?, ?, ?, ?)`,
-                [reservaResult.insertId, id_usuario, montoTotal, new Date()]
+                [reservaResult.insertId, id_usuario, monto, new Date()]
             );
         }
 
@@ -175,3 +172,5 @@ export const realizarPago = async (req, res) => {
         res.status(500).json({ message: 'Error interno al realizar el pago' });
     }
 };
+
+//hola

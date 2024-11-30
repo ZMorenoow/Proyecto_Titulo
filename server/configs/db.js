@@ -47,7 +47,7 @@ const insertCotizacion = async (cotizacion) => {
             estado_producto, 
             antiguedad, 
             especificaciones_adicionales,
-            valor
+            valor * 1.19
         ]);
 
         // Obtener la última ID insertada

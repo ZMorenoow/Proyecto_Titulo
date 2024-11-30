@@ -13,6 +13,8 @@ export const getAllWorkerReservations = async (req, res) => {
                 r.hora_reserva,
                 e.tipo_estado AS estado,
                 s.nombre_servicio,
+                co.medidas,
+                co.material,
                 u.nombre AS nombre_cliente
             FROM reserva_trabajador rt
             JOIN reservas r ON rt.id_reserva = r.id_reserva

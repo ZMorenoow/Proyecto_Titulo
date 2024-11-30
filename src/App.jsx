@@ -8,7 +8,7 @@ import Home from './home.jsx';
 import Servicios from './Servicios.jsx';
 import Reservas from './Reservas.jsx';
 import Contacto from './Contacto.jsx';
-import Cotiza from './Cotizar.jsx';
+import Cotizar from './Cotizar.jsx';
 import Cart from './Cart.jsx';
 import Cuenta from './Cuenta.jsx';
 import Login from './Login.jsx';
@@ -24,6 +24,7 @@ import PrivateRoute from './PrivateRoute.jsx';
 import Mapbox from './Mapbox.jsx';
 import ReservasTrabajador from './ReservasTrabajador.jsx';
 import ResetPassword  from './ResetPassword.jsx';
+import Contratar from './Contratar.jsx';
 
 
 
@@ -70,9 +71,9 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/reservas" element={<Reservas />} />
-                <Route path="/contacto" element={<Contacto />} />
                 <Route path="/Servicios" element={<Servicios/>}/>
-                <Route path="/Cotiza" element={<Cotiza />}/>  
+                <Route path="/Contratar" element={<Contratar />}/>
+                <Route path="/Cotizar" element={<Cotizar />}/> 
                 <Route path="/Login" element={<Login />}/>
                 <Route path="/Registro" element={<Registro />} />
                 <Route path="/Cuenta"  element={ <Cuenta />} />
@@ -111,6 +112,10 @@ const App = () => {
                 <Route 
                 path="/cart" 
                 element={<PrivateRoute element={<Cart/>} allowedRoles={['Usuario']} />} 
+                />
+                <Route 
+                path="/contacto" 
+                element={<PrivateRoute element={<Contacto/>} allowedRoles={['Usuario']} />} 
                 />
                 
             </Routes>   

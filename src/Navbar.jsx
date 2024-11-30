@@ -41,9 +41,11 @@ const Navbar = ({ visible }) => {
                                 <Link className="nav-link" to="/Servicios">Servicios</Link>
                             </li>
                             
-                            <li className="nav-item">
+                            {rol === rol !== "Trabajador" && rol !== "Administrador" && (
+                                <li className="nav-item">
                                 <Link className="nav-link" to="/contacto">Contacto</Link>
                             </li>
+                            )}
                             <li className="nav-item">
                                 <Link className="nav-link" to="/map">Mapa</Link>
                             </li>

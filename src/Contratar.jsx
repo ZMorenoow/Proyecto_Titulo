@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import jsPDF from 'jspdf';
-import 'jspdf-autotable'; // Importa el complemento de tablas
+import 'jspdf-autotable'; // Importar el complemento para generar tablas en el PDF
+import './CSS/Cotizar.css';
 
 const CotizacionForm = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [error, setError] = useState('');
-  const [valorCotizacion, setValorCotizacion] = useState(null);
-  const [valorConIva, setValorConIva] = useState(null); // Estado para el valor con IVA
+  const [valorCotizacion, setValorCotizacion] = useState(null); // Inicializar como null
+  const [valorConIva, setValorConIva] = useState(null); // Nuevo estado para el valor con IVA
   const [mostrarEspecificaciones, setMostrarEspecificaciones] = useState(false);
-  const [idCotizacion, setIdCotizacion] = useState(null);
+  const [idCotizacion, setIdCotizacion] = useState(null); // Para almacenar el ID de la última cotización
 
   const [cotizacion, setCotizacion] = useState({
     id_servicio: location.state?.servicio?.id_servicio || '',
@@ -55,16 +57,14 @@ const CotizacionForm = () => {
 
       const data = await response.json();
       console.log('Cotización enviada correctamente:', data);
-      
-      // Suponiendo que el valor calculado está en `data.precioFinal`, lo asignamos
+
+      // Calcula el IVA y el total con IVA
       const precioFinal = data.precioFinal;
-      
-      // Calculamos el IVA (19%)
       const iva = precioFinal * 0.19;
-      const valorTotalConIva = precioFinal + iva;
+      const totalConIva = precioFinal + iva;
 
       setValorCotizacion(precioFinal);
-      setValorConIva(valorTotalConIva); // Guardamos el valor con IVA
+      setValorConIva(totalConIva); // Guarda el valor total con IVA
       setIdCotizacion(data.idCotizacion);
     } catch (error) {
       console.error('Error al enviar la cotización:', error);
@@ -72,79 +72,35 @@ const CotizacionForm = () => {
     }
   };
 
-  const handleDownloadPDF = () => {
-    const doc = new jsPDF();
-  
-    // Ruta de la imagen (logo)
-    const imageUrl = './img/logo.png'; // Cambia esta ruta a tu logo
-    const image = new Image();
-    image.src = imageUrl;
-    const currentDate = new Date();
-    const formattedDate = currentDate.toLocaleDateString(); // Solo la fecha
-    const formattedTime = currentDate.toLocaleTimeString(); // Solo la hora
-  
-    image.onload = () => {
-      // Añadir la imagen al PDF (ajustando tamaño y posición)
-      doc.addImage(image, 'PNG', 10, 10, 40, 40); // x, y, width, height
-  
-      // Título del documento
-      doc.setFontSize(20);
-      doc.text('COTIZACIÓN', 80, 20);
-  
-      // Información adicional
-      doc.setFontSize(12);
-      doc.text(`Nº: 0000${idCotizacion || '00001'}`, 150, 20);
-      doc.text('Fecha: ' + formattedDate, 150, 30); // Fecha en una línea
-      doc.text('Hora: ' + formattedTime, 150, 40); // Hora en la siguiente línea
-  
-      // Definir los datos para la tabla
-      const tableData = [
-        ['Servicio', servicioSeleccionado.nombre_servicio],
-        ['Cantidad', cotizacion.cantidad],
-        ['Medidas', cotizacion.medidas],
-        ['Material', cotizacion.material],
-        ['Estado del Producto', cotizacion.estado_producto],
-        ['Antigüedad', cotizacion.antiguedad],
-        ['Especificaciones Adicionales', cotizacion.especificaciones_adicionales || 'N/A'],
-        ['Valor Neto', valorCotizacion !== null ? `$${Math.round(valorCotizacion)}` : 'Pendiente'],
-        ['IVA (19%)', valorCotizacion !== null ? `$${Math.round(valorCotizacion * 0.19)}` : 'Pendiente'],
-        ['Valor Total (con IVA)', valorConIva !== null ? `$${Math.round(valorConIva)}` : 'Pendiente']
-      ];
-  
-      // Agregar tabla con estilo
-      doc.autoTable({
-        startY: 70, // Inicia después del encabezado
-        head: [['Campo', 'Descripción']], // Encabezados de la tabla
-        body: tableData, // Datos de la tabla
-        styles: {
-          head: { fillColor: [41, 128, 185], textColor: [255, 255, 255] }, // Color de fondo de la cabecera y texto blanco
-          halign: 'left', // Alineación del texto en las celdas
-          fontSize: 10, // Tamaño de fuente
+  // Función para agregar al carrito
+  const handleAddToCart = async () => {
+    if (!idCotizacion) {
+      setError('No hay una cotización válida para agregar al carrito.');
+      return;
+    }
+    setError('');
+    try {
+      const response = await fetch('http://localhost:3000/carrito/agregar', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`
         },
-        columnStyles: {
-          0: { cellWidth: 60 }, // Ancho de la primera columna (campo)
-          1: { cellWidth: 120 }, // Ancho de la segunda columna (descripción)
-        },
+        body: JSON.stringify({ id_cotizacion: idCotizacion })
       });
 
-      // Texto adicional con la palabra "NOTA:" al principio
-      const textoAdicional = [
-        "NOTA:", // Título de la nota
-        "",
-        "El tiempo de trabajo dependerá de la hora de la reserva y del área de trabajo asignada. Agradecemos su comprensión. *Esta cotización tiene una durabilidad de 30 días habiles*."
-      ];
-      doc.setFontSize(10);
-      doc.text(textoAdicional, 10, doc.lastAutoTable.finalY + 10, { maxWidth: 180 }); // El texto se coloca después de la tabla
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Error al agregar al carrito');
+      }
 
-      // Descargar el PDF
-      doc.save('cotizacion.pdf');
-    };
-  
-    // Si la imagen no carga
-    image.onerror = () => {
-      console.error('Error al cargar la imagen.');
-      alert('No se pudo cargar la imagen. Verifica la ruta.');
-    };
+      const data = await response.json();
+      alert('Cotización agregada al carrito correctamente');
+      navigate('/cart');
+    } catch (error) {
+      console.error('Error al agregar al carrito:', error);
+      setError('Hubo un problema al agregar la cotización al carrito.');
+    }
   };
 
   return (
@@ -226,7 +182,9 @@ const CotizacionForm = () => {
 
         {mostrarEspecificaciones && (
           <>
-            <label htmlFor="especificaciones_adicionales">Especificaciones Adicionales (Opcional)</label>
+            <label htmlFor="especificaciones_adicionales">
+              Especificaciones Adicionales (Opcional)
+            </label>
             <textarea
               id="especificaciones_adicionales"
               name="especificaciones_adicionales"
@@ -243,13 +201,23 @@ const CotizacionForm = () => {
 
       {error && <p className="cotizacion-form__error">{error}</p>}
 
-      {valorCotizacion !== null && (
-        <p className="cotizacion-form__resultado">
-          Valor Estimado: <strong>${Math.round(valorConIva)}</strong>
-        </p>
+      {valorCotizacion !== null && valorConIva !== null && (
+        <div className="cotizacion-form__resultado">
+          <p>
+            Valor Neto: <strong>${valorCotizacion}</strong>
+          </p>
+          <p>
+            IVA (19%): <strong>${Math.round(valorCotizacion * 0.19)}</strong>
+          </p>
+          <p>
+            Valor Total (con IVA): <strong>${Math.round(valorConIva)}</strong>
+          </p>
+        </div>
       )}
       {idCotizacion && (
-        <button onClick={handleDownloadPDF}>Descargar Cotización</button>
+        <div>
+          <button onClick={handleAddToCart}>Agregar al Carrito</button>
+        </div>
       )}
     </div>
   );

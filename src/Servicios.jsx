@@ -6,7 +6,7 @@ import "./CSS/Servicios.css";
 const Servicios = () => {
   const [servicios, setServicios] = useState([]);
   const navigate = useNavigate();
-  const { rol } = useAuth(); // Accede al rol del usuario desde el contexto
+  const { rol, isAuthenticated } = useAuth(); // Accede al rol e información de autenticación del usuario
 
   useEffect(() => {
     // Obtener servicios de la API
@@ -18,8 +18,17 @@ const Servicios = () => {
       .catch((error) => console.error("Error al obtener los servicios:", error));
   }, []);
 
+  const contratar = (servicio) => {
+    if (!isAuthenticated) {
+      alert("Debes iniciar sesión para contratar un servicio.");
+      navigate("/login"); // Redirige a la página de inicio de sesión
+      return;
+    }
+    navigate("/contratar", { state: { servicio } });
+  };
+
   const cotizar = (servicio) => {
-    navigate("/cotiza", { state: { servicio } });
+    navigate("/cotizar", { state: { servicio } }); // Redirigir a la página de cotización
   };
 
   return (
@@ -42,11 +51,23 @@ const Servicios = () => {
               <p>{servicio.descripcion_servicio}</p>
             </div>
             <div className="btn-container">
-              {/* Condición para mostrar el botón solo si no es trabajador */}
-              {rol !== "Trabajador" && rol !== "Administrador" && (
+              {/* Mostrar el botón de Cotizar solo para usuarios no autenticados */}
+              {!isAuthenticated && (
                 <button onClick={() => cotizar(servicio)} className="btn-agregar">
                   Cotizar
                 </button>
+              )}
+              <br />
+              {/* Mostrar el botón de Contratar solo si está autenticado y el rol no es Trabajador o Administrador */}
+              {isAuthenticated && rol !== "Trabajador" && rol !== "Administrador" && (
+                <>
+                  <button onClick={() => contratar(servicio)} className="btn-agregar">
+                    Contratar
+                  </button>
+                  <button onClick={() => cotizar(servicio)} className="btn-agregar">
+                    Cotizar
+                  </button>
+                </>
               )}
             </div>
           </div>
