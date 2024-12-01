@@ -37,8 +37,41 @@ export const registerUser = async (req, res) => {
             [userId, 2]
         );
 
-        const emailSubject = 'Verificación de cuenta en WatchyWash';
-        const emailContent = `<p>Haga clic en el siguiente enlace para verificar su cuenta: <a href="${verificationUrl}">${verificationUrl}</a></p>`;
+        const emailSubject = '¡Confirma tu cuenta en WatchyWash!';
+
+        const emailContent = `
+        <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="https://lh3.googleusercontent.com/d/19g5PHrc1uDN4Wn4cfhH8XUW3MiomTwdh" alt="WatchyWash" style="width: 150px;"/>
+            </div>
+            <h1 style="color: #4CAF50; text-align: center;">¡Bienvenido a WatchyWash, ${nombre}!</h1>
+            <p style="font-size: 16px; text-align: justify;">
+                Gracias por registrarte en WatchyWash, tu solución confiable para servicios de lavandería. 
+                Estamos emocionados de tenerte con nosotros.
+            </p>
+            <p style="font-size: 16px; text-align: justify;">
+                Para completar tu registro y comenzar a disfrutar de todos nuestros servicios, por favor confirma tu dirección de correo electrónico haciendo clic en el botón a continuación.
+            </p>
+            <div style="text-align: center; margin: 20px 0;">
+                <a href="${verificationUrl}" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-decoration: none; font-size: 16px; border-radius: 5px; display: inline-block;">
+                    Verificar mi cuenta
+                </a>
+            </div>
+            <p style="font-size: 14px; text-align: justify; color: #666;">
+                Si el botón no funciona, copia y pega el siguiente enlace en tu navegador:
+                <br />
+                <a href="${verificationUrl}" style="color: #4CAF50;">${verificationUrl}</a>
+            </p>
+            <hr style="border: 1px solid #ddd; margin: 20px 0;"/>
+            <p style="font-size: 14px; text-align: center; color: #999;">
+                Este mensaje fue enviado por WatchyWash. Si no esperabas este correo, por favor ignóralo.
+            </p>
+            <div style="text-align: center; margin-top: 10px; font-size: 12px; color: #666;">
+                <p>© 2024 WatchyWash. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    `;
+        
         await sendEmail(correo, emailSubject, emailContent);
 
         res.status(201).json({
