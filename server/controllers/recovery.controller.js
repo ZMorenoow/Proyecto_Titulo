@@ -35,9 +35,9 @@ export const requestPasswordReset = async (req, res) => {
             <div style="text-align: center; margin-bottom: 20px;">
                 <img src="https://lh3.googleusercontent.com/d/19g5PHrc1uDN4Wn4cfhH8XUW3MiomTwdh" alt="WatchyWash" style="width: 150px;"/>
             </div>
-            <h1 style="color: #FF5722; text-align: center;">Restablecimiento de Contraseña</h1>
+            <h1 style="color: #4CAF50; text-align: center;">Restablecimiento de Contraseña</h1>
             <p style="font-size: 16px; text-align: justify;">
-                Recibimos una solicitud para restablecer la contraseña de tu cuenta en WatchyWash. Si no realizaste esta solicitud, por favor ignora este correo. De lo contrario, usa el siguiente token para completar el proceso de restablecimiento.
+                Recibimos una solicitud para restablecer la contraseña de tu cuenta en WatchyWash. Si no realizaste esta solicitud, por favor ignora este correo. De lo contrario, usa el siguiente código para completar el proceso de restablecimiento.
             </p>
             <div style="text-align: center; margin: 20px 0;">
                 <p style="font-size: 18px; font-weight: bold; background-color: #f9f9f9; padding: 10px 20px; border: 1px solid #ddd; display: inline-block; border-radius: 5px;">

@@ -120,7 +120,7 @@ export const loginUser = async (req, res) => {
 
         // Generar el token JWT con el rol
         const token = jwt.sign(
-            { id_usuario: existingUser.id_usuario, correo: existingUser.correo, rol },
+            { id_usuario: existingUser.id_usuario, nombre: existingUser.nombre, correo: existingUser.correo, rol },
             "1q2w3e4r5t6y7u8i9o0p!@$%^&*_+QWERTYUIOP|:<>?asdfghjklzxcvbnmASDFGHJKLZXCVBNM",
             { expiresIn: '8h' }
         );

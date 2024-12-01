@@ -49,23 +49,29 @@ export const createOrder = async (data, actions, totalCLP, cart) => {
 export const onApprove = async (data, actions, requestData) => {
     try {
         const details = await actions.order.capture();
-        alert("Transacción completada por " + details.payer.name.given_name);
+        
+        // Verificar si la transacción fue exitosa
+        if (details.status === "COMPLETED") {
+            alert("Transacción completada por " + details.payer.name.given_name);
 
-        const token = localStorage.getItem("token");
+            const token = localStorage.getItem("token");
 
-        await axios.put(
-            "http://localhost:3000/carrito/pagar",
-            {
-                ...requestData
-            },
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json"
+            // Llamar al endpoint solo si la transacción fue exitosa
+            await axios.put(
+                "http://localhost:3000/carrito/pagar",
+                {
+                    ...requestData
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    }
                 }
-            }
-        );
-
+            );
+        } else {
+            alert("La transacción no se completó correctamente.");
+        }
     } catch (error) {
         console.error("Error al completar la transacción:", error);
         alert("Hubo un error al procesar la transacción.");
