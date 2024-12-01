@@ -14,13 +14,13 @@ const Mapbox = () => {
     { 
       name: 'Local  N°1', 
       coords: [-72.57184517449679, -38.729070461760294], 
-      address: 'Dirección de la sede 1: Avenida Principal 123',
+      address: 'Avenida Principal 123',
       details: 'Esta sede ofrece atención al cliente de lunes a viernes de 9:00 a 18:00 horas. Teléfono: +56 9 1234 5678.'
     },
     { 
       name: 'Local N°2', 
       coords: [-72.649305863841, -38.75669508910295], 
-      address: 'Dirección de la sede 2: Calle Secundaria 456',
+      address: 'Calle Secundaria 456',
       details: 'En esta sede se realizan entregas y devoluciones. Horario: lunes a sábado de 10:00 a 20:00 horas. Teléfono: +56 9 8765 4321.'
     },
   ];

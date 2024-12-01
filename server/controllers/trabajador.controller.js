@@ -14,6 +14,8 @@ export const getAllWorkerReservations = async (req, res) => {
                 e.tipo_estado AS estado,
                 s.nombre_servicio,
                 co.medidas,
+                r.direccion,
+                r.comuna,
                 co.material,
                 u.nombre AS nombre_cliente
             FROM reserva_trabajador rt

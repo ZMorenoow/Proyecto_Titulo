@@ -51,6 +51,8 @@ const HomeWorker = () => {
                             <th>Servicio</th>
                             <th>Medidas</th>
                             <th>Material</th>
+                            <th>Dirección</th>
+                            <th>Comuna</th>
                             <th>Fecha</th>
                             <th>Hora</th>
                         </tr>
@@ -63,6 +65,8 @@ const HomeWorker = () => {
                                 <td>{reservation.nombre_servicio}</td>
                                 <td>{reservation.medidas}</td>
                                 <td>{reservation.material}</td>
+                                <td>{reservation.direccion}</td>
+                                <td>{reservation.comuna}</td>
                                 <td>{new Date(reservation.fecha_reserva).toLocaleDateString('es-CL')}</td>
                                 <td>{reservation.hora_reserva}</td>
                             </tr>

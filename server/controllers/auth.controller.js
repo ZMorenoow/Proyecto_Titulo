@@ -46,7 +46,7 @@ export const registerUser = async (req, res) => {
             </div>
             <h1 style="color: #4CAF50; text-align: center;">¡Bienvenido a WatchyWash, ${nombre}!</h1>
             <p style="font-size: 16px; text-align: justify;">
-                Gracias por registrarte en WatchyWash, tu solución confiable para servicios de lavandería. 
+                Gracias por registrarte en WatchyWash, tu solución confiable para servicios de limpieza. 
                 Estamos emocionados de tenerte con nosotros.
             </p>
             <p style="font-size: 16px; text-align: justify;">
