@@ -1,5 +1,6 @@
 import db from '../configs/db.js';
 import { sendEmailContact } from '../utils/email.js';
+import { generateContactEmail } from '../templates/emailTemplate.js';
 
 
 export const enviarReclamo = async (req, res) => {
@@ -12,7 +13,7 @@ export const enviarReclamo = async (req, res) => {
   }
 
   const emailSubject = asunto;
-  const emailContent = descripcion;
+  const emailContent = generateContactEmail (email_usuario, asunto, descripcion);
 
   const connection = await db();
 

@@ -2,7 +2,8 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../src/utils/AuthContext.jsx'
 import logo from '../img/logo.png';
-import carro from '../img/carro.png';
+import usuario from '../img/usuario.png';
+import carrito from '../img/carrito.png';
 import './CSS/Navbar.css';
 
 const Navbar = ({ visible }) => {
@@ -52,8 +53,9 @@ const Navbar = ({ visible }) => {
                             <li className="nav-item d-flex align-items-center">
                                 {isAuthenticated ? (
                                     <div className="d-flex align-items-center">
-                                        <Link className="nav-link" to="/Cuenta">Mi cuenta</Link>
                                         <button className="nav-link btn btn-link ms-2" onClick={handleLogout}>Cerrar sesión</button>
+                                        
+                                        <Link className="nav-link" to="/Cuenta"><img src={usuario} alt="CarroCompras" className="carrito" /></Link>
                                     </div>
                                 ) : (
                                     <>
@@ -70,7 +72,7 @@ const Navbar = ({ visible }) => {
                                         if (!isAuthenticated) alert("Debes iniciar sesión para acceder al carrito.");
                                     }}
                                 >
-                                    <img src={carro} alt="CarroCompras" className="carrito" />
+                                    <img src={carrito} alt="CarroCompras" className="carrito" />
                                 </Link>
                             </li>
                         </ul>

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import jsPDF from 'jspdf';
-import 'jspdf-autotable'; // Importar el complemento para generar tablas en el PDF
 import './CSS/Cotizar.css';
+import "./CSS/modal.css";
 
 const CotizacionForm = () => {
   const location = useLocation();
@@ -12,6 +11,7 @@ const CotizacionForm = () => {
   const [valorConIva, setValorConIva] = useState(null); // Nuevo estado para el valor con IVA
   const [mostrarEspecificaciones, setMostrarEspecificaciones] = useState(false);
   const [idCotizacion, setIdCotizacion] = useState(null); // Para almacenar el ID de la última cotización
+  const [modalOpen, setModalOpen] = useState(false); // Estado para controlar el modal de confirmación
 
   const [cotizacion, setCotizacion] = useState({
     id_servicio: location.state?.servicio?.id_servicio || '',
@@ -95,12 +95,20 @@ const CotizacionForm = () => {
       }
 
       const data = await response.json();
-      alert('Cotización agregada al carrito correctamente');
-      navigate('/cart');
+      console.log('Cotización agregada al carrito:', data);
+
+      // Mostrar el modal de confirmación
+      setModalOpen(true);
     } catch (error) {
       console.error('Error al agregar al carrito:', error);
       setError('Hubo un problema al agregar la cotización al carrito.');
     }
+  };
+
+  // Función para cerrar el modal y redirigir al carrito
+  const handleRedirectToCart = () => {
+    setModalOpen(false);
+    navigate('/cart');
   };
 
   return (
@@ -217,6 +225,19 @@ const CotizacionForm = () => {
       {idCotizacion && (
         <div>
           <button onClick={handleAddToCart}>Agregar al Carrito</button>
+        </div>
+      )}
+
+      {modalOpen && (
+        <div className="modal__overlay">
+          <div className="modal__content">
+            <img src="https://lh3.googleusercontent.com/d/1Eh77Liep6_pCjjO-Age35Yy3ZR0VVg0N"
+              alt="Éxito"
+              className="modal__icon"
+            />
+            <p>Tu cotización ha sido añadida al carrito correctamente.</p>
+            <button onClick={handleRedirectToCart}>Continuar</button>
+          </div>
         </div>
       )}
     </div>

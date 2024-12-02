@@ -7,6 +7,7 @@ import { initialOptions, createOrder, onApprove } from "../server/controllers/pa
 import { useNavigate, useLocation } from "react-router-dom";
 import './CSS/reserva.css';
 
+
 const Reserva = () => {
     const location = useLocation();
     const navigate = useNavigate();
@@ -47,9 +48,9 @@ const Reserva = () => {
 
     const handlePayPalApprove = async (data, actions) => {
         await onApprove(data, actions, requestData);
-        alert("Reserva completada exitosamente.");
-        navigate("/");
+        navigate("/", { state: { paymentSuccess: true } }); // Pasar estado a la página de inicio
     };
+    
 
     return (
         <div className="reservation__container">

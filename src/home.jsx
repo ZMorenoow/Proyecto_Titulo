@@ -1,16 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './CSS/App.css';
 import './CSS/Tarjeta.css';
 import './CSS/Carrusel.css';
 import './CSS/Navbar.css';
 import './CSS/Home.css';
+import Modal from './Modal.jsx';
 
 
 const Home = () => {
     const [visible, setVisible] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const location = useLocation();
+
+    useEffect(() => {
+        // Mostrar modal si el estado indica éxito en el pago
+        if (location.state?.paymentSuccess) {
+            setIsModalOpen(true);
+            // Limpia el estado para evitar reaparición del modal en futuras visitas
+            window.history.replaceState({}, document.title);
+        }
+    }, [location.state]);
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -18,14 +34,14 @@ const Home = () => {
         };
 
         window.addEventListener('scroll', handleScroll);
-        
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
 
     return (
-        <div>   
+        <div>
+            <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
             <main>
             <section className="bienvenida">
             <div className="contenido-bienvenida" >
