@@ -105,10 +105,10 @@ const CotizacionForm = () => {
     }
   };
 
-  // Función para cerrar el modal y redirigir al carrito
+  // Función para cerrar el modal y redirigir a servicios
   const handleRedirectToCart = () => {
     setModalOpen(false);
-    navigate('/cart');
+    navigate('/servicios');
   };
 
   return (
