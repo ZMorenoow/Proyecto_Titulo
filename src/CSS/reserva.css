@@ -115,3 +115,10 @@
 .reservation__paypal {
     margin-top: 20px;
 }
+
+
+.react-datepicker__day--disabled {
+    color: purple !important; 
+    pointer-events: none; 
+    opacity: 0.5; 
+}

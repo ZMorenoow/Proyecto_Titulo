@@ -15,7 +15,7 @@ const Modal = ({ isOpen, onClose }) => {
                 <h2>¡PAGO REALIZADO CON ÉXITO!</h2>
                 <p>
                     Tu pago ha sido procesado y se ha enviado una confirmación a tu correo
-                    electrónico.
+                    electrónico
                 </p>
                 <button className="modal__close-button" onClick={onClose}>
                     Cerrar

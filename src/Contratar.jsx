@@ -113,7 +113,7 @@ const CotizacionForm = () => {
 
   return (
     <div className="cotizacion-form__container">
-      <h2 className="form-coti">Formulario de Cotización</h2>
+      <h2 className="form-coti">Formulario de Contratación</h2>
       <form className="cotizacion-form__form" onSubmit={handleSubmit}>
         <label>Servicio: {servicioSeleccionado.nombre_servicio}</label>
         <br />
@@ -235,7 +235,7 @@ const CotizacionForm = () => {
               alt="Éxito"
               className="modal__icon"
             />
-            <p>Tu cotización ha sido añadida al carrito correctamente.</p>
+            <p>Se ha añadido al carrito correctamente</p>
             <button onClick={handleRedirectToCart}>Continuar</button>
           </div>
         </div>

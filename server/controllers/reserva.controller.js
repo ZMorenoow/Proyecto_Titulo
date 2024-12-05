@@ -56,3 +56,20 @@ export const obtenerReservas = async (req, res) => {
         res.status(500).json({ message: 'Error interno al obtener las reservas' });
     }
 };
+
+export const obtenerHorariosOcupados = async (req, res) => {
+    try {
+        const connection = await db();
+
+        const [horarios] = await connection.execute(
+            `SELECT fecha_reserva, hora_reserva
+            FROM reservas
+            WHERE estado IN ('1', '2');`
+        );
+
+        res.status(200).json({ horarios });
+    } catch (error) {
+        console.error('Error al obtener horarios ocupados:', error);
+        res.status(500).json({ message: 'Error interno al obtener horarios ocupados' });
+    }
+};
