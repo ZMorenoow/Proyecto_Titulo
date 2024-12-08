@@ -42,7 +42,7 @@ export const registerUser = async (req, res) => {
         const emailContent = `
         <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
             <div style="text-align: center; margin-bottom: 20px;">
-                <img src="https://lh3.googleusercontent.com/d/19g5PHrc1uDN4Wn4cfhH8XUW3MiomTwdh" alt="WatchyWash" style="width: 150px;"/>
+                <src="/img/logo.png" alt="WatchyWash" style="width: 150px;"/>
             </div>
             <h1 style="color: #4CAF50; text-align: center;">¡Bienvenido a WatchyWash, ${nombre}!</h1>
             <p style="font-size: 16px; text-align: justify;">

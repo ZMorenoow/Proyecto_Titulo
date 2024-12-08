@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import './CSS/HomeWorker.css'; 
+import axios from 'axios';
+import './CSS/HomeWorker.css';
 
 const HomeWorker = () => {
     const [reservations, setReservations] = useState([]);
     const [error, setError] = useState('');
+    
+    // El mapa de estados usa los id_estado como claves
+    const estadoMap = {
+        1: 'Pendiente',
+        2: 'Aceptado',
+        3: 'Cancelado',
+        4: 'Terminado'
+    };
 
     // Función para obtener reservas asignadas al trabajador
     const fetchReservations = async () => {
@@ -14,24 +23,51 @@ const HomeWorker = () => {
                 return;
             }
 
-            const response = await fetch('http://localhost:3000/worker/reservas-trabajador/todas', {
-                method: 'GET',
+            const response = await axios.get('http://localhost:3000/worker/reservas-trabajador/todas', {
                 headers: {
                     'Authorization': `Bearer ${token}`, // Enviar el token en el encabezado
                 },
             });
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Error al obtener las reservas');
-            }
-
-            const data = await response.json();
-            setReservations(data); // Almacena las reservas en el estado
+            setReservations(response.data); // Almacena las reservas en el estado
         } catch (error) {
             setError(`Error: ${error.message}`);
         }
     };
+
+    // Función para manejar la actualización del estado
+    const handleUpdateState = async (id_reserva, newStateId) => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            setError('No se encontró un token en el almacenamiento local. Inicia sesión nuevamente.');
+            return;
+        }
+
+        try {
+            const response = await axios.put(`http://localhost:3000/worker/reserva/${id_reserva}`, {
+                estado: newStateId // Enviar el ID del estado
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.status === 200) {
+                // Actualizar el estado localmente para reflejar el cambio
+                setReservations((prevReservations) =>
+                    prevReservations.map((reservation) =>
+                        reservation.id_reserva === id_reserva ? { ...reservation, estado: newStateId } : reservation
+                    )
+                );
+            }
+            ;
+            alert('Estado de la reserva actualizado correctamente');
+          } catch (error) {
+            console.error('Error al actualizar el estado de la reserva', error);
+            alert('Error al actualizar el estado de la reserva');
+          }
+        };
 
     // Llamamos a la API al cargar el componente
     useEffect(() => {
@@ -55,6 +91,7 @@ const HomeWorker = () => {
                             <th>Comuna</th>
                             <th>Fecha</th>
                             <th>Hora</th>
+                            <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -69,6 +106,25 @@ const HomeWorker = () => {
                                 <td>{reservation.comuna}</td>
                                 <td>{new Date(reservation.fecha_reserva).toLocaleDateString('es-CL')}</td>
                                 <td>{reservation.hora_reserva}</td>
+                                <td>
+                                    <select
+                                        value={reservation.estado}
+                                        onChange={(e) => {
+                                            // No permitir cambios si el estado ya es 'Terminado'
+                                            if (reservation.estado === 4) {
+                                                alert('No puedes modificar una reserva terminada.');
+                                                return;
+                                            }
+                                            handleUpdateState(reservation.id_reserva, parseInt(e.target.value));
+                                        }}
+                                    >
+                                        {Object.entries(estadoMap).map(([id, estado]) => (
+                                            <option key={id} value={id} disabled={reservation.estado === 4 && id !== '4'}>
+                                                {estado}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </td>
                             </tr>
                         ))}
                     </tbody>

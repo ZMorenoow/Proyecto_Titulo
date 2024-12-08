@@ -17,23 +17,23 @@ const Reservas = () => {
   // Obtener las reservas desde el backend
   useEffect(() => {
     const fetchReservas = async () => {
-        try {
-            const response = await axios.get('http://localhost:3000/admin/reservas', {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`,
-                },
-            });
-            console.log(response.data); // Verifica que `nombre_servicio` esté presente
-            setReservas(response.data);
-            setLoading(false);
-        } catch (error) {
-            setError('Error al cargar las reservas');
-            setLoading(false);
-        }
+      try {
+        const response = await axios.get('http://localhost:3000/admin/reservas', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+        console.log(response.data); // Verifica que `nombre_servicio` esté presente
+        setReservas(response.data);
+        setLoading(false);
+      } catch (error) {
+        setError('Error al cargar las reservas');
+        setLoading(false);
+      }
     };
 
     fetchReservas();
-}, []);
+  }, []);
 
 
   // Función para formatear las fechas
@@ -47,6 +47,7 @@ const Reservas = () => {
     });
   };
 
+  // Actualizar estado de la reserva
   // Actualizar estado de la reserva
   const handleUpdateEstado = async (id_reserva, nuevoEstado) => {
     const estadoId = estadoMap[nuevoEstado];
@@ -76,24 +77,25 @@ const Reservas = () => {
     }
   };
 
+
   // Eliminar una reserva
   const handleDelete = async (id_reserva) => {
     console.log("Eliminando reserva con ID:", id_reserva); // Para verificar
     if (window.confirm('¿Estás seguro de que quieres eliminar esta reserva?')) {
-        try {
-            await axios.delete(`http://localhost:3000/admin/reservas/${id_reserva}`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`,
-                },
-            });
-            setReservas(reservas.filter(reserva => reserva.id_reserva !== id_reserva));
-            alert('Reserva eliminada correctamente');
-        } catch (error) {
-            console.error('Error al eliminar la reserva:', error);
-            alert('Error al eliminar la reserva');
-        }
+      try {
+        await axios.delete(`http://localhost:3000/admin/reservas/${id_reserva}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+        setReservas(reservas.filter(reserva => reserva.id_reserva !== id_reserva));
+        alert('Reserva eliminada correctamente');
+      } catch (error) {
+        console.error('Error al eliminar la reserva:', error);
+        alert('Error al eliminar la reserva');
+      }
     }
-};
+  };
 
 
   if (loading) {
@@ -120,34 +122,42 @@ const Reservas = () => {
           </tr>
         </thead>
         <tbody>
-          {reservas.map((reserva) => (
-            <tr key={reserva.id_reserva}>
-              <td>{reserva.usuario}</td>
-              <td>{reserva.nombre_servicio}</td>
-              <td>{reserva.monto}</td>
-              <td>{formatDate(reserva.fecha_reserva)}</td>
-              <td>{reserva.hora_reserva}</td>
-              <td>
-                <select
-                  value={reserva.estado}
-                  onChange={(e) => handleUpdateEstado(reserva.id_reserva, e.target.value)}
-                >
-                  <option value="Pendiente">Pendiente</option>
-                  <option value="Aceptado">Aceptado</option>
-                  <option value="Cancelado">Cancelado</option>
-                </select>
-              </td>
-              <td>
-                <button onClick={() => handleDelete(reserva.id_reserva)} className="boton-eliminar">
-                  Eliminar
-                </button>
-              </td>
-            </tr>
-          ))}
+          {reservas
+            .filter((reserva) => !reserva.id_reserva.toString().endsWith('4'))
+            .map((reserva) => (
+              <tr key={reserva.id_reserva}>
+                <td>{reserva.usuario}</td>
+                <td>{reserva.nombre_servicio}</td>
+                <td>{reserva.monto}</td>
+                <td>{formatDate(reserva.fecha_reserva)}</td>
+                <td>{reserva.hora_reserva}</td>
+                <td>
+                  {reserva.estado === 'Terminado' ? (
+                    // No mostrar el select si el estado es 'Cancelado'
+                    <span>{reserva.estado}</span>
+                  ) : (
+                    <select
+                      value={reserva.estado}
+                      onChange={(e) => handleUpdateEstado(reserva.id_reserva, e.target.value)}
+                    >
+                      <option value="Pendiente">Pendiente</option>
+                      <option value="Aceptado">Aceptado</option>
+                      <option value="Cancelado">Cancelado</option>
+                    </select>
+                  )}
+                </td>
+                <td>
+                  <button onClick={() => handleDelete(reserva.id_reserva)} className="boton-eliminar">
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
   );
+
 };
 
 export default Reservas;

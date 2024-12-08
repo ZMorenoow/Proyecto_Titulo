@@ -148,7 +148,7 @@ export const realizarPago = async (req, res) => {
         const htmlContent = `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
                 <div style="text-align: center; margin-bottom: 20px;">
-                    <img src="https://lh3.googleusercontent.com/d/19g5PHrc1uDN4Wn4cfhH8XUW3MiomTwdh" alt="Watchy Wash Logo" style="width: 150px; height: auto;">
+                    <img src="https://lh3.googleusercontent.com/d/19g5PHrc1uDN4Wn4cfhH8XUW3MiomTwdh" alt="Watch & Wash Logo" style="width: 150px; height: auto;">
                 </div>
                 <h2 style="color: #333; text-align: center;">¡Gracias por tu compra, ${req.user.nombre}!</h2>
                 <p style="color: #555; text-align: center;">Estamos encantados de que hayas confiado en nosotros. Aquí tienes los detalles de tu compra:</p>
@@ -185,17 +185,17 @@ export const realizarPago = async (req, res) => {
                 </p>
                 <div style="margin-top: 30px; text-align: center;">
                     <p style="color: #555;">Para más información, no dudes en contactarnos.</p>
-                    <p style="color: #555;">Equipo de <strong>Watch y Wash</strong></p>
+                    <p style="color: #555;">Equipo de <strong>Watch & Wash</strong></p>
                     <p style="font-size: 14px; text-align: center; color: #999;">
                 </p>
                 <div style="text-align: center; margin-top: 10px; font-size: 9px; color: #666;">
-                <p>No responda a este mensaje. Este correo electrónico fue enviado por un sistema automático que no procesa respuestas. WyW.</p>
+                <p>No responda a este mensaje. Este correo electrónico fue enviado por un sistema automático que no procesa respuestas. W&W.</p>
             </div>
                 </div>
             </div>
         `;
 
-        await sendEmail(emailUsuario, 'Gracias por tu compra en Watch y Wash', htmlContent);
+        await sendEmail(emailUsuario, 'Gracias por tu compra en Watch & Wash', htmlContent);
 
         res.status(200).json({
             message: 'Pago realizado, correo enviado, y reservas creadas correctamente.',

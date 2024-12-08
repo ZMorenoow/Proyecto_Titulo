@@ -64,7 +64,7 @@ export const obtenerHorariosOcupados = async (req, res) => {
         const [horarios] = await connection.execute(
             `SELECT fecha_reserva, hora_reserva
             FROM reservas
-            WHERE estado IN ('1', '2');`
+            WHERE estado IN ('1','2');`
         );
 
         res.status(200).json({ horarios });

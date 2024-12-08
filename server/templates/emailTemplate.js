@@ -50,7 +50,7 @@ export const generateContactEmail = (userEmail, subject, message) => {
             </div>
           <div class="email-container">
             <div class="header">
-                Watch y Wash
+                Watch & Wash
             </div>
             <div class="content">
               <p><strong>De:</strong> ${userEmail}</p>

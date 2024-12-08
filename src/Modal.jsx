@@ -8,7 +8,7 @@ const Modal = ({ isOpen, onClose }) => {
         <div className="modal__overlay">
             <div className="modal__content">
                 <img
-                    src="https://lh3.googleusercontent.com/d/17lbKazeg2FyA_wiQw5EcIFioBO3WDX77"
+                    src="/img/comprobado.png"
                     alt="Éxito"
                     className="modal__icon"
                 />

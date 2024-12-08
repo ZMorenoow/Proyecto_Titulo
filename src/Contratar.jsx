@@ -231,10 +231,12 @@ const CotizacionForm = () => {
       {modalOpen && (
         <div className="modal__overlay">
           <div className="modal__content">
-            <img src="https://lh3.googleusercontent.com/d/1Eh77Liep6_pCjjO-Age35Yy3ZR0VVg0N"
+            <img
+              src="/img/bolsacompra.png"
               alt="Éxito"
               className="modal__icon"
             />
+
             <p>Se ha añadido al carrito correctamente</p>
             <button onClick={handleRedirectToCart}>Continuar</button>
           </div>

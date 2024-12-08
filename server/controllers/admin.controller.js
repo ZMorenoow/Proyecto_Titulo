@@ -256,7 +256,8 @@ export const getReservationsList = async (req, res) => {
 const estadoMap = {
     'Pendiente': 1,  // ID del estado 'Pendiente'
     'Aceptado': 2,   // ID del estado 'Aceptado'
-    'Cancelado': 3   // ID del estado 'Cancelado'
+    'Cancelado': 3,   // ID del estado 'Cancelado'
+    'Terminado': 4
   };
   export const updateReservationStatus = async (req, res) => {
     const { id_reserva } = req.params;
@@ -272,7 +273,7 @@ const estadoMap = {
   
     try {
       // Realiza la actualización en la base de datos
-      const connection = await db(); // Establece la conexión con la base de datos
+      const connection = await db(); 
       const [result] = await connection.execute(`
         UPDATE reservas 
         SET estado = ? 

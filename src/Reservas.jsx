@@ -103,7 +103,7 @@ const Reserva = () => {
                 <h2 className="reservation__title">Reserva tu Servicio</h2>
                 <form className="reservation__form-content" onSubmit={handleReserveSubmit}>
                     <div className="reservation__group">
-                        <label htmlFor="nombre">Nombre</label>
+                        <label htmlFor="nombre">Nombre Destinatario</label>
                         <input
                             type="text"
                             id="nombre"

@@ -28,7 +28,7 @@ export const requestPasswordReset = async (req, res) => {
       [resetToken, resetTokenExpires, correo]
     );
 
-    const emailSubject = 'Restablecimiento de contraseña de WatchyWash';
+    const emailSubject = 'Restablecimiento de contraseña de Watch&Wash';
 
     const emailContent = `
         <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
@@ -37,7 +37,7 @@ export const requestPasswordReset = async (req, res) => {
             </div>
             <h1 style="color: #4CAF50; text-align: center;">Restablecimiento de Contraseña</h1>
             <p style="font-size: 16px; text-align: justify;">
-                Recibimos una solicitud para restablecer la contraseña de tu cuenta en WatchyWash. Si no realizaste esta solicitud, por favor ignora este correo. De lo contrario, usa el siguiente código para completar el proceso de restablecimiento.
+                Recibimos una solicitud para restablecer la contraseña de tu cuenta en Watch&Wash. Si no realizaste esta solicitud, por favor ignora este correo. De lo contrario, usa el siguiente código para completar el proceso de restablecimiento.
             </p>
             <div style="text-align: center; margin: 20px 0;">
                 <p style="font-size: 18px; font-weight: bold; background-color: #f9f9f9; padding: 10px 20px; border: 1px solid #ddd; display: inline-block; border-radius: 5px;">
@@ -49,10 +49,10 @@ export const requestPasswordReset = async (req, res) => {
             </p>
             <hr style="border: 1px solid #ddd; margin: 20px 0;"/>
             <p style="font-size: 14px; text-align: center; color: #999;">
-                Este mensaje fue enviado por WatchyWash. Si no esperabas este correo, por favor ignóralo.
+                Este mensaje fue enviado por Watch&Wash. Si no esperabas este correo, por favor ignóralo.
             </p>
             <div style="text-align: center; margin-top: 10px; font-size: 12px; color: #666;">
-                <p>© 2024 WatchyWash. Todos los derechos reservados.</p>
+                <p>© 2024 Watch&Wash. Todos los derechos reservados.</p>
             </div>
         </div>
     `;
