@@ -13,7 +13,7 @@
     "@google/generative-ai": "^0.21.0",
     "@mercadopago/sdk-react": "^0.0.19",
     "@paypal/react-paypal-js": "^8.7.0",
-    "axios": "^1.7.7",
+    "axios": "^1.7.9",
     "boostrap": "^2.0.0",
     "bootstrap": "^5.3.3",
     "date-fns": "^4.1.0",
@@ -22,11 +22,13 @@
     "jspdf-autotable": "^3.8.4",
     "jwt-decode": "^4.0.0",
     "mapbox-gl": "^3.8.0",
+    "mysql2": "^3.11.5",
     "react": "^18.3.1",
     "react-datepicker": "^7.4.0",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0",
-    "react-time-picker": "^7.0.0"
+    "react-time-picker": "^7.0.0",
+    "recharts": "^2.14.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",

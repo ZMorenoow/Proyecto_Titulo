@@ -21,7 +21,7 @@ export const obtenerReservas = async (req, res) => {
             r.nombre_destinatario,
             u.nombre AS nombre_usuario, 
             u.apellido AS apellido_usuario, 
-            c.id_cotizacion, 
+            c.id_contratacion, 
             co.cantidad, 
             co.valor,
             e.tipo_estado, 
@@ -34,7 +34,7 @@ export const obtenerReservas = async (req, res) => {
             JOIN 
                 carrito c ON r.id_carrito = c.id_carrito
             JOIN 
-                cotizaciones co ON c.id_cotizacion = co.id_cotizacion
+                contratacion co ON c.id_contratacion = co.id_contratacion
             JOIN 
                 servicios s ON co.id_servicio = s.id_servicio
             JOIN 
@@ -64,7 +64,7 @@ export const obtenerHorariosOcupados = async (req, res) => {
         const [horarios] = await connection.execute(
             `SELECT fecha_reserva, hora_reserva
             FROM reservas
-            WHERE estado IN ('1','2');`
+            WHERE estado IN ('1', '2');`
         );
 
         res.status(200).json({ horarios });

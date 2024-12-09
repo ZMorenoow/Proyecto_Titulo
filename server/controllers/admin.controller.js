@@ -221,9 +221,8 @@ export const deleteService = async (req, res) => {
 
 export const getReservationsList = async (req, res) => {
     try {
-        const connection = await db(); // Establecer la conexión con la base de datos
+        const connection = await db();
 
-        // Consulta para obtener las reservas con los detalles requeridos
         const [reservations] = await connection.execute(`
             SELECT 
                 r.id_reserva, 
@@ -238,14 +237,11 @@ export const getReservationsList = async (req, res) => {
             JOIN usuario u ON r.id_usuario = u.id_usuario
             JOIN carrito c ON r.id_carrito = c.id_carrito
             JOIN pagos p ON r.id_reserva = p.id_reserva
-            JOIN cotizaciones co ON c.id_cotizacion = co.id_cotizacion
+            JOIN contratacion co ON c.id_contratacion = co.id_contratacion
             JOIN servicios s ON co.id_servicio = s.id_servicio
             JOIN estados e ON r.estado = e.id_estado;
-
         `);
 
-        // Responder con las reservas en formato JSON
-        console.log(reservations);
         res.status(200).json(reservations);
     } catch (error) {
         console.error('Error al obtener las reservas:', error);
@@ -330,11 +326,10 @@ export const getReservationsForWorkers = async (req, res) => {
             JOIN usuario u ON ur.id_usuario = u.id_usuario
             JOIN estados e ON r.estado = e.id_estado
             JOIN carrito c ON r.id_carrito = c.id_carrito
-            JOIN cotizaciones cot ON c.id_cotizacion = cot.id_cotizacion
-            JOIN servicios s ON cot.id_servicio = s.id_servicio
+            JOIN contratacion co ON c.id_contratacion = co.id_contratacion
+            JOIN servicios s ON co.id_servicio = s.id_servicio
             WHERE e.id_estado = 2
             GROUP BY r.id_reserva, rt.id_reserva_trabajador, s.nombre_servicio;
-
         `);
 
         res.status(200).json(reservations);
@@ -344,11 +339,11 @@ export const getReservationsForWorkers = async (req, res) => {
     }
 };
 
+
 ;
 export const addWorkerReservation = async (req, res) => {
     const { id_reserva, id_usuario_rol } = req.body;
 
-    // Validar los datos recibidos
     if (!id_reserva || !id_usuario_rol) {
         return res.status(400).json({
             message: 'Faltan datos requeridos: id_reserva y id_usuario_rol.',
@@ -358,7 +353,6 @@ export const addWorkerReservation = async (req, res) => {
     try {
         const connection = await db();
 
-        // Verificar que la reserva existe y está en estado pendiente
         const [reservation] = await connection.execute(
             `SELECT * FROM reservas WHERE id_reserva = ? AND estado = 2`,
             [id_reserva]
@@ -366,11 +360,10 @@ export const addWorkerReservation = async (req, res) => {
 
         if (reservation.length === 0) {
             return res.status(400).json({
-                message: 'La reserva no está disponible para ser asignada (puede no existir o no estar aceptada).',
+                message: 'La reserva no está disponible para ser asignada.',
             });
         }
 
-        // Verificar que el trabajador tiene el rol adecuado
         const [worker] = await connection.execute(
             `SELECT * FROM usuario_rol WHERE id_usuario_rol = ? AND id_rol = 3`,
             [id_usuario_rol]
@@ -378,11 +371,10 @@ export const addWorkerReservation = async (req, res) => {
 
         if (worker.length === 0) {
             return res.status(400).json({
-                message: 'El trabajador no existe o no tiene el rol adecuado.',
+                message: 'El trabajador no tiene el rol adecuado.',
             });
         }
 
-        // Verificar que la asignación no exista previamente
         const [existingAssignment] = await connection.execute(
             `SELECT * FROM reserva_trabajador WHERE id_reserva = ? AND id_usuario_rol = ?`,
             [id_reserva, id_usuario_rol]
@@ -394,7 +386,6 @@ export const addWorkerReservation = async (req, res) => {
             });
         }
 
-        // Insertar la asignación en la base de datos
         const [result] = await connection.execute(
             `INSERT INTO reserva_trabajador (id_reserva, id_usuario_rol, fecha_asignacion)
              VALUES (?, ?, NOW())`,
@@ -412,6 +403,7 @@ export const addWorkerReservation = async (req, res) => {
         });
     }
 };
+
 
 export const updateWorkerReservation = async (req, res) => {
     const { id_reserva_trabajador } = req.params;

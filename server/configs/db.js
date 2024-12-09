@@ -63,5 +63,51 @@ const insertCotizacion = async (cotizacion) => {
     }
 };
 
-export { getServicios, insertCotizacion };
+const insertContratacion = async (contratacion) => {
+    const connection = await db();
+    const { 
+        id_servicio, 
+        cantidad, 
+        medidas, 
+        material, 
+        estado_producto, 
+        antiguedad, 
+        especificaciones_adicionales,
+        valor 
+    } = contratacion;
+
+    const query = `
+        INSERT INTO contratacion 
+        (id_servicio, cantidad, medidas, material, estado_producto, antiguedad, especificaciones_adicionales, valor)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+
+    try {
+        // Insertar la contratación
+        const [result] = await connection.execute(query, [
+            id_servicio, 
+            cantidad, 
+            medidas, 
+            material, 
+            estado_producto, 
+            antiguedad, 
+            especificaciones_adicionales,
+            valor * 1.19
+        ]);
+
+        // Obtener la última ID insertada
+        const [rows] = await connection.execute('SELECT LAST_INSERT_ID() AS id');
+        const lastInsertId = rows[0].id;
+
+        return { insertId: lastInsertId, affectedRows: result.affectedRows };
+    } catch (error) {
+        console.error('Error al insertar contratación:', error);
+        throw new Error('Error al insertar contratación en la base de datos: ' + error.message);
+    } finally {
+        connection.end(); // Asegura que siempre se cierre la conexión
+    }
+};
+
+
+export { getServicios, insertCotizacion,insertContratacion };
 export default db;

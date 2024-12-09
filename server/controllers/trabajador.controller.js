@@ -23,7 +23,7 @@ export const getAllWorkerReservations = async (req, res) => {
             JOIN reservas r ON rt.id_reserva = r.id_reserva
             JOIN estados e ON r.estado = e.id_estado
             JOIN carrito c ON r.id_carrito = c.id_carrito
-            JOIN cotizaciones co ON c.id_cotizacion = co.id_cotizacion
+            JOIN contratacion co ON c.id_contratacion = co.id_contratacion
             JOIN servicios s ON co.id_servicio = s.id_servicio
             JOIN usuario u ON r.id_usuario = u.id_usuario
             WHERE rt.id_usuario_rol = (
@@ -33,7 +33,7 @@ export const getAllWorkerReservations = async (req, res) => {
             );
             `,
             [req.user.id_usuario]
-        )
+        );
 
         res.status(200).json(reservations);
     } catch (error) {

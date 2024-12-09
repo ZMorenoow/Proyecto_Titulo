@@ -3,17 +3,17 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import './CSS/Cotizar.css';
 import "./CSS/modal.css";
 
-const CotizacionForm = () => {
+const ContratacionForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [error, setError] = useState('');
-  const [valorCotizacion, setValorCotizacion] = useState(null); // Inicializar como null
-  const [valorConIva, setValorConIva] = useState(null); // Nuevo estado para el valor con IVA
+  const [valorContratacion, setValorContratacion] = useState(null);
+  const [valorConIva, setValorConIva] = useState(null);
   const [mostrarEspecificaciones, setMostrarEspecificaciones] = useState(false);
-  const [idCotizacion, setIdCotizacion] = useState(null); // Para almacenar el ID de la última cotización
-  const [modalOpen, setModalOpen] = useState(false); // Estado para controlar el modal de confirmación
+  const [idContratacion, setIdContratacion] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
-  const [cotizacion, setCotizacion] = useState({
+  const [contratacion, setContratacion] = useState({
     id_servicio: location.state?.servicio?.id_servicio || '',
     cantidad: '',
     medidas: '',
@@ -30,12 +30,12 @@ const CotizacionForm = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setCotizacion({ ...cotizacion, [name]: value });
+    setContratacion({ ...contratacion, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { cantidad, medidas, material } = cotizacion;
+    const { cantidad, medidas, material } = contratacion;
 
     if (!cantidad.trim() || !medidas.trim() || !material.trim()) {
       setError('Por favor, complete todos los campos obligatorios.');
@@ -44,38 +44,36 @@ const CotizacionForm = () => {
 
     setError('');
     try {
-      const response = await fetch('http://localhost:3000/cotizaciones', {
+      const response = await fetch('http://localhost:3000/contrataciones', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('token')}`
         },
-        body: JSON.stringify(cotizacion)
+        body: JSON.stringify(contratacion)
       });
 
       if (!response.ok) throw new Error('Error en el servidor');
 
       const data = await response.json();
-      console.log('Cotización enviada correctamente:', data);
+      console.log('Contratación enviada correctamente:', data);
 
-      // Calcula el IVA y el total con IVA
       const precioFinal = data.precioFinal;
       const iva = precioFinal * 0.19;
       const totalConIva = precioFinal + iva;
 
-      setValorCotizacion(precioFinal);
-      setValorConIva(totalConIva); // Guarda el valor total con IVA
-      setIdCotizacion(data.idCotizacion);
+      setValorContratacion(precioFinal);
+      setValorConIva(totalConIva);
+      setIdContratacion(data.idContratacion);
     } catch (error) {
-      console.error('Error al enviar la cotización:', error);
-      setError('Hubo un problema al enviar la cotización. Intenta de nuevo.');
+      console.error('Error al enviar la contratación:', error);
+      setError('Hubo un problema al enviar la contratación. Intenta de nuevo.');
     }
   };
 
-  // Función para agregar al carrito
   const handleAddToCart = async () => {
-    if (!idCotizacion) {
-      setError('No hay una cotización válida para agregar al carrito.');
+    if (!idContratacion) {
+      setError('No hay una contratación válida para agregar al carrito.');
       return;
     }
     setError('');
@@ -86,7 +84,7 @@ const CotizacionForm = () => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('token')}`
         },
-        body: JSON.stringify({ id_cotizacion: idCotizacion })
+        body: JSON.stringify({ id_contratacion: idContratacion })
       });
 
       if (!response.ok) {
@@ -95,17 +93,15 @@ const CotizacionForm = () => {
       }
 
       const data = await response.json();
-      console.log('Cotización agregada al carrito:', data);
+      console.log('Contratación agregada al carrito:', data);
 
-      // Mostrar el modal de confirmación
       setModalOpen(true);
     } catch (error) {
       console.error('Error al agregar al carrito:', error);
-      setError('Hubo un problema al agregar la cotización al carrito.');
+      setError('Hubo un problema al agregar la contratación al carrito.');
     }
   };
 
-  // Función para cerrar el modal y redirigir a servicios
   const handleRedirectToCart = () => {
     setModalOpen(false);
     navigate('/servicios');
@@ -123,7 +119,7 @@ const CotizacionForm = () => {
           type="number"
           id="cantidad"
           name="cantidad"
-          value={cotizacion.cantidad}
+          value={contratacion.cantidad}
           onChange={handleInputChange}
           placeholder="Agregar cantidad de productos"
           required
@@ -135,7 +131,7 @@ const CotizacionForm = () => {
           type="text"
           id="medidas"
           name="medidas"
-          value={cotizacion.medidas}
+          value={contratacion.medidas}
           onChange={handleInputChange}
           placeholder="Agregar medidas, sepárelos por ',' "
           required
@@ -147,7 +143,7 @@ const CotizacionForm = () => {
           type="text"
           id="material"
           name="material"
-          value={cotizacion.material}
+          value={contratacion.material}
           onChange={handleInputChange}
           placeholder="Agregar materiales, sepárelos por ',' "
           required
@@ -158,7 +154,7 @@ const CotizacionForm = () => {
         <select
           id="estado_producto"
           name="estado_producto"
-          value={cotizacion.estado_producto}
+          value={contratacion.estado_producto}
           onChange={handleInputChange}
         >
           <option value="Bueno">Bueno</option>
@@ -171,7 +167,7 @@ const CotizacionForm = () => {
         <select
           id="antiguedad"
           name="antiguedad"
-          value={cotizacion.antiguedad}
+          value={contratacion.antiguedad}
           onChange={handleInputChange}
         >
           <option value="Menos de 1 año">Menos de 1 año</option>
@@ -196,7 +192,7 @@ const CotizacionForm = () => {
             <textarea
               id="especificaciones_adicionales"
               name="especificaciones_adicionales"
-              value={cotizacion.especificaciones_adicionales}
+              value={contratacion.especificaciones_adicionales}
               onChange={handleInputChange}
               placeholder="Agregar detalles adicionales sobre el producto"
             />
@@ -204,25 +200,25 @@ const CotizacionForm = () => {
           </>
         )}
 
-        <button type="submit">Enviar Cotización</button>
+        <button type="submit">Enviar Contratación</button>
       </form>
 
       {error && <p className="cotizacion-form__error">{error}</p>}
 
-      {valorCotizacion !== null && valorConIva !== null && (
+      {valorContratacion !== null && valorConIva !== null && (
         <div className="cotizacion-form__resultado">
           <p>
-            Valor Neto: <strong>${valorCotizacion}</strong>
+            Valor Neto: <strong>${valorContratacion}</strong>
           </p>
           <p>
-            IVA (19%): <strong>${Math.round(valorCotizacion * 0.19)}</strong>
+            IVA (19%): <strong>${Math.round(valorContratacion * 0.19)}</strong>
           </p>
           <p>
             Valor Total (con IVA): <strong>${Math.round(valorConIva)}</strong>
           </p>
         </div>
       )}
-      {idCotizacion && (
+      {idContratacion && (
         <div>
           <button onClick={handleAddToCart}>Agregar al Carrito</button>
         </div>
@@ -236,7 +232,6 @@ const CotizacionForm = () => {
               alt="Éxito"
               className="modal__icon"
             />
-
             <p>Se ha añadido al carrito correctamente</p>
             <button onClick={handleRedirectToCart}>Continuar</button>
           </div>
@@ -246,4 +241,4 @@ const CotizacionForm = () => {
   );
 };
 
-export default CotizacionForm;
+export default ContratacionForm;

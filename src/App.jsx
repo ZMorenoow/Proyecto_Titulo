@@ -25,7 +25,7 @@ import Mapbox from './Mapbox.jsx';
 import ReservasTrabajador from './ReservasTrabajador.jsx';
 import ResetPassword  from './ResetPassword.jsx';
 import Contratar from './Contratar.jsx';
-
+import Dashboard from './Dashboard.jsx'
 
 
 const App = () => {
@@ -108,6 +108,10 @@ const App = () => {
                 <Route 
                 path="/reservas-trabajador" 
                 element={<PrivateRoute element={<ReservasTrabajador/>} allowedRoles={['Administrador']} />} 
+                />
+                <Route 
+                path="/dashboard" 
+                element={<PrivateRoute element={<Dashboard/>} allowedRoles={['Administrador']} />} 
                 />
                 <Route 
                 path="/cart" 

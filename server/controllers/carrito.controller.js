@@ -2,11 +2,11 @@ import db from '../configs/db.js';
 import { sendEmail } from '../utils/email.js';
 
 export const agregarAlCarrito = async (req, res) => {
-    const {  id_cotizacion } = req.body;
+    const { id_contratacion } = req.body;
     const id_usuario = req.user.id_usuario;
 
-    if (!id_cotizacion) {
-        return res.status(400).json({ message: 'Faltan parámetros requeridos (id_servicio o id_cotizacion)' });
+    if (!id_contratacion) {
+        return res.status(400).json({ message: 'Faltan parámetros requeridos (id_contratacion)' });
     }
 
     if (!id_usuario) {
@@ -17,9 +17,9 @@ export const agregarAlCarrito = async (req, res) => {
         const connection = await db();
 
         const [result] = await connection.execute(
-            `INSERT INTO carrito ( id_cotizacion, id_usuario) 
-            VALUES ( ?, ?)`,
-            [ id_cotizacion, id_usuario]
+            `INSERT INTO carrito (id_contratacion, id_usuario) 
+             VALUES (?, ?)`,
+            [id_contratacion, id_usuario]
         );
 
         res.status(201).json({ message: 'Artículo agregado al carrito exitosamente', id_carrito: result.insertId });
@@ -40,9 +40,9 @@ export const obtenerCarrito = async (req, res) => {
         const connection = await db();
 
         const [carrito] = await connection.execute(
-            `SELECT c.id_carrito, c.id_cotizacion, c.check_pago, co.valor, co.cantidad, s.nombre_servicio
+            `SELECT c.id_carrito, c.id_contratacion, c.check_pago, co.valor, co.cantidad, s.nombre_servicio
              FROM carrito c
-             JOIN cotizaciones co ON c.id_cotizacion = co.id_cotizacion
+             JOIN contratacion co ON c.id_contratacion = co.id_contratacion
              JOIN servicios s ON co.id_servicio = s.id_servicio
              WHERE c.id_usuario = ? AND c.check_pago = 0`,
             [id_usuario]
@@ -57,7 +57,7 @@ export const obtenerCarrito = async (req, res) => {
         console.error('Error al obtener el carrito:', error);
         res.status(500).json({ message: 'Error interno al obtener el carrito' });
     }
-}
+};
 
 export const eliminarDelCarrito = async (req, res) => {
     const { id_carrito } = req.body; // ID del artículo en el carrito a eliminar
@@ -98,9 +98,9 @@ export const realizarPago = async (req, res) => {
         const connection = await db();
 
         const [carritoItems] = await connection.execute(
-            `SELECT c.id_carrito, co.id_cotizacion, co.cantidad, co.valor, s.nombre_servicio
+            `SELECT c.id_carrito, co.id_contratacion, co.cantidad, co.valor, s.nombre_servicio
              FROM carrito c
-             JOIN cotizaciones co ON c.id_cotizacion = co.id_cotizacion
+             JOIN contratacion co ON c.id_contratacion = co.id_contratacion
              JOIN servicios s ON co.id_servicio = s.id_servicio
              WHERE c.id_usuario = ? AND c.check_pago = 0`,
             [id_usuario]
@@ -141,7 +141,7 @@ export const realizarPago = async (req, res) => {
 
             await connection.execute(
                 `UPDATE carrito SET check_pago = 1 WHERE id_carrito IN (${placeholders})`,
-                carritoIds 
+                carritoIds
             );
         }
 

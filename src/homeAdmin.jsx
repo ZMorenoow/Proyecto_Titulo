@@ -39,10 +39,15 @@ const AdminHome = () => {
             <h2>Gestionar Trabajadores</h2>
             <p>Administra el personal de limpieza.</p>
           </div>
+
+          {/* Botón Mostrar Dashboard */}
+          <div className="card" onClick={() => redirectToPage('/dashboard')}>
+            <h2>Panel de Control</h2>
+            <p>Visualiza estadísticas y métricas clave.</p>
+          </div>
         </div>
       </main>
     </div>
-  
   );
 }
 

@@ -7,7 +7,8 @@ import carritoRoutes from '../server/routes/carrito.router.js';
 import reservaRoutes from '../server/routes/reserva.router.js'
 import recoveryRouter from '../server/routes/recovery.router.js';
 import contactoRoutes from '../server/routes/contacto.router.js';
-import { getServicios,insertCotizacion } from './configs/db.js'; 
+import dashboardRouter from './routes/dashboard.router.js';
+import { getServicios,insertCotizacion,insertContratacion } from './configs/db.js'; 
 import { fileURLToPath } from 'url';
 import path from 'path';
 import { geminiApiCall } from './utils/GeminiAPI.js';
@@ -24,7 +25,7 @@ app.use('/carrito', carritoRoutes);
 app.use('/reserva', reservaRoutes);
 app.use('/contacto',contactoRoutes);
 app.use('/recovery',recoveryRouter);
-
+app.use('/api/dashboard', dashboardRouter);
 
 // Ruta principal de prueba
 app.get("/", (req, res) => {
@@ -71,6 +72,32 @@ app.post('/cotizaciones', async (req, res) => {
         res.status(500).json({ error: 'Error al procesar la cotización' });
     }
 });
+app.post('/contrataciones', async (req, res) => {
+    try {
+        const contratacion = req.body;
+
+        // Llamada a Gemini para calcular el valor
+        const geminiValor = await geminiApiCall(contratacion);
+
+        // Asegurarse de que el valor calculado de Gemini sea un número
+        const valorCalculado = parseFloat(geminiValor.replace(/[^0-9.-]+/g, ""));
+
+        // Insertar la contratación con el valor calculado
+        contratacion.valor = valorCalculado;
+
+        const { insertId } = await insertContratacion(contratacion);
+
+        res.status(200).json({
+            message: 'Contratación insertada correctamente',
+            idContratacion: insertId,
+            precioFinal: valorCalculado
+        });
+    } catch (error) {
+        console.error('Error al procesar la contratación:', error);
+        res.status(500).json({ error: 'Error al procesar la contratación' });
+    }
+});
+
 
 
 // Iniciar el servidor
